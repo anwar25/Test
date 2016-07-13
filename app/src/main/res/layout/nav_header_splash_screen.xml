@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="@dimen/nav_header_height"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/side_nav_bar"
+    android:id="@+id/navigation_header"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark" android:orientation="vertical"
+    android:gravity="bottom">
+
+    <in.eweblabs.careeradvance.UI.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/profile_img"
+        android:layout_width="78dp"
+        android:layout_height="78dp"
+        android:src="@drawable/ic_face_white_48dp"
+        app:civ_border_width="2dp"
+        app:civ_border_color="@color/light"/>
+
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:paddingTop="@dimen/nav_header_vertical_spacing" android:id="@+id/txt_username" android:text="@string/title_sign_in_sign_up"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"  />
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="android.studio@android.com" android:visibility="invisible" android:id="@+id/text_email_address" />
+
+</LinearLayout>

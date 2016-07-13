@@ -1,0 +1,217 @@
+[
+  {
+    "salaryCode": "CAD",
+    "salaryName": "0"
+  },
+  {
+    "salaryCode": "1",
+    "salaryName": "Less than 50000"
+  },
+  {
+    "salaryCode": "50000",
+    "salaryName": "50,000"
+  },
+  {
+    "salaryCode": "60000",
+    "salaryName": "60,000"
+  },
+  {
+    "salaryCode": "70000",
+    "salaryName": "70,000"
+  },
+  {
+    "salaryCode": "80000",
+    "salaryName": "80,000"
+  },
+  {
+    "salaryCode": "90000",
+    "salaryName": "90,000"
+  },
+  {
+    "salaryCode": "100000",
+    "salaryName": "1,00,000"
+  },
+  {
+    "salaryCode": "125000",
+    "salaryName": "1,25,000"
+  },
+  {
+    "salaryCode": "150000",
+    "salaryName": "1,50,000"
+  },
+  {
+    "salaryCode": "175000",
+    "salaryName": "1,75,000"
+  },
+  {
+    "salaryCode": "200000",
+    "salaryName": "2,00,000"
+  },
+  {
+    "salaryCode": "225000",
+    "salaryName": "2,25,000"
+  },
+  {
+    "salaryCode": "250000",
+    "salaryName": "2,50,000"
+  },
+  {
+    "salaryCode": "275000",
+    "salaryName": "2,75,000"
+  },
+  {
+    "salaryCode": "300000",
+    "salaryName": "3,00,000"
+  },
+  {
+    "salaryCode": "300000",
+    "salaryName": "3,25,000"
+  },
+  {
+    "salaryCode": "350000",
+    "salaryName": "3,50,000"
+  },
+  {
+    "salaryCode": "400000",
+    "salaryName": "4,00,000"
+  },
+  {
+    "salaryCode": "425000",
+    "salaryName": "4,25,000"
+  },
+  {
+    "salaryCode": "450000",
+    "salaryName": "4,50,000"
+  },
+  {
+    "salaryCode": "475000",
+    "salaryName": "4,75,000"
+  }
+,
+  {
+    "salaryCode": "500000",
+    "salaryName": "5,00,000"
+  }
+,
+  {
+    "salaryCode": "650000",
+    "salaryName": "6,50,000"
+  },
+  {
+    "salaryCode": "700000",
+    "salaryName": "7,00,000"
+  },
+  {
+    "salaryCode": "750000",
+    "salaryName": "7,50,000"
+  },
+  {
+    "salaryCode": "800000",
+    "salaryName": "8,00,000"
+  }
+,
+  {
+    "salaryCode": "850000",
+    "salaryName": "8,50,000"
+  },
+  {
+    "salaryCode": "900000",
+    "salaryName": "9,00,000"
+  },
+  {
+    "salaryCode": "950000",
+    "salaryName": "9,50,000"
+  },
+  {
+    "salaryCode": "1000000",
+    "salaryName": "10,00,000"
+  }
+,
+  {
+    "salaryCode": "1100000",
+    "salaryName": "11,00,000"
+  }
+,
+  {
+    "salaryCode": "1200000",
+    "salaryName": "12,00,000"
+  }
+,
+  {
+    "salaryCode": "1300000",
+    "salaryName": "13,00,000"
+  }
+,
+  {
+    "salaryCode": "1400000",
+    "salaryName": "14,00,000"
+  }
+,
+  {
+    "salaryCode": "1500000",
+    "salaryName": "15,00,000"
+  }
+,
+  {
+    "salaryCode": "1600000",
+    "salaryName": "16,00,000"
+  }
+,
+  {
+    "salaryCode": "1700000",
+    "salaryName": "17,00,000"
+  }
+,
+  {
+    "salaryCode": "1800000",
+    "salaryName": "18,00,000"
+  }
+,
+  {
+    "salaryCode": "1900000",
+    "salaryName": "19,00,000"
+  }
+,
+  {
+    "salaryCode": "2000000",
+    "salaryName": "20,00,000"
+  }
+,
+  {
+    "salaryCode": "2250000",
+    "salaryName": "22,50,000"
+  }
+,
+  {
+    "salaryCode": "2500000",
+    "salaryName": "25,00,000"
+  },
+  {
+    "salaryCode": "2750000",
+    "salaryName": "27,50,000"
+  },
+  {
+    "salaryCode": "3000000",
+    "salaryName": "30,00,000"
+  },
+  {
+    "salaryCode": "3500000",
+    "salaryName": "35,00,000"
+  },
+  {
+    "salaryCode": "4000000",
+    "salaryName": "40,00,000"
+  },
+  {
+    "salaryCode": "4500000",
+    "salaryName": "45,00,000"
+  },
+  {
+    "salaryCode": "5000000",
+    "salaryName": "50,00,000"
+  },
+  {
+    "salaryCode": "10000000",
+    "salaryName": "50,00,000 & above"
+  }
+]

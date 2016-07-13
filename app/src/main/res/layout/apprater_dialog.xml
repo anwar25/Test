@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:id="@+id/list_item"
+    android:orientation="vertical"
+    android:descendantFocusability="blocksDescendants" android:layout_marginTop="20dp" android:layout_marginBottom="20dp" android:layout_marginLeft="10dp" android:layout_marginRight="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" android:background="@drawable/dailog_bgwhite" >
+
+        <TextView
+            android:layout_width="match_parent"   android:textColor="@color/light" android:layout_height="wrap_content" android:padding="10dp" android:background="@drawable/dailog_bg_top_blue" android:text="@string/term_and_condition" android:textStyle="bold" android:gravity="center"  android:id="@+id/title"/>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="2dp" android:background="@color/light_grey" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/app_rate_text" android:textColor="@color/dark_grey" android:padding="10dp" android:text="@string/app_rate_text"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:orientation="horizontal" >
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" android:layout_weight="1" android:layout_margin="10dp" android:background="@color/colorPrimary">
+                <Button
+                    android:id="@+id/btnRateName"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:textColor="@color/light"
+                    android:text="@string/rate_app_name"
+                    android:background="@drawable/search_rectangle_btn"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" android:layout_weight="1" android:layout_margin="10dp" android:background="@color/colorPrimary">
+                <Button
+                    android:id="@+id/btnRemindMeLater"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:textColor="@color/light"
+                    android:text="@string/remind_me_later"
+                    android:background="@drawable/search_rectangle_btn"
+
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" android:layout_weight="1" android:layout_margin="10dp" android:background="@color/colorPrimary">
+                <Button
+                    android:id="@+id/btnNoThanks"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:textColor="@color/light"
+                    android:text="@string/no_thanks"
+                    android:background="@drawable/search_rectangle_btn"
+
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

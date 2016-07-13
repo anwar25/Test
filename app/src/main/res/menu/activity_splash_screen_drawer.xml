@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_job_search" android:icon="@drawable/ic_search_black_24dp"
+            android:title="@string/title_job_search" />
+        <item android:id="@+id/nav_post_your_resume" android:icon="@drawable/ic_description_black_24dp"
+            android:title="@string/post_your_resume" />
+        <item android:id="@+id/nav_change_country" android:icon="@drawable/ic_change_history_black_24dp"
+            android:title="@string/change_county" />
+        <item android:id="@+id/nav_settings" android:icon="@drawable/ic_settings_black_24dp"
+            android:title="@string/settings" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item android:id="@+id/nav_term_and_condition"  android:icon="@drawable/ic_subject_black_24dp"
+                android:title="@string/term_and_condition" />
+            <item android:id="@+id/nav_rate_us" android:icon="@drawable/ic_grade_black_24dp"
+                android:title="@string/rate_us" />
+            <item android:id="@+id/nav_about_us" android:icon="@drawable/ic_announcement_black_24dp"
+                android:title="@string/about_us" />
+            <item android:id="@+id/nav_promote_this_app" android:icon="@drawable/ic_stay_primary_portrait_black_24dp"
+                android:title="@string/promote_this_app" />
+        </menu>
+    </item>
+
+</menu>

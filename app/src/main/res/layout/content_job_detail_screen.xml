@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" android:background="@color/background">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" android:fillViewport="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" android:layout_margin="5dp">
+                <TextView
+                    android:id="@+id/text_job_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16dp"
+                    android:text="Software Developer" />
+
+                <TextView
+                    android:id="@+id/text_company_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="15dp"
+                    android:text="Eweblabs Pvt limit." />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:background="@drawable/ic_view_column_black_24dp"/>
+                    <TextView
+                        android:id="@+id/text_job_exp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/dark_grey"
+                        android:layout_marginLeft="5dp"
+                        android:textSize="15sp"
+                        android:text="4-5 year" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:background="@drawable/ic_location_on_black_24dp"/>
+                    <TextView
+                        android:id="@+id/text_job_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/dark_grey"
+                        android:layout_marginLeft="5dp"
+                        android:textSize="15sp"
+                        android:text="Delhi ,India " />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:background="@drawable/ic_date_range_black_24dp"/>
+                    <TextView
+                        android:id="@+id/text_job_post"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/dark_grey"
+                        android:layout_marginLeft="5dp"
+                        android:textSize="15sp"
+                        android:text="31 Dec 2015 " />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+                    <TextView
+                        android:id="@+id/text_currency"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#000"
+                        android:layout_marginLeft="5dp"
+                        android:textSize="15sp"
+                        android:text="Ruppers" />
+                    <TextView
+                        android:id="@+id/text_ctc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/dark_grey"
+                        android:layout_marginLeft="5dp"
+                        android:textSize="15sp"
+                        android:text="150000 - 200000" />
+
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp" android:background="@color/dark_grey"></LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp" android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:text="@string/job_Summary"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:layout_marginBottom="2dp" android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:text="@string/industry"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:id="@+id/text_industry_area"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="15sp"
+                        android:text="Application Programing"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:layout_marginBottom="2dp" android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:text="@string/functional_area"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:id="@+id/text_functional_ares"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="15sp"
+                        android:text="Application Programing"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:layout_marginBottom="2dp" android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:text="@string/role"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:id="@+id/text_role"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="15sp"
+                        android:text="Software Developer"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:layout_marginBottom="2dp" android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:text="@string/job_type"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:id="@+id/text_job_type"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="15sp"
+                        android:text="Full Time"/>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp" android:background="@color/dark_grey"></LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp" android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:text="@string/job_details"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="15sp"
+                    android:id="@+id/text_job_detail"
+                    android:text="Debeloper with an experience of 2 year."/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp" android:background="@color/dark_grey"></LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp" android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:text="@string/educational_requirement"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="15sp"
+                    android:id="@+id/text_educational_requirement"
+                    android:text="Mca"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp" android:background="@color/dark_grey"></LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp" android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:text="@string/employer_details"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:layout_marginBottom="2dp" android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:text="@string/company_name"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:id="@+id/text_ed_company_name"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="15sp"
+                        android:text="E Weblabs Pvt limit."/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:layout_marginBottom="2dp" android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:text="@string/contact_person"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:id="@+id/text_ed_contact_person"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="15sp"
+                        android:text="Akash Singh"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:layout_marginBottom="2dp" android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:text="@string/contact_email"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:id="@+id/text_ed_contact_email"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="15sp"
+                        android:text="android.eweblabs@gmail.com"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:layout_marginBottom="2dp" android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:text="@string/contact_number"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:id="@+id/text_ed_contact_number"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="15sp"
+                        android:text="9812756756"/>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp" android:background="@color/dark_grey"></LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/background">
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btnApply"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="12dp"
+        android:minHeight="0dp"
+        android:textColor="@color/light"
+        android:text="Apply Now" android:background="@drawable/search_rectangle_btn"/>
+</LinearLayout>
+
+</LinearLayout>

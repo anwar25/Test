@@ -1,0 +1,8 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+    <!-- Search, should appear as action button -->
+    <item android:id="@+id/action_recent"
+        android:icon="@drawable/ic_restore_white_24dp"
+        android:title=""
+        app:showAsAction="ifRoom" />
+</menu>

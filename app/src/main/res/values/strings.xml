@@ -1,0 +1,568 @@
+<resources>
+    <string name="app_name">Career Advance</string>
+    <string name="app_play_store_link">https://play.google.com/store/apps/details?id=%1$s</string>
+
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="action_recent_search">Recent Search</string>
+    <string name="action_change_password">Change Password</string>
+
+    <string name="title_job_search">Job Search</string>
+    <string name="title_sign_in">Sign In</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_job_for_you">Job for you</string>
+    <string name="add_update_profile">Add/Update Profile</string>
+    <string name="title_sign_in_sign_up">Sign In or Sign Up</string>
+    <string name="title_sign_out">Sign Up</string>
+    <string name="title_create_new_account">Create New Account</string>
+    <string name="hint_job_title_keyword_company">Job title, Keyword, Company </string>
+    <string name="search_carrier">Search Carrier</string>
+    <string name="location">Location</string>
+    <string name="hint_select_your_location">Enter your location</string>
+    <string name="search_jobs">Search Jobs</string>
+    <string name="job_details">Job Details</string>
+    <string name="job_Summary">Job Summary</string>
+    <string name="functional_area">Functional Area</string>
+    <string name="industry">Industry</string>
+    <string name="company_name">Company Name</string>
+    <string name="company_website">Company Website</string>
+    <string name="contact_person">Contact Person</string>
+    <string name="contact_email">Contact Email</string>
+    <string name="contact_number">Contact Number</string>
+    <string name="vacancy">Vacancy</string>
+    <string name="job_country">Job Country</string>
+    <string name="role">Role</string>
+    <string name="job_type">Job Type</string>
+    <string name="educational_requirement">Educational Requirement</string>
+    <string name="employer_details">Employer Details</string>
+    <string name="hint_select_your_email">Enter your email</string>
+    <string name="hint_please_enter_your_email">Enter your email</string>
+    <string name="hint_please_enter_valid_email">Enter valid email</string>
+
+    <string name="hint_select_your_password">Enter your password</string>
+    <string name="hint_please_enter_your_password">Enter your password</string>
+    <string name="hint_please_enter_your_old_password">Enter your old password</string>
+    <string name="hint_please_enter_your_new_password">Enter your new password</string>
+    <string name="hint_please_enter_your_conform_password">Enter your conform password</string>
+    <string name="hint_password_are_not_matching">Password are not matching</string>
+    <string name="hint_select_your_first_name">Enter your Full Name</string>
+    <string name="hint_select_your_last_name">Enter your Last Name</string>
+    <string name="new_user">New User?</string>
+    <string name="create_account">Create Account</string>
+    <string name="forget_password">Forget Password</string>
+    <string name="well_done_send_your_temporary_password_on_your_mail">Well done!Send your temporary password on your mail.</string>
+    <string name="close">Close</string>
+    <string name="ok">Ok</string>
+    <string name="term_and_condition">Term &amp; conditions</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="about_us">About us</string>
+    <string name="rate_us">Rate us</string>
+    <string name="post_your_resume">Upload New Resume</string>
+    <string name="change_county">Change Country</string>
+    <string name="county">Country</string>
+    <string name="settings">Settings</string>
+    <string name="promote_this_app">Promote this App</string>
+    <string name="send_to">Send TO</string>
+    <string name="remind_me_later">Later</string>
+    <string name="no_thanks">No, thanks</string>
+    <string name="rate_app_name">Rate it</string>
+    <string name="app_rate_text">If you enjoy using %1$s, Please take a moment to rate it. Thanks for your support!</string>
+    <string name="error_dialog_error">Fail to connect !Please Check Internet Connection.</string>
+    <string name="error_dialog_no_results">No results found. Try changing your criteria.</string>
+    <string name="error_dialog_server_error">A problem occurred retrieving results. Please try again later.</string>
+    <string name="error_dialog_error_unknown">An unknown error has occurred. Please try again.</string>
+    <string name="error_message_network_to_connect">Fail to connect !Please Check Internet Connection</string>
+    <string name="profile_resume_headline">Resume Headline:</string>
+    <string name="profile_objective">Objective:</string>
+    <string name="profile_experience">Experience:</string>
+    <string name="profile_salary_expectation">Salary Expectation:</string>
+    <string name="profile_location">Location:</string>
+    <string name="profile_key_skills">Key Skills:</string>
+    <string name="hint_objective">Objective*:</string>
+    <string name="hint_Where_are_you_currently_located">Where are you currently located?*:</string>
+    <string name="hint_province">Province*:</string>
+    <string name="hint_address">Address*:</string>
+    <string name="hint_home_down_city">Hometown/City*:</string>
+    <string name="hint_postal_code">Postal Code*:</string>
+    <string name="hint_contact_number">Contact Number*:</string>
+    <string name="title_your_contact_information">Your Contact Information</string>
+    <string name="title_continue">Continue</string>
+    <string name="keywords">Keywords</string>
+    <string name="your_current_employment_details">Your Current Employment Details</string>
+    <string name="how_much_work_experience_do_you_have">How much work experience do you have?*:</string>
+    <string name="annual_salary">Annual Salary *:</string>
+    <string name="select_annual_salary">Select Annual Salary</string>
+    <string name="what_are_you_key_skills">What are your Key Skills?*:</string>
+    <string name="enter_a_headline_for_your_profile">Enter a Headline for your Profile*:</string>
+    <string name="select_the_industry_and_functional_are_that_are_interest_in">Select the Industry and Functional Area that you are interested in?:</string>
+    <string name="which_functional_area_do_you_work_in">Which Functional Area do you work in?*:</string>
+    <string name="please_select_your_basic_education">Select your Basic Education*:</string>
+    <string name="select_basic_education">Select Basic Education</string>
+    <string name="please_select_your_master_education">Select your Master Education*:</string>
+    <string name="select_master_education">Select Master Education</string>
+    <string name="please_select_your_doctorate_education">Select your Doctorate Education*:</string>
+    <string name="select_doctorate_education">Select Doctorate Education</string>
+    <string name="enter_the_certificate_course_name">Enter the certificate course name*:</string>
+    <string name="your_education_background">Your Education Background</string>
+    <string name="upload_your_detail_resume">Upload your detailed resume</string>
+    <string name="mailer_and_privacy_settings">Mailer and Privacy Settings</string>
+    <string name="job_alerts">Job Alerts</string>
+    <string name="important_notifications">Important Notifications</string>
+    <string name="fast_forward_e_mails">FastForward E-Mails</string>
+    <string name="fast_forward_call_sms">FastForward Calls/SMS</string>
+    <string name="communication_from_clients">Communication from Clients(Voice/Calls/SMS)</string>
+    <string name="other_promotions_offers">Other Promotions/ Special Offers</string>
+    <string name="i_have_read_and_understood_and_agree">I have read and understood and agree. </string>
+    <string name="years">Years</string>
+    <string name="months">Months</string>
+    <string name="search_country_text">Country Item</string>
+    <string name="search_province_text">Province Item</string>
+    <string name="select">Select</string>
+    <string name="select_currency">Select Currency</string>
+    <string name="select_salary">Select Salary</string>
+    <string name="select_your_industry">Select Your Industry</string>
+    <string name="select_your_function_ares">Select Your Function Area</string>
+    <string name="other">Other</string>
+    <string name="enter_other_basic_education">Enter other education</string>
+
+    <string-array name="work_experience_year">
+        <item>@string/select</item>
+        <item>Fresher</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>30+</item>
+    </string-array>
+
+    <string-array name="work_experience_year_value">
+        <item></item>
+        <item>99</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>30+</item>
+        <item>31</item>
+    </string-array>
+
+
+    <string-array name="work_experience_month">
+        <item>@string/select</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+    </string-array>
+
+
+    <string-array name="work_experience_month_value">
+        <item></item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+    </string-array>
+
+    <string-array name="amount">
+        <item>Min Annual Salary</item>
+        <item>0</item>
+        <item>Less than 50000</item>
+        <item>50,000</item>
+        <item>60,000</item>
+        <item>70,000</item>
+        <item>80,000</item>
+        <item>1,00,000</item>
+        <item>1,25,000</item>
+        <item>1,50,000</item>
+        <item>1,75,000</item>
+        <item>1,75,000</item>
+        <item>2,25,000</item>
+        <item>2,50,000</item>
+        <item>2,75,000</item>
+        <item>3,25,000</item>
+        <item>3,50,000</item>
+        <item>4,00,000</item>
+        <item>4,25,000</item>
+        <item>4,50,000</item>
+        <item>4,75,000</item>
+        <item>5,00,000</item>
+        <item>5,50,000</item>
+        <item>6,00,000</item>
+        <item>6,50,000</item>
+        <item>7,00,000</item>
+        <item>7,50,000</item>
+        <item>8,00,000</item>
+        <item>8,50,000</item>
+        <item>9,00,000</item>
+        <item>9,50,000</item>
+        <item>10,00,000</item>
+        <item>11,00,000</item>
+        <item>12,00,000</item>
+        <item>13,00,000</item>
+        <item>14,00,000</item>
+        <item>15,00,000</item>
+        <item>16,00,000</item>
+        <item>17,00,000</item>
+        <item>18,00,000</item>
+        <item>19,00,000</item>
+        <item>20,00,000</item>
+        <item>22,50,000</item>
+        <item>25,00,000</item>
+        <item>27,50,000</item>
+        <item>30,00,000</item>
+        <item>35,00,000</item>
+        <item>40,00,000</item>
+        <item>50,00,000</item>
+        <item>50,00,000 &amp; above</item>
+    </string-array>
+
+    <string-array name="amount_value">
+        <item></item>
+        <item>0</item>
+        <item>1</item>
+        <item>50000</item>
+        <item>60000</item>
+        <item>70000</item>
+        <item>80000</item>
+        <item>100000</item>
+        <item>125000</item>
+        <item>150000</item>
+        <item>175000</item>
+        <item>175000</item>
+        <item>225000</item>
+        <item>250000</item>
+        <item>275000</item>
+        <item>325000</item>
+        <item>350000</item>
+        <item>400000</item>
+        <item>425000</item>
+        <item>450000</item>
+        <item>475000</item>
+        <item>500000</item>
+        <item>550000</item>
+        <item>600000</item>
+        <item>650000</item>
+        <item>700000</item>
+        <item>750000</item>
+        <item>800000</item>
+        <item>850000</item>
+        <item>900000</item>
+        <item>950000</item>
+        <item>1000000</item>
+        <item>1100000</item>
+        <item>1200000</item>
+        <item>1300000</item>
+        <item>1400000</item>
+        <item>1500000</item>
+        <item>1600000</item>
+        <item>1700000</item>
+        <item>1800000</item>
+        <item>1900000</item>
+        <item>2000000</item>
+        <item>2250000</item>
+        <item>2500000</item>
+        <item>2750000</item>
+        <item>3000000</item>
+        <item>3500000</item>
+        <item>4000000</item>
+        <item>5000000</item>
+        <item>10000000</item>
+    </string-array>
+
+
+    <string-array name="select_your_industry">
+        <item>Select</item>
+        <item>IT-Software/Software Services</item>
+        <item>Accounting/Finance</item>
+        <item>Fresher/Trainee</item>
+        <item>Banking/Financial Services/Broking</item>
+        <item>Banking/Financial Services/Broking</item>
+        <item>Construction/Engineering/Cement/Metals</item>
+        <item>Advertising/PR/MR/Events</item>
+        <item>Agriculture/Dairy</item>
+        <item>Animation</item>
+        <item>Architecture/Interior Designing</item>
+        <item>Auto/Auto Ancillary</item>
+        <item>Aviation / Aerospace Firms</item>
+        <item>BPO/ITES</item>
+        <item>Brewery / Distillery</item>
+        <item>Ceramics /Sanitary ware</item>
+        <item>Chemicals/PetroChemical/Plastic/Rubber</item>
+        <item>Consumer Durables</item>
+        <item>Courier/Transportation/Freight</item>
+        <item>Education/Teaching/Training</item>
+        <item>Electricals / Switchgears</item>
+        <item>Export/Import</item>
+        <item>Facility Management</item>
+        <item>Fertilizers/Pesticides</item>
+        <item>FMCG/Foods/Beverage</item>
+        <item>Food Processing</item>
+        <item>Gems &amp; Jewellery</item>
+        <item>Glass</item>
+        <item>Heat Ventilation Air Conditioning</item>
+        <item>Hotels/Restaurants/Airlines/Travel</item>
+        <item>Industrial Products/Heavy Machinery</item>
+        <item>Insurance</item>
+        <item>IT-Hardware &amp; Networking</item>
+        <item>KPO / Research /Analytics</item>
+        <item>Legal</item>
+        <item>Media/Dotcom/Entertainment</item>
+        <item>Internet/Ecommerce</item>
+        <item>Medical/Healthcare/Hospital</item>
+        <item>Mining</item>
+        <item>NGO/Social Services</item>
+        <item>Office Equipment/Automation</item>
+        <item>Oil and Gas/Power/Infrastructure/Energy</item>
+        <item>Paper</item>
+        <item>Pharma/Biotech/Clinical Research</item>
+        <item>Printing/Packaging</item>
+        <item>Publishing</item>
+        <item>Real Estate/Property</item>
+        <item>Recruitment</item>
+        <item>Retail</item>
+        <item>Security/Law Enforcement</item>
+        <item>Semiconductors/Electronics</item>
+        <item>Shipping/Marine</item>
+        <item>Steel</item>
+        <item>Strategy /Management Consulting Firms</item>
+        <item>Telcom/ISP</item>
+        <item>Textiles/Garments/Accessories</item>
+        <item>Tyres</item>
+        <item>Water Treatment / Waste Management</item>
+        <item>Wellness/Fitness/Sports</item>
+        <item>Other</item>
+    </string-array>
+
+
+
+    <string-array name="select_function_your_area">
+        <item>Select</item>
+        <item>Accounts / Finance / Tax / CS / Audit</item>
+        <item>Production / Maintenance / Quality</item>
+        <item>IT Software - Application Programming / Maintenance</item>
+        <item>ITES / BPO / KPO / Customer Service / Operations</item>
+        <item>Banking / Insurance</item>
+        <item>Agent</item>
+        <item>Analytics &amp; Business Intelligence</item>
+        <item>Architecture / Interior Design</item>
+        <item>Content / Journalism</item>
+        <item>Corporate Planning / Consulting</item>
+        <item>Engineering Design / R&amp;D</item>
+        <item>Export / Import / Merchandising</item>
+        <item>Fashion / Garments / Merchandising</item>
+        <item>Guards / Security Services</item>
+        <item>Hotels / Restaurants</item>
+        <item>HR / Administration / IR</item>
+        <item>IT Software - Client Server</item>
+        <item>IT Software - Mainframe</item>
+        <item>IT Software - Middleware</item>
+        <item>IT Software - Mobile</item>
+        <item>IT Software - Other</item>
+        <item>IT Software - System Programming</item>
+        <item>IT Software - Telecom Software</item>
+        <item>IT Software - DBA / Datawarehousing</item>
+        <item>IT Software - E-Commerce / Internet Technologies</item>
+        <item>IT Software - Embedded /EDA /VLSI /ASIC /Chip Des.</item>
+        <item>IT Software - ERP / CRM</item>
+        <item>IT Software - Network Administration / Security</item>
+        <item>IT Software - QA &amp; Testing</item>
+        <item>IT Software - Systems / EDP / MIS</item>
+        <item>IT- Hardware / Telecom / Technical Staff / Support</item>
+        <item>IT-Hardware &amp; Networking</item>
+        <item>Legal</item>
+        <item>Marketing / Advertising / MR / PR</item>
+        <item>Internet/Ecommerce</item>
+        <item>Medical/Healthcare/Hospital</item>
+        <item>Packaging</item>
+        <item>Pharma / Biotech / Healthcare / Medical / R&amp;D</item>
+        <item>Sales / BD</item>
+        <item>Secretary / Front Office / Data Entry</item>
+        <item>Self Employed / Consultants</item>
+        <item>Shipping</item>
+        <item>Site Engineering / Project Management</item>
+        <item>Teaching / Education</item>
+        <item>Real Estate/Property</item>
+        <item>Ticketing / Travel / Airlines</item>
+        <item>Top Management</item>
+        <item>TV / Films / Production</item>
+        <item>Web / Graphic Design / Visualiser</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="select_your_Basic_Education">
+        <item>Select</item>
+        <item>Not Pursuing Graduation</item>
+        <item>B.A</item>
+        <item>B.Arch</item>
+        <item>BCA</item>
+        <item>B.B.A</item>
+        <item>B.Com</item>
+        <item>B.Ed</item>
+        <item>BDS</item>
+        <item>BHM</item>
+        <item>B.Pharma</item>
+        <item>B.Sc</item>
+        <item>B.Tech/B.E.</item>
+        <item>LLB</item>
+        <item>MBBS</item>
+        <item>Diploma</item>
+        <item>BVSC</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="select_your_Basic_Education_value">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>9999</item>
+    </string-array>
+
+    <string-array name="select_your_Masters_Education">
+        <item>Select</item>
+        <item>CA</item>
+        <item>CS</item>
+        <item>ICWA</item>
+        <item>Integrated PG</item>
+        <item>LLM</item>
+        <item>M.A</item>
+        <item>M.Arch</item>
+        <item>M.Com</item>
+        <item>M.Ed</item>
+        <item>M.Pharma</item>
+        <item>M.Sc</item>
+        <item>M.Tech/B.E.</item>
+        <item>MBA/PGDM</item>
+        <item>MCA</item>
+        <item>MS</item>
+        <item>PG Diploma</item>
+        <item>MVSC</item>
+        <item>MCM</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="select_your_Masters_Education_value">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>9999</item>
+    </string-array>
+
+    <string-array name="select_your_doctorate_Education">
+        <item>Select</item>
+        <item>Ph.D/Doctorate</item>
+        <item>MPHIL</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="select_your_doctorate_Education_value">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>9999</item>
+    </string-array>
+
+</resources>

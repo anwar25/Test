@@ -1,0 +1,36 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style
+        name="dialog_animation_bounce" >
+        <item name="android:windowEnterAnimation">@anim/bounce_in_dialog</item>
+        <item name="android:windowExitAnimation">@anim/bounce_out_dialog</item>
+    </style>
+
+    <style name="MyEditTextTheme">
+        <item name="colorControlNormal">@color/light</item>
+        <item name="colorControlActivated">@color/light</item>
+        <item name="colorControlHighlight">@color/light</item>
+    </style>
+
+    <style name="pu_profile_image_style">
+    <item name="android:layout_width">78dp</item>
+    <item name="android:layout_height">78dp</item>
+    <item name="android:layout_centerHorizontal">true</item>
+    <item name="android:src">@drawable/user_profile_icon</item>
+    </style>
+
+
+</resources>

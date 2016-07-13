@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:fitsSystemWindows="true"
+    tools:context=".SplashScreenActivity"
+    android:gravity="center_horizontal"
+    android:fillViewport="true"
+    android:layout_marginBottom="1dp" android:background="@color/background">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" android:fillViewport="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:background="?attr/colorPrimary"
+                android:layout_height="wrap_content" android:padding="10dp">
+
+                <in.eweblabs.careeradvance.UI.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/profile_img"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:src="@drawable/ic_face_white_48dp"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="@color/light"/>
+
+                <TextView
+                    android:id="@+id/txt_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:padding="2dp"
+                    android:gravity="center"
+                    android:text="Akash Singh" android:textColor="@color/light" />
+
+                <TextView
+                    android:id="@+id/text_email_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:padding="2dp"
+                    android:gravity="center"
+                    android:text="android.eweblabs@gmail.com" android:textColor="@color/light" />
+
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/logout_btn"
+                    android:layout_width="wrap_content"
+                    android:paddingLeft="32dp"
+                    android:paddingRight="32dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:layout_margin="5dp"
+                    android:text="Logout"
+                    android:textColor="@color/light"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/pu_logout_btn_selector"
+                    android:layout_below="@+id/pu_email_id"
+                    android:layout_centerHorizontal="true" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:padding="10dp" android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/profile_objective"
+                    android:id="@+id/textView2" android:textStyle="bold" android:paddingRight="5dp" android:textColor="@color/light_grey"/>
+                <TextView
+                    android:id="@+id/profile_objective"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:singleLine="true" android:textColor="@color/dark_grey" android:text=""/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" android:padding="10dp" android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="@string/profile_resume_headline"
+                        android:id="@+id/textView1" android:textStyle="bold" android:paddingRight="5dp" android:textColor="@color/light_grey"/>
+                    <TextView
+                        android:id="@+id/profile_resume_headline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:singleLine="true" android:textColor="@color/dark_grey" android:text=""/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:padding="10dp" android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/profile_experience"
+                    android:id="@+id/textView3" android:textStyle="bold" android:paddingRight="5dp" android:textColor="@color/light_grey"/>
+                <TextView
+                    android:id="@+id/profile_experience"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:singleLine="true" android:textColor="@color/dark_grey" android:text="0 Year(s) 0 Month(s)"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:padding="10dp" android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/profile_salary_expectation"
+                    android:id="@+id/textView4" android:textStyle="bold" android:paddingRight="5dp" android:textColor="@color/light_grey"/>
+                <TextView
+                    android:id="@+id/profile_salary_expectation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:singleLine="true" android:textColor="@color/dark_grey" android:text=""/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:padding="10dp" android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/profile_location"
+                    android:id="@+id/textView5" android:textStyle="bold" android:paddingRight="5dp" android:textColor="@color/light_grey"/>
+                <TextView
+                    android:id="@+id/profile_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:singleLine="true" android:textColor="@color/dark_grey" android:text=""/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:padding="10dp" android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/profile_key_skills"
+                    android:id="@+id/textView6" android:textStyle="bold" android:paddingRight="5dp" android:textColor="@color/light_grey"/>
+                <TextView
+                    android:id="@+id/profile_key_skills"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:singleLine="true" android:textColor="@color/dark_grey" android:text=""/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <android.support.design.widget.FloatingActionButton android:id="@+id/fab"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end" android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_edit_white_24dp" />
+
+</android.support.design.widget.CoordinatorLayout>
+

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light"
+    android:orientation="vertical" >
+            <in.eweblabs.careeradvance.UI.CustomViewPager
+                android:id="@+id/pager"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+            <in.eweblabs.careeradvance.UI.CirclePageIndicator
+                android:id="@+id/indicator"
+                android:padding="10dip"
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btncontinue"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="12dp"
+        android:textColor="@color/light"
+        android:text="@string/title_continue" android:background="@drawable/search_rectangle_btn"/>
+
+
+</LinearLayout>
+

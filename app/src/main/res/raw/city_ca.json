@@ -1,0 +1,54 @@
+[
+  {
+    "cityCode": "AB",
+    "cityName": "Alberta"
+  },
+  {
+    "cityCode": "BC",
+    "cityName": "British Columbia"
+  },
+  {
+    "cityCode": "MB",
+    "cityName": "Manitoba"
+  },
+  {
+    "cityCode": "NB",
+    "cityName": "New Brunswick"
+  },
+  {
+    "cityCode": "NL",
+    "cityName": "Newfoundland and Labrador"
+  },
+  {
+    "cityCode": "NT",
+    "cityName": "Northwest Territories"
+  },
+  {
+    "cityCode": "NS",
+    "cityName": "Nova Scotia"
+  },
+  {
+    "cityCode": "NU",
+    "cityName": "Nunavut"
+  },
+  {
+    "cityCode": "PE",
+    "cityName": "Prince Edward Island"
+  },
+  {
+    "cityCode": "SK",
+    "cityName": "Saskatchewan"
+  },
+  {
+    "cityCode": "ON",
+    "cityName": "Ontario"
+  },
+  {
+    "cityCode": "QC",
+    "cityName": "Quebec"
+  },
+  {
+    "cityCode": "YT",
+    "cityName": "Yukon"
+  }
+]
