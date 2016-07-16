@@ -3,85 +3,147 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" android:background="@color/background">
+    android:background="@color/background"
+    android:orientation="vertical">
 
     <android.support.v7.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        card_view:cardCornerRadius="0dp"
         android:layout_margin="5dp"
+        card_view:cardCornerRadius="0dp"
         card_view:cardElevation="5dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" android:padding="5dp">
+            android:orientation="vertical"
+            android:padding="5dp">
+
             <TextView
                 android:id="@+id/text_job_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="Software Developer"
                 android:textColor="@color/colorPrimary"
-                android:textSize="16dp"
-                android:text="Software Developer" />
+                android:textSize="16dp" />
 
             <TextView
                 android:id="@+id/text_company_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="Eweblabs Pvt limit."
                 android:textColor="@color/dark_grey"
-                android:textSize="15dp"
-                android:text="Eweblabs Pvt limit." />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:textSize="15dp" />
 
-                <LinearLayout
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/expImageView"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/ic_view_column_black_24dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:id="@+id/text_job_exp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/expImageView"
+                    android:layout_marginLeft="5dp"
+                    android:text="4-5 year"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:id="@+id/locationImageView"
+                    android:layout_toRightOf="@+id/text_job_exp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/ic_location_on_black_24dp" />
+                <TextView
+                    android:id="@+id/text_job_location"
+                    android:layout_toRightOf="@+id/locationImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_centerVertical="true"
+                    android:text="Delhi ,India "
+                    android:textColor="@color/dark_grey"
+                    android:textSize="@dimen/sp_12" />
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/btnApply"
+                    android:layout_width="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_height="25dp"
+                    android:background="@drawable/apply_btn_selector"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimary"
+                    android:text="@string/apply"/>
+
+              <!--  <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:layout_gravity="left"
                     android:layout_weight="1"
-                    android:gravity="center">
+                    android:orientation="horizontal">
+
                     <ImageView
                         android:layout_width="25dp"
                         android:layout_height="25dp"
-                        android:background="@drawable/ic_view_column_black_24dp"/>
+                        android:background="@drawable/ic_view_column_black_24dp" />
+
                     <TextView
                         android:id="@+id/text_job_exp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="bottom"
+                        android:text="4-5 year"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="15sp" />
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:background="@drawable/ic_location_on_black_24dp" />
+
+                    <TextView
+                        android:id="@+id/text_job_location"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/dark_grey"
                         android:layout_marginLeft="5dp"
-                        android:textSize="15sp"
-                        android:text="4-5 year" />
+                        android:text="Delhi ,India "
+                        android:textColor="@color/dark_grey"
+                        android:textSize="15sp" />
+
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:background="@drawable/ic_location_on_black_24dp"/>
-                    <TextView
-                        android:id="@+id/text_job_location"
-                        android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/dark_grey"
-                        android:layout_marginLeft="5dp"
-                        android:textSize="15sp"
-                        android:text="Delhi ,India " />
+                        android:text="@string/apply" />
 
-                </LinearLayout>
+                </LinearLayout>-->
 
-            </LinearLayout>
-
-
+            </RelativeLayout>
 
 
         </LinearLayout>
-        </android.support.v7.widget.CardView>
+    </android.support.v7.widget.CardView>
 </LinearLayout>

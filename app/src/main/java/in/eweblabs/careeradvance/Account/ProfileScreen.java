@@ -1,5 +1,7 @@
 package in.eweblabs.careeradvance.Account;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -50,12 +52,9 @@ import in.eweblabs.careeradvance.BaseActivityScreen;
 import in.eweblabs.careeradvance.Entity.City;
 import in.eweblabs.careeradvance.Entity.Country;
 import in.eweblabs.careeradvance.Entity.Currency;
-import in.eweblabs.careeradvance.Entity.Response;
-import in.eweblabs.careeradvance.Entity.ResultMessage;
 import in.eweblabs.careeradvance.Entity.UserInfo;
 import in.eweblabs.careeradvance.Network.BaseNetwork;
 import in.eweblabs.careeradvance.R;
-import in.eweblabs.careeradvance.SharedPreferences.PreHelper;
 import in.eweblabs.careeradvance.StaticData.StaticConstant;
 import in.eweblabs.careeradvance.UI.CircleImageView;
 import in.eweblabs.careeradvance.UI.LoadingDialog;
@@ -72,13 +71,24 @@ public class ProfileScreen extends Fragment {
     int REQUEST_CAMERA = 9999;
     int SELECT_FILE = 8888;
     ImageLoader imageLoader;
+    private BaseActivityScreen activityHandle;
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.content_profile_screen,container,false);
-        ((BaseActivityScreen)getActivity()).SetToolbarInitialization(this);
+        ((BaseActivityScreen)getActivity()).setToolbarInitialization(this);
         WidgetMapping(view);
         return view;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof Activity){
+            activityHandle = (BaseActivityScreen) context;
+        }
     }
 
     private void WidgetMapping(View view) {
@@ -93,7 +103,7 @@ public class ProfileScreen extends Fragment {
         profile_img = (CircleImageView)view.findViewById(R.id.profile_img);
         imageLoader =  new ImageLoader(getActivity());
 
-        UserInfo userInfo = ApplicationController.getInstance().getUserInfo();
+        UserInfo userInfo = activityHandle.getmUserInfo();
         if(userInfo!=null && !TextUtils.isEmpty(userInfo.getUserEmail()))
         {
 
@@ -131,7 +141,7 @@ public class ProfileScreen extends Fragment {
 
     private void InitializationCurrentSalary(View view) {
         String Amount = "";
-        String Amount_Value = ApplicationController.getInstance().getUserInfo().getUserCTC();
+        String Amount_Value = activityHandle.getmUserInfo().getUserCTC() ;
         List<String> objectNameArrayListAmount = Arrays.asList(getResources().getStringArray(R.array.amount));
         List<String> objectCodeArrayListAmount = Arrays.asList(getResources().getStringArray(R.array.amount_value));
         for (int i = 0; i < objectNameArrayListAmount.size(); i++) {
@@ -141,7 +151,7 @@ public class ProfileScreen extends Fragment {
             }
         }
         HashMap<Object,Object> objectArrayListCurr = ApplicationController.getInstance().getDataModel().GetCurrencyList();
-        String CurrencyCode = ApplicationController.getInstance().getUserInfo().getUserSalaryCurrency();
+        String CurrencyCode = activityHandle.getmUserInfo().getUserSalaryCurrency();
         Currency currency = (Currency) objectArrayListCurr.get(CurrencyCode);
         if(currency!=null)
             ((TextView)view.findViewById(R.id.profile_salary_expectation)).setText(currency.getCurrencyName()+" "+TextUtility.checkIsStringEmpty(Amount));
@@ -154,7 +164,7 @@ public class ProfileScreen extends Fragment {
 
     private void InitializationLocation(View view) {
 
-        String UserLocation = ApplicationController.getInstance().getUserInfo().getUserLocation();
+        String UserLocation = activityHandle.getmUserInfo().getUserLocation();
         String stateUser = "";
         String countryUser = "";
         String LocationName = "" ;
@@ -298,7 +308,7 @@ public class ProfileScreen extends Fragment {
                     String FileName =  (getString(R.string.app_name)+"_img_Profile" + ".jpg").replaceAll("\\s+","");
                     File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath().toString(),FileName);
                     Logger.d("file_path", "::" + file.getPath());
-                    mpEntity.addPart("loginId", new StringBody(ApplicationController.getInstance().getUserInfo().getUserId()));
+                    mpEntity.addPart("loginId", new StringBody(activityHandle.getmUserInfo().getUserId()));
                     mpEntity.addPart("profileImage", new FileBody(file));
                     HttpEntity entity = mpEntity.build();
                     httppost.setEntity(entity);
@@ -337,7 +347,7 @@ public class ProfileScreen extends Fragment {
                         }
                         if(jsonObjectLogin.has("image_file")){
                             String ImageFile = jsonObjectLogin.getString("image_file");
-                            ApplicationController.getInstance().getUserInfo().setUserAvatar(jsonObjectLogin.getString("image_file"));
+                            activityHandle.getmUserInfo().setUserAvatar(jsonObjectLogin.getString("image_file"));
                             if(!TextUtils.isEmpty(ImageFile));
                             imageLoader.DisplayImage(ImageFile, profile_img);
                         }

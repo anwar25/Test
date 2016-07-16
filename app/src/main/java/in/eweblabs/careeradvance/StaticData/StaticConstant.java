@@ -5,6 +5,10 @@ package in.eweblabs.careeradvance.StaticData;
  * This class use for global declare variable.
  */
 public class StaticConstant {
+    public static final String SIGN_IN = "SignIn";
+    public static final String APPLIED_JOB = "applied_job";
+    public static final String UPLOAD_RESUME = "upload_resume";
+
     public static String GCM_APP_ID = "1059237334193";
     public static final int PAGING_ITEM_SIZE = 20;
     public static final int NULL_POINTER_EXCEPTION = 0;
@@ -117,4 +121,9 @@ public class StaticConstant {
 
     public static String PACKAGE_NAME ="in.eweblabs.careeradvance";
     public static String Regular_Expression_LOCATION= ", ";
+
+    public static final String PREF_FILE_NAME = "career_advance";
+    public static final String USER_INFO = "user_info";
+
+    public static final String IS_LOGGED_IN = "is_logged_in";
 }

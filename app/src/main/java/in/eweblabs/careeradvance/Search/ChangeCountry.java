@@ -35,7 +35,7 @@ public class ChangeCountry extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.content_country_screen,container,false);
-        ((BaseActivityScreen)getActivity()).SetToolbarInitialization(this);
+        ((BaseActivityScreen)getActivity()).setToolbarInitialization(this);
         WidgetMapping(view);
         return view;
     }

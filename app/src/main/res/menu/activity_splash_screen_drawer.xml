@@ -4,6 +4,10 @@
     <group android:checkableBehavior="single">
         <item android:id="@+id/nav_job_search" android:icon="@drawable/ic_search_black_24dp"
             android:title="@string/title_job_search" />
+        <item android:id="@+id/nav_my_profile" android:icon="@drawable/ic_account_circle_black_24dp"
+            android:title="@string/title_my_profile" />
+        <item android:id="@+id/nav_applied_jobs" android:icon="@drawable/ic_check_black_24dp"
+            android:title="@string/title_applied_job" />
         <item android:id="@+id/nav_post_your_resume" android:icon="@drawable/ic_description_black_24dp"
             android:title="@string/post_your_resume" />
         <item android:id="@+id/nav_change_country" android:icon="@drawable/ic_change_history_black_24dp"

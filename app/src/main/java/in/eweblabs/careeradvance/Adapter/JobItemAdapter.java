@@ -1,6 +1,7 @@
 package in.eweblabs.careeradvance.Adapter;
 
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -8,7 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import java.util.ArrayList;
+
 import in.eweblabs.careeradvance.Entity.Job;
 import in.eweblabs.careeradvance.Interface.IRefreshList;
 import in.eweblabs.careeradvance.R;
@@ -22,10 +25,17 @@ public class JobItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     FragmentActivity context;
     IRefreshList iRefreshList;
 
-    public JobItemAdapter(FragmentActivity context, ArrayList<Job> listItems, IRefreshList iRefreshList) {
+    private final  ApplyJobListener applyJob ;
+    public interface ApplyJobListener{
+        void jobApplied(Job job);
+    }
+
+    public JobItemAdapter(FragmentActivity context, ArrayList<Job> listItems, IRefreshList iRefreshList,
+                          ApplyJobListener applyJobListener) {
         this.context = context;
         this.listItems = listItems;
         this.iRefreshList = iRefreshList;
+        this.applyJob  = applyJobListener ;
     }
 
 
@@ -88,16 +98,24 @@ public class JobItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return listItems.size();
     }
 
-    class ViewItem extends RecyclerView.ViewHolder{
+    class ViewItem extends RecyclerView.ViewHolder implements View.OnClickListener{
         public TextView text_job_location,text_job_title,text_company_name,text_job_exp;
         CardView card_view;
+        public AppCompatButton applyJobButton ;
         public ViewItem(View itemView) {
             super(itemView);
             text_job_title = (TextView)itemView.findViewById(R.id.text_job_title);
             text_company_name = (TextView)itemView.findViewById(R.id.text_company_name);
             text_job_exp = (TextView)itemView.findViewById(R.id.text_job_exp);
             text_job_location = (TextView) itemView.findViewById(R.id.text_job_location);
+            applyJobButton = (AppCompatButton) itemView.findViewById(R.id.btnApply);
+            applyJobButton.setOnClickListener(this);
             card_view = (CardView) itemView.findViewById(R.id.card_view);
+        }
+
+        @Override
+        public void onClick(View v) {
+            applyJob.jobApplied(listItems.get(getAdapterPosition()));
         }
     }
 

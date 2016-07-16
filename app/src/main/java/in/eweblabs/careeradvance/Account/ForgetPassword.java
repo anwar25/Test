@@ -17,7 +17,6 @@ import in.eweblabs.careeradvance.AsyncTask.AuthCommonTask;
 import in.eweblabs.careeradvance.BaseActivityScreen;
 import in.eweblabs.careeradvance.Entity.Response;
 import in.eweblabs.careeradvance.Entity.ResultMessage;
-import in.eweblabs.careeradvance.Entity.UserInfo;
 import in.eweblabs.careeradvance.Interface.IAsyncTaskRunner;
 import in.eweblabs.careeradvance.Network.BaseNetwork;
 import in.eweblabs.careeradvance.R;
@@ -35,7 +34,7 @@ public class ForgetPassword extends Fragment implements IAsyncTaskRunner {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.content_forget_password_screen,container,false);
-        ((BaseActivityScreen)getActivity()).SetToolbarInitialization(this);
+        ((BaseActivityScreen)getActivity()).setToolbarInitialization(this);
         WidgetMapping(view);
         return view;
     }

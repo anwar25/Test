@@ -3,12 +3,8 @@ package in.eweblabs.careeradvance;
 import android.app.Application;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.text.TextUtils;
-
-import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 import in.eweblabs.careeradvance.DB.CareerAdvanceDBData;
 import in.eweblabs.careeradvance.DB.DatabaseManager;
@@ -16,7 +12,8 @@ import in.eweblabs.careeradvance.Data.DataModel;
 import in.eweblabs.careeradvance.Entity.UserInfo;
 import in.eweblabs.careeradvance.SharedPreferences.PreHelper;
 import in.eweblabs.careeradvance.StaticData.StaticConstant;
-import in.eweblabs.careeradvance.Utils.Logger;
+
+//import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 
 /**
@@ -26,12 +23,11 @@ import in.eweblabs.careeradvance.Utils.Logger;
 public class ApplicationController extends Application{
 
     static ApplicationController appController;
-    GoogleCloudMessaging gcm;
+  //  GoogleCloudMessaging gcm;
     CareerAdvanceDBData careerAdvanceDBData;
     UserInfo userInfo;
     DataModel dataModel;
-    public static ApplicationController getInstance()
-    {
+    public static ApplicationController getInstance() {
         return  appController;
     }
 
@@ -60,7 +56,7 @@ public class ApplicationController extends Application{
 
     public void registerGCMService()
     {
-        try{
+      /*  try{
             gcm = GoogleCloudMessaging.getInstance(this);
             String regId = getRegistrationId(this);
 
@@ -75,7 +71,7 @@ public class ApplicationController extends Application{
             Logger.d("registerGCMService", (new StringBuilder("::")).append(regId).toString());
         }catch (Exception e){
 
-        }
+        }*/
 
     }
 
@@ -92,7 +88,7 @@ public class ApplicationController extends Application{
         (new AsyncTask() {
             @Override
             protected Object doInBackground(Object[] params) {
-                try
+             /*   try
                 {
                     if (gcm == null)
                     {
@@ -110,7 +106,7 @@ public class ApplicationController extends Application{
                     Logger.d("GCNException", "::" + s);
                     e.printStackTrace();
                     return s;
-                }
+                }*/
                 return "";
             }
 

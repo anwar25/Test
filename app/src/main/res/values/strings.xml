@@ -46,7 +46,7 @@
     <string name="hint_please_enter_your_password">Enter your password</string>
     <string name="hint_please_enter_your_old_password">Enter your old password</string>
     <string name="hint_please_enter_your_new_password">Enter your new password</string>
-    <string name="hint_please_enter_your_conform_password">Enter your conform password</string>
+    <string name="hint_please_enter_your_conform_password">Enter your confirm password</string>
     <string name="hint_password_are_not_matching">Password are not matching</string>
     <string name="hint_select_your_first_name">Enter your Full Name</string>
     <string name="hint_select_your_last_name">Enter your Last Name</string>
@@ -127,6 +127,12 @@
     <string name="select_your_function_ares">Select Your Function Area</string>
     <string name="other">Other</string>
     <string name="enter_other_basic_education">Enter other education</string>
+    <string name="title_applied_job">Applied Jobs</string>
+    <string name="title_my_profile">My Profile</string>
+    <string name="apply">Apply</string>
+    <string name="applying">Applying...</string>
+    <string name="processing_wait">Processing , Please wait...</string>
+    <string name="applied_jobs">Applied Jobs</string>
 
     <string-array name="work_experience_year">
         <item>@string/select</item>

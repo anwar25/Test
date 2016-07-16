@@ -7,40 +7,29 @@ package in.eweblabs.careeradvance.Network;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Build;
 import android.text.TextUtils;
 
-import java.io.BufferedInputStream;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.BasicResponseHandler;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.xmlpull.v1.XmlPullParserException;
-
-import in.eweblabs.careeradvance.Data.HJSONParsing;
-import in.eweblabs.careeradvance.Exception.SearchException;
 import in.eweblabs.careeradvance.Utils.Logger;
 
 public class BaseNetwork
@@ -54,6 +43,8 @@ public class BaseNetwork
     public static final String UPDATEPROFILE2 = "updateprofile2";
     public static final String UPDATEPROFILE3 = "updateprofile3";
     public static final String APPLYJOB = "applyJob";
+    public static final String MY_APPLIED_JOBS = "myApliedJobs";
+
     public static final String JOBKEYWORDS = "jobKeywords";
     public static final String JOBLOCATIONS = "jobLocations";
     public static final String SEARCHJOBBYKEYWORD= "searchJobBykeyword";

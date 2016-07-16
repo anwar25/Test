@@ -12,20 +12,17 @@ import android.widget.TextView;
 
 import java.util.HashMap;
 
-import in.eweblabs.careeradvance.Account.ProfileScreen;
 import in.eweblabs.careeradvance.Account.SignInScreen;
 import in.eweblabs.careeradvance.ApplicationController;
 import in.eweblabs.careeradvance.AsyncTask.AuthCommonTask;
 import in.eweblabs.careeradvance.BaseActivityScreen;
 import in.eweblabs.careeradvance.Entity.Job;
-import in.eweblabs.careeradvance.Entity.RecentSearch;
 import in.eweblabs.careeradvance.Entity.Response;
 import in.eweblabs.careeradvance.Entity.ResultMessage;
 import in.eweblabs.careeradvance.Entity.UserInfo;
 import in.eweblabs.careeradvance.Interface.IAsyncTaskRunner;
 import in.eweblabs.careeradvance.Network.BaseNetwork;
 import in.eweblabs.careeradvance.R;
-import in.eweblabs.careeradvance.StaticData.StaticConstant;
 import in.eweblabs.careeradvance.UI.LoadingDialog;
 import in.eweblabs.careeradvance.UI.MessageDialog;
 import in.eweblabs.careeradvance.Utils.TextUtility;
@@ -40,7 +37,7 @@ public class JobDetailFragment extends Fragment implements IAsyncTaskRunner{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.content_job_detail_screen,container,false);
-        ((BaseActivityScreen)getActivity()).SetToolbarInitialization(this);
+        ((BaseActivityScreen)getActivity()).setToolbarInitialization(this);
         job = (Job) getArguments().getSerializable("JobDetail");
         WidgetMapping(view);
         return view;
@@ -93,7 +90,7 @@ public class JobDetailFragment extends Fragment implements IAsyncTaskRunner{
                         PerformJobApplyProcess();
                     }else{
                         Bundle bundle =  new Bundle();
-                        bundle.putSerializable("activity", "JobApply");
+                        bundle.putString("activity", "JobApply");
                         SignInScreen signInScreen = new SignInScreen();
                         signInScreen.setArguments(bundle);
                         ((BaseActivityScreen) getActivity()).onReplaceFragment(signInScreen, true);

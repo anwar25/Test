@@ -1,25 +1,15 @@
 package in.eweblabs.careeradvance.Account;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatButton;
-import android.text.Editable;
-import android.text.Spannable;
-import android.text.SpannableString;
 import android.text.TextUtils;
-import android.text.TextWatcher;
-import android.text.method.LinkMovementMethod;
-import android.text.style.ClickableSpan;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import java.util.HashMap;
 
@@ -28,14 +18,12 @@ import in.eweblabs.careeradvance.AsyncTask.AuthCommonTask;
 import in.eweblabs.careeradvance.BaseActivityScreen;
 import in.eweblabs.careeradvance.Entity.Response;
 import in.eweblabs.careeradvance.Entity.ResultMessage;
-import in.eweblabs.careeradvance.Entity.UserInfo;
 import in.eweblabs.careeradvance.Interface.IAsyncTaskRunner;
 import in.eweblabs.careeradvance.Network.BaseNetwork;
 import in.eweblabs.careeradvance.R;
 import in.eweblabs.careeradvance.UI.CustomTextWatcher;
 import in.eweblabs.careeradvance.UI.LoadingDialog;
 import in.eweblabs.careeradvance.UI.MessageDialog;
-import in.eweblabs.careeradvance.UI.WebviewMessageDialog;
 
 /**
  * Created by Akash.Singh on 11/17/2015.
@@ -47,7 +35,7 @@ public class ChangePassword extends Fragment implements IAsyncTaskRunner {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.content_change_password_screen,container,false);
-        ((BaseActivityScreen)getActivity()).SetToolbarInitialization(this);
+        ((BaseActivityScreen)getActivity()).setToolbarInitialization(this);
         WidgetMapping(view);
         return view;
     }

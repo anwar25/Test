@@ -18,14 +18,11 @@ import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.HashMap;
 
-import in.eweblabs.careeradvance.ApplicationController;
 import in.eweblabs.careeradvance.AsyncTask.AuthCommonTask;
 import in.eweblabs.careeradvance.BaseActivityScreen;
 import in.eweblabs.careeradvance.Entity.ResultMessage;
@@ -47,7 +44,7 @@ public class SignUpScreen extends Fragment implements IAsyncTaskRunner {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.content_sign_up_screen,container,false);
-        ((BaseActivityScreen)getActivity()).SetToolbarInitialization(this);
+        ((BaseActivityScreen)getActivity()).setToolbarInitialization(this);
         WidgetMapping(view);
         return view;
     }

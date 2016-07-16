@@ -2,12 +2,11 @@ package in.eweblabs.careeradvance;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ProgressBar;
+
 import java.util.HashMap;
 
 import in.eweblabs.careeradvance.AsyncTask.AuthCommonTask;
@@ -69,7 +68,7 @@ public class SplashScreen extends AppCompatActivity implements ITimeCount,IAsync
     public void PerformProcessProcess() {
         if(SplashScreenAnimation)
             progressBar.setVisibility(View.VISIBLE);
-        HashMap<String, String> hashMap = new HashMap<>();
+        HashMap<String, String> hashMap = new HashMap<String, String>();
         AuthCommonTask authCommonTask =  new AuthCommonTask(SplashScreen.this,this, BaseNetwork.JOBKEYWORDS);
         authCommonTask.execute(hashMap);
     }
@@ -97,8 +96,7 @@ public class SplashScreen extends AppCompatActivity implements ITimeCount,IAsync
             }
             else{
                 SplashScreenFetchData = true;
-                if(SplashScreenAnimation==true && SplashScreenFetchData==true)
-                {
+                if(SplashScreenAnimation==true && SplashScreenFetchData==true){
                     progressBar.setVisibility(View.INVISIBLE);
                     SplashScreenFetchData = false;
                     Intent i = new Intent(getApplicationContext(), BaseActivityScreen.class);

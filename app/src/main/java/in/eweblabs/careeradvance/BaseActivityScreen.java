@@ -3,16 +3,17 @@ package in.eweblabs.careeradvance;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,19 +23,21 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+
 import in.eweblabs.careeradvance.Account.ChangePassword;
-import in.eweblabs.careeradvance.Account.UpdateProfile.UpdateProfileScreen;
 import in.eweblabs.careeradvance.Account.ProfileScreen;
 import in.eweblabs.careeradvance.Account.SignInScreen;
 import in.eweblabs.careeradvance.Account.SignUpScreen;
-import in.eweblabs.careeradvance.Account.UpdateProfile.UploadYourDetailedResume;
-import in.eweblabs.careeradvance.Account.UpdateProfile.YourContactInformation;
-import in.eweblabs.careeradvance.Account.UpdateProfile.YourCurrentEmploymentDetails;
+import in.eweblabs.careeradvance.Account.UpdateProfile.UpdateProfileScreen;
+import in.eweblabs.careeradvance.Account.UploadResumeScreen;
 import in.eweblabs.careeradvance.Entity.UserInfo;
+import in.eweblabs.careeradvance.Search.AppliedJobFragment;
 import in.eweblabs.careeradvance.Search.ChangeCountry;
 import in.eweblabs.careeradvance.Search.JobDetailFragment;
 import in.eweblabs.careeradvance.Search.SearchFragment;
 import in.eweblabs.careeradvance.Search.SearchResultFragment;
+import in.eweblabs.careeradvance.StaticData.StaticConstant;
 import in.eweblabs.careeradvance.UI.AppRateDialog;
 import in.eweblabs.careeradvance.UI.AppRater;
 import in.eweblabs.careeradvance.UI.CircleImageView;
@@ -44,8 +47,12 @@ import in.eweblabs.careeradvance.loader.ImageLoader;
 
 public class BaseActivityScreen extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
     ActionBarDrawerToggle toggle;
     public EditText edit_search_country;
+    private  static SessionManager sSessionManager;
+    private UserInfo mUserInfo ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +75,7 @@ public class BaseActivityScreen extends AppCompatActivity
 
             @Override
             public void onDrawerOpened(View drawerView) {
-                HeaderSettings(headerView);
+                headerSettings(headerView);
                 super.onDrawerOpened(drawerView);
             }
         };
@@ -80,9 +87,9 @@ public class BaseActivityScreen extends AppCompatActivity
             public void onClick(View v) {
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);
-                if (ApplicationController.getInstance().getUserInfo() != null &&
-                        !TextUtils.isEmpty(ApplicationController.getInstance().getUserInfo().getUserEmail())) {
-                    onReplaceFragment(new ProfileScreen(), true);
+                if (mUserInfo != null && !TextUtils.isEmpty(mUserInfo.getUserEmail())) {
+                    //onReplaceFragment(new ProfileScreen(), true);
+                    onReplaceFragment(new ProfileScreen(), false);
                 } else {
                     onReplaceFragment(new SignInScreen(), true);
                 }
@@ -105,26 +112,41 @@ public class BaseActivityScreen extends AppCompatActivity
             }
         });
         edit_search_country = (EditText) findViewById(R.id.edit_search_country);
-
+        Log.d("BaseActivityScreen", "InstanceID token: " + FirebaseInstanceId.getInstance().getToken());
+        mUserInfo =  getSessionManager().getUserInfo();
+        headerSettings(headerView);
     }
 
-    private void HeaderSettings(View headerView) {
+    public synchronized  SessionManager getSessionManager(){
+        if(sSessionManager == null){
+            sSessionManager = new SessionManager(getApplicationContext());
+        }
+        return sSessionManager ;
+    }
+
+    public UserInfo getmUserInfo() {
+        return mUserInfo;
+    }
+
+    public void setmUserInfo(UserInfo mUserInfo) {
+        this.mUserInfo = mUserInfo;
+    }
+
+    private void headerSettings(View headerView) {
 
         TextView text_email_address = (TextView)headerView.findViewById(R.id.text_email_address);
         TextView txt_username = (TextView)headerView.findViewById(R.id.txt_username);
-        UserInfo userInfo = ApplicationController.getInstance().getUserInfo();
-        if(userInfo!=null && !TextUtils.isEmpty(userInfo.getUserEmail()))
-        {
+        //UserInfo userInfo = ApplicationController.getInstance().getUserInfo();
 
+        if(mUserInfo != null && !TextUtils.isEmpty(mUserInfo.getUserEmail())) {
             text_email_address.setVisibility(View.VISIBLE);
-            txt_username.setText(userInfo.getUserName());
-            text_email_address.setText(userInfo.getUserEmail());
+            txt_username.setText(mUserInfo.getUserName());
+            text_email_address.setText(mUserInfo.getUserEmail());
             ImageLoader imageLoader =  new ImageLoader(this);
-            if(!TextUtils.isEmpty(userInfo.getUserAvatar()))
-            imageLoader.DisplayImage(userInfo.getUserAvatar(), ((CircleImageView)headerView.findViewById(R.id.profile_img)));
+            if(!TextUtils.isEmpty(mUserInfo.getUserAvatar()))
+            imageLoader.DisplayImage(mUserInfo.getUserAvatar(), ((CircleImageView)headerView.findViewById(R.id.profile_img)));
 
-        }
-        else{
+        } else{
             text_email_address.setVisibility(View.INVISIBLE);
             txt_username.setText(getString(R.string.title_sign_in_sign_up));
         }
@@ -179,11 +201,40 @@ public class BaseActivityScreen extends AppCompatActivity
         if (id == R.id.nav_job_search) {
             if(fragment instanceof SearchFragment){
             }
-            else
+            else{
                 onReplaceFragment(new SearchFragment(), false);
-        }
-        else if (id == R.id.nav_post_your_resume) {
+            }
+        } else if(id == R.id.nav_my_profile){
+            if(mUserInfo == null){
+                SignInScreen signInScreen = new SignInScreen();
+                Bundle bundle = new Bundle();
+                bundle.putString("activity", StaticConstant.SIGN_IN);
+                signInScreen.setArguments(bundle);
+                onReplaceFragment(signInScreen, true);
+            }else{
+                onReplaceFragment(new ProfileScreen(), false);
+            }
 
+        }else if(id == R.id.nav_applied_jobs){
+            if(mUserInfo == null){
+                SignInScreen signInScreen = new SignInScreen();
+                Bundle bundle = new Bundle();
+                bundle.putString("activity", StaticConstant.APPLIED_JOB);
+                signInScreen.setArguments(bundle);
+                onReplaceFragment(signInScreen, true);
+            }else{
+                onReplaceFragment(new AppliedJobFragment(), false);
+            }
+        } else if (id == R.id.nav_post_your_resume) {
+            if(mUserInfo == null){
+                SignInScreen signInScreen = new SignInScreen();
+                Bundle bundle = new Bundle();
+                bundle.putString("activity", StaticConstant.UPLOAD_RESUME);
+                signInScreen.setArguments(bundle);
+                onReplaceFragment(signInScreen, true);
+            }else{
+                onReplaceFragment(new UploadResumeScreen(), false);
+            }
         } else if (id == R.id.nav_change_country) {
             if(fragment instanceof ChangeCountry){}
             else
@@ -246,11 +297,11 @@ public class BaseActivityScreen extends AppCompatActivity
         }
     }
 
-    public void SetToolbarInitialization(Fragment fragment){
+    public void setToolbarInitialization(Fragment fragment){
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         if(fragment instanceof SearchFragment) {
             setTitle(getString(R.string.title_job_search));
-            SetDrawerVisibility(0);
+            setDrawerVisibility(0);
             ((EditText)findViewById(R.id.edit_search_country)).setVisibility(View.GONE);
             navigationView.setCheckedItem(R.id.nav_job_search);
             navigationView.invalidate();
@@ -258,7 +309,7 @@ public class BaseActivityScreen extends AppCompatActivity
         }
         else if(fragment instanceof SignInScreen) {
             setTitle(getString(R.string.title_sign_in));
-            SetDrawerVisibility(1);
+            setDrawerVisibility(1);
             ((EditText) findViewById(R.id.edit_search_country)).setVisibility(View.GONE);
             getSupportActionBar().setHomeButtonEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -266,7 +317,7 @@ public class BaseActivityScreen extends AppCompatActivity
         }
         else if(fragment instanceof SignUpScreen) {
             setTitle(getString(R.string.title_sign_out));
-            SetDrawerVisibility(1);
+            setDrawerVisibility(1);
             ((EditText)findViewById(R.id.edit_search_country)).setVisibility(View.GONE);
             getSupportActionBar().setHomeButtonEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -274,7 +325,7 @@ public class BaseActivityScreen extends AppCompatActivity
         }
         else if(fragment instanceof ProfileScreen) {
             setTitle(getString(R.string.title_profile));
-            SetDrawerVisibility(1);
+            setDrawerVisibility(1);
             ((EditText) findViewById(R.id.edit_search_country)).setVisibility(View.GONE);
             toggle.setDrawerIndicatorEnabled(true);
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
@@ -284,7 +335,7 @@ public class BaseActivityScreen extends AppCompatActivity
         }
         else if(fragment instanceof SignUpScreen) {
             setTitle(getString(R.string.forget_password));
-            SetDrawerVisibility(1);
+            setDrawerVisibility(1);
             ((EditText)findViewById(R.id.edit_search_country)).setVisibility(View.GONE);
             getSupportActionBar().setHomeButtonEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -292,7 +343,7 @@ public class BaseActivityScreen extends AppCompatActivity
         }
         else if(fragment instanceof UpdateProfileScreen) {
             setTitle(getString(R.string.add_update_profile));
-            SetDrawerVisibility(1);
+            setDrawerVisibility(1);
             ((EditText) findViewById(R.id.edit_search_country)).setVisibility(View.GONE);
             toggle.setDrawerIndicatorEnabled(true);
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
@@ -302,7 +353,7 @@ public class BaseActivityScreen extends AppCompatActivity
         }
         else if(fragment instanceof ChangePassword) {
             setTitle(getString(R.string.action_change_password));
-            SetDrawerVisibility(1);
+            setDrawerVisibility(1);
             ((EditText) findViewById(R.id.edit_search_country)).setVisibility(View.GONE);
             toggle.setDrawerIndicatorEnabled(true);
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
@@ -312,7 +363,7 @@ public class BaseActivityScreen extends AppCompatActivity
         }
         else if(fragment instanceof ChangeCountry) {
             setTitle(getString(R.string.change_county));
-            SetDrawerVisibility(0);
+            setDrawerVisibility(0);
             ((EditText)findViewById(R.id.edit_search_country)).setVisibility(View.VISIBLE);
             navigationView.setCheckedItem(R.id.nav_change_country);
             navigationView.invalidate();
@@ -320,7 +371,7 @@ public class BaseActivityScreen extends AppCompatActivity
         }
         else if(fragment instanceof UpdateProfileScreen) {
             setTitle(getString(R.string.title_profile));
-            SetDrawerVisibility(1);
+            setDrawerVisibility(1);
             ((EditText) findViewById(R.id.edit_search_country)).setVisibility(View.GONE);
             toggle.setDrawerIndicatorEnabled(true);
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
@@ -329,7 +380,7 @@ public class BaseActivityScreen extends AppCompatActivity
             invalidateOptionsMenu();
         }else if(fragment instanceof SearchResultFragment) {
             setTitle(getString(R.string.title_job_for_you));
-            SetDrawerVisibility(1);
+            setDrawerVisibility(1);
             ((EditText) findViewById(R.id.edit_search_country)).setVisibility(View.GONE);
             toggle.setDrawerIndicatorEnabled(true);
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
@@ -338,7 +389,25 @@ public class BaseActivityScreen extends AppCompatActivity
             invalidateOptionsMenu();
         }else if(fragment instanceof JobDetailFragment) {
             setTitle(getString(R.string.job_details));
-            SetDrawerVisibility(1);
+            setDrawerVisibility(1);
+            ((EditText) findViewById(R.id.edit_search_country)).setVisibility(View.GONE);
+            toggle.setDrawerIndicatorEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            invalidateOptionsMenu();
+        }else if(fragment instanceof  AppliedJobFragment){
+            setTitle(getString(R.string.applied_jobs));
+            setDrawerVisibility(1);
+            ((EditText) findViewById(R.id.edit_search_country)).setVisibility(View.GONE);
+            toggle.setDrawerIndicatorEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            invalidateOptionsMenu();
+        }else if(fragment instanceof  UploadResumeScreen){
+            setTitle(getString(R.string.add_update_profile));
+            setDrawerVisibility(1);
             ((EditText) findViewById(R.id.edit_search_country)).setVisibility(View.GONE);
             toggle.setDrawerIndicatorEnabled(true);
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
@@ -383,7 +452,7 @@ public class BaseActivityScreen extends AppCompatActivity
 
     }
 
-    public void SetDrawerVisibility(int status) {
+    public void setDrawerVisibility(int status) {
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         if (status == 0) {

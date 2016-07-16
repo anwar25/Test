@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "187269097967",
+    "firebase_url": "https://careeradvance-f930c.firebaseio.com",
+    "project_id": "careeradvance-f930c",
+    "storage_bucket": "careeradvance-f930c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:187269097967:android:657a85b6efd0c2ff",
+        "android_client_info": {
+          "package_name": "in.eweblabs.careeradvance"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "187269097967-fthienvcpg1tc8j25t8rhonm97cuhc54.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDr2gtYCLU1Lntn6lg0kllKs31qfkoydyg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

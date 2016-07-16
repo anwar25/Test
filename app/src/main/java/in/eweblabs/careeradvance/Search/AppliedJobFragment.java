@@ -29,12 +29,11 @@ import in.eweblabs.careeradvance.Network.BaseNetwork;
 import in.eweblabs.careeradvance.R;
 import in.eweblabs.careeradvance.UI.LoadingDialog;
 import in.eweblabs.careeradvance.UI.MessageDialog;
-import in.eweblabs.careeradvance.Utils.Utils;
 
 /**
- * Created by Akash.Singh on 1/9/2016.
+ * Created by Anwar Shaikh on 1/9/2016.
  */
-public class SearchResultFragment extends Fragment implements IRefreshList , JobItemAdapter.ApplyJobListener
+public class AppliedJobFragment extends Fragment implements IRefreshList , JobItemAdapter.ApplyJobListener
     ,IAsyncTaskRunner{
     ArrayList<Job> jobArrayList = new ArrayList<>();
     JobItemAdapter jobItemAdapter;
@@ -46,7 +45,9 @@ public class SearchResultFragment extends Fragment implements IRefreshList , Job
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.content_search_result_screen,container,false);
         ((BaseActivityScreen)getActivity()).setToolbarInitialization(this);
-        jobArrayList = (ArrayList<Job>) getArguments().getSerializable("Job");
+        //jobArrayList = (ArrayList<Job>) getArguments().getSerializable("Job");
+        getAppliedJob();
+        jobArrayList = new ArrayList<Job>();
         recycler_view = (RecyclerView) view.findViewById(R.id.recycler_view);
         CreateJob();
         return view;
@@ -74,19 +75,14 @@ public class SearchResultFragment extends Fragment implements IRefreshList , Job
     public void jobApplied(Job job) {
       //  Toast.makeText(getContext(), "Item lcicke position:"+job.getCompany() , Toast.LENGTH_SHORT).show();
         if(activityHandle.getmUserInfo() != null){
-            performApplyJob(job);
         }else{
-            SignInScreen signInScreen = new SignInScreen();
-            Bundle bundle = new Bundle();
-            bundle.putString("activity", "JobApply");
-            signInScreen.setArguments(bundle);
-            activityHandle.onReplaceFragment(signInScreen, true);
+            activityHandle.onReplaceFragment(new SignInScreen(), true);
         }
 
         //shareTextUrl();
     }
     private void shareTextUrl() {
-        Intent share = new Intent(android.content.Intent.ACTION_SEND);
+        Intent share = new Intent(Intent.ACTION_SEND);
         share.setType("text/plain");
       //  share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
 
@@ -99,16 +95,15 @@ public class SearchResultFragment extends Fragment implements IRefreshList , Job
     }
 
     LoadingDialog loadingDialog;
-    public void performApplyJob(Job job) {
+    public void getAppliedJob() {
         loadingDialog =  new LoadingDialog(getActivity());
         loadingDialog.show();
-        loadingDialog.SetTitleMessage(getString(R.string.applying));
+        loadingDialog.SetTitleMessage(getString(R.string.processing_wait));
         HashMap<String, String> hashMap = new HashMap<String, String>();
         hashMap.put(BaseNetwork.USER_ID_PARAMETER, activityHandle.getmUserInfo().getUserId());
-        hashMap.put(BaseNetwork.JOBID, job.getJob_id());
-        hashMap.put(BaseNetwork.EMPID,job.getEmp_id());
-        hashMap.put(BaseNetwork.DATETIME, Utils.getCurrentDateTime());
-        AuthCommonTask authCommonTask =  new AuthCommonTask(getActivity(),BaseNetwork.APPLYJOB,this,loadingDialog);
+    //   hashMap.put(BaseNetwork.EMPID,job.getEmp_id());
+     //   hashMap.put(BaseNetwork.DATETIME, Utils.getCurrentDateTime());
+        AuthCommonTask authCommonTask =  new AuthCommonTask(getActivity(),BaseNetwork.MY_APPLIED_JOBS,this,loadingDialog);
         authCommonTask.execute(hashMap);
     }
 
@@ -119,12 +114,12 @@ public class SearchResultFragment extends Fragment implements IRefreshList , Job
         if(obj!=null){
             ResultMessage resultMessage = (ResultMessage) obj;
             Response response = (Response) resultMessage.RESULT_OBJECT;
-            if(!TextUtils.isEmpty(response.getMessage())){
+           /* if(!TextUtils.isEmpty(response.getMessage())){
                 MessageDialog messageDialog =  new MessageDialog(getActivity());
                 messageDialog.show();
                 messageDialog.setTitle(getString(R.string.app_name));
                 messageDialog.setMessageContent(response.getMessage());
-            }
+            }*/
         }
 
     }

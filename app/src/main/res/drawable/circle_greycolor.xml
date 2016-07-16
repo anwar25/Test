@@ -8,5 +8,5 @@
 
     <stroke
         android:width="2dp"
-        android:color="@color/common_action_bar_splitter" />
+        android:color="@color/default_circle_indicator_page_color" />
 </shape>

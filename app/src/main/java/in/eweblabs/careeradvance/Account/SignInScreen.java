@@ -1,5 +1,7 @@
 package in.eweblabs.careeradvance.Account;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
@@ -14,7 +16,9 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import java.util.HashMap;
+
 import in.eweblabs.careeradvance.ApplicationController;
 import in.eweblabs.careeradvance.AsyncTask.AuthCommonTask;
 import in.eweblabs.careeradvance.BaseActivityScreen;
@@ -23,6 +27,8 @@ import in.eweblabs.careeradvance.Entity.UserInfo;
 import in.eweblabs.careeradvance.Interface.IAsyncTaskRunner;
 import in.eweblabs.careeradvance.Network.BaseNetwork;
 import in.eweblabs.careeradvance.R;
+import in.eweblabs.careeradvance.Search.AppliedJobFragment;
+import in.eweblabs.careeradvance.StaticData.StaticConstant;
 import in.eweblabs.careeradvance.UI.LoadingDialog;
 import in.eweblabs.careeradvance.UI.MessageDialog;
 
@@ -32,11 +38,13 @@ import in.eweblabs.careeradvance.UI.MessageDialog;
 public class SignInScreen extends Fragment implements IAsyncTaskRunner{
     EditText edit_email_address,edit_password;
     TextInputLayout input_email_address,input_password;
+    private BaseActivityScreen activityHandle;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.content_sign_in_screen,container,false);
-        ((BaseActivityScreen)getActivity()).SetToolbarInitialization(this);
+        ((BaseActivityScreen)getActivity()).setToolbarInitialization(this);
         WidgetMapping(view);
         return view;
     }
@@ -131,6 +139,13 @@ public class SignInScreen extends Fragment implements IAsyncTaskRunner{
         authCommonTask.execute(hashMap);
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof Activity){
+            activityHandle = (BaseActivityScreen) context;
+        }
+    }
 
     @Override
     public void taskCompleted(Object obj) {
@@ -140,15 +155,19 @@ public class SignInScreen extends Fragment implements IAsyncTaskRunner{
             ResultMessage resultMessage = (ResultMessage) obj;
             UserInfo userInfo = (UserInfo) resultMessage.RESULT_OBJECT;
             if(!TextUtils.isEmpty(userInfo.getUserEmail())){
+                //SAVE USER INFO START
                 ApplicationController.getInstance().setUserInfo(userInfo);
-                if(((String)getArguments().getSerializable("activity")).equalsIgnoreCase("SignIn"))
-                {
+                activityHandle.getSessionManager().putString(StaticConstant.USER_INFO,resultMessage.RESPONSE);
+                activityHandle.getSessionManager().putBoolean(StaticConstant.IS_LOGGED_IN , true);
+                activityHandle.setmUserInfo(userInfo);
+                //SAVE USER INFO END
+                if(((String)getArguments().getString("activity")).equalsIgnoreCase(StaticConstant.SIGN_IN)){
                     getActivity().getSupportFragmentManager().popBackStack();
                     ((BaseActivityScreen) getActivity()).onReplaceFragment(new ProfileScreen(), true);
-                }
-                else if(((String)getArguments().getSerializable("activity")).equalsIgnoreCase("JobApply"))
-                {
+                }else if(((String)getArguments().getString("activity")).equalsIgnoreCase("JobApply")){
                     getActivity().getSupportFragmentManager().popBackStack();
+                }else if(((String)getArguments().getString("activity")).equalsIgnoreCase(StaticConstant.APPLIED_JOB)){
+                    ((BaseActivityScreen) getActivity()).onReplaceFragment(new AppliedJobFragment(), true);
                 }
 
             }
