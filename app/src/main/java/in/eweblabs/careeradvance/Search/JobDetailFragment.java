@@ -1,9 +1,13 @@
 package in.eweblabs.careeradvance.Search;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatImageView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +17,6 @@ import android.widget.TextView;
 import java.util.HashMap;
 
 import in.eweblabs.careeradvance.Account.SignInScreen;
-import in.eweblabs.careeradvance.ApplicationController;
 import in.eweblabs.careeradvance.AsyncTask.AuthCommonTask;
 import in.eweblabs.careeradvance.BaseActivityScreen;
 import in.eweblabs.careeradvance.Entity.Job;
@@ -29,10 +32,14 @@ import in.eweblabs.careeradvance.Utils.TextUtility;
 import in.eweblabs.careeradvance.Utils.Utils;
 
 /**
- * Created by Akash.Singh on 1/11/2016.
+ * Created by Anwar shaikh on 1/11/2016.
  */
 public class JobDetailFragment extends Fragment implements IAsyncTaskRunner{
     Job job;
+    private BaseActivityScreen activityHandle;
+
+    private AppCompatImageView mShareJobImageView ;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -84,10 +91,9 @@ public class JobDetailFragment extends Fragment implements IAsyncTaskRunner{
             @Override
             public void onClick(View v) {
                 if(job.getWebsite().equalsIgnoreCase("www.careeradvance.com")){
-                    UserInfo userInfo = ApplicationController.getInstance().getUserInfo();
-                    if(userInfo!=null && !TextUtils.isEmpty(userInfo.getUserEmail()))
-                    {
-                        PerformJobApplyProcess();
+                    UserInfo userInfo = activityHandle.getmUserInfo();
+                    if(userInfo!=null && !TextUtils.isEmpty(userInfo.getUserEmail())) {
+                        performJobApplyProcess();
                     }else{
                         Bundle bundle =  new Bundle();
                         bundle.putString("activity", "JobApply");
@@ -101,16 +107,46 @@ public class JobDetailFragment extends Fragment implements IAsyncTaskRunner{
                 }
             }
         });
-
+        mShareJobImageView = (AppCompatImageView)view.findViewById(R.id.shareJobImageView);
+        mShareJobImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shareJob();
+               // share
+            }
+        });
     }
+
+    private void shareJob() {
+        Intent share = new Intent(android.content.Intent.ACTION_SEND);
+        share.setType("text/plain");
+        //  share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+
+        // Add data to the intent, the receiving app will decide
+        // what to do with it.
+        share.putExtra(Intent.EXTRA_SUBJECT, job.getJob_title());
+        share.putExtra(Intent.EXTRA_TEXT,job.getJob_desc());
+
+        startActivity(Intent.createChooser(share, getString(R.string.share_job_via)));
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof Activity){
+            activityHandle = (BaseActivityScreen) context;
+        }
+    }
+
+
     LoadingDialog loadingDialog;
-    public void PerformJobApplyProcess() {
+    public void performJobApplyProcess() {
         loadingDialog =  new LoadingDialog(getActivity());
         loadingDialog.show();
-        loadingDialog.SetTitleMessage("Job Search, Processing...");
+        loadingDialog.SetTitleMessage(getString(R.string.applying));
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put(BaseNetwork.JOBID, job.getJob_id());
-        hashMap.put(BaseNetwork.USERID, ApplicationController.getInstance().getUserInfo().getUserId());
+        hashMap.put(BaseNetwork.USERID, activityHandle.getmUserInfo().getUserId());
         hashMap.put(BaseNetwork.EMPID, job.getEmp_id());
         hashMap.put(BaseNetwork.DATETIME, Utils.getCurrentDateTime());
         AuthCommonTask authCommonTask =  new AuthCommonTask(getActivity(),BaseNetwork.APPLYJOB,this,loadingDialog);

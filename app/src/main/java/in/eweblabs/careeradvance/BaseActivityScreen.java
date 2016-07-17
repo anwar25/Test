@@ -11,6 +11,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
@@ -23,6 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import in.eweblabs.careeradvance.Account.ChangePassword;
@@ -43,7 +45,6 @@ import in.eweblabs.careeradvance.UI.AppRater;
 import in.eweblabs.careeradvance.UI.CircleImageView;
 import in.eweblabs.careeradvance.UI.WebviewMessageDialog;
 import in.eweblabs.careeradvance.Utils.Logger;
-import in.eweblabs.careeradvance.loader.ImageLoader;
 
 public class BaseActivityScreen extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -53,6 +54,9 @@ public class BaseActivityScreen extends AppCompatActivity
     private  static SessionManager sSessionManager;
     private UserInfo mUserInfo ;
 
+    static {
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +69,7 @@ public class BaseActivityScreen extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         final View headerView = (View) LayoutInflater.from(this).inflate(R.layout.nav_header_splash_screen, null);
         navigationView.addHeaderView(headerView);
+        profile_img = (CircleImageView)headerView.findViewById(R.id.header_profile_img);
 
         toggle = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.navigation_drawer_open, R.string.navigation_drawer_close){
 
@@ -112,8 +117,11 @@ public class BaseActivityScreen extends AppCompatActivity
             }
         });
         edit_search_country = (EditText) findViewById(R.id.edit_search_country);
+
+        FirebaseInstanceId.getInstance().getToken();
         Log.d("BaseActivityScreen", "InstanceID token: " + FirebaseInstanceId.getInstance().getToken());
         mUserInfo =  getSessionManager().getUserInfo();
+        ApplicationController.getInstance().setUserInfo(mUserInfo);
         headerSettings(headerView);
     }
 
@@ -131,7 +139,8 @@ public class BaseActivityScreen extends AppCompatActivity
     public void setmUserInfo(UserInfo mUserInfo) {
         this.mUserInfo = mUserInfo;
     }
-
+    CircleImageView profile_img ;
+    //ImageLoader imageLoader;
     private void headerSettings(View headerView) {
 
         TextView text_email_address = (TextView)headerView.findViewById(R.id.text_email_address);
@@ -142,9 +151,16 @@ public class BaseActivityScreen extends AppCompatActivity
             text_email_address.setVisibility(View.VISIBLE);
             txt_username.setText(mUserInfo.getUserName());
             text_email_address.setText(mUserInfo.getUserEmail());
-            ImageLoader imageLoader =  new ImageLoader(this);
-            if(!TextUtils.isEmpty(mUserInfo.getUserAvatar()))
-            imageLoader.DisplayImage(mUserInfo.getUserAvatar(), ((CircleImageView)headerView.findViewById(R.id.profile_img)));
+            //imageLoader =  new ImageLoader(this);
+            if(!TextUtils.isEmpty(mUserInfo.getUserAvatar())){
+              //  imageLoader.DisplayImage(mUserInfo.getUserAvatar(),profile_img);
+                Glide.with(this)
+                        .load(mUserInfo.getUserAvatar())
+                       // .placeholder(R.drawable.ic_face_white_48dp) // can also be a drawable
+                        .error(R.drawable.ic_face_white_48dp) // will be displayed if the image cannot be loaded
+                        .crossFade(2000)
+                        .into(profile_img);
+            }
 
         } else{
             text_email_address.setVisibility(View.INVISIBLE);
@@ -406,7 +422,7 @@ public class BaseActivityScreen extends AppCompatActivity
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             invalidateOptionsMenu();
         }else if(fragment instanceof  UploadResumeScreen){
-            setTitle(getString(R.string.add_update_profile));
+            setTitle(getString(R.string.update_download_resume));
             setDrawerVisibility(1);
             ((EditText) findViewById(R.id.edit_search_country)).setVisibility(View.GONE);
             toggle.setDrawerIndicatorEnabled(true);

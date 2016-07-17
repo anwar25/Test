@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.HashMap;
 
@@ -103,6 +104,10 @@ public class SignInScreen extends Fragment implements IAsyncTaskRunner{
                     input_password.setError(getString(R.string.hint_please_enter_your_password));
                     return;
                 } else {
+                    if(TextUtils.isEmpty(activityHandle.getSessionManager().getString(BaseNetwork.DEVICE_TOKEN))){
+                        Toast.makeText(activityHandle, getString(R.string.failed_to_generate_token), Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     PerformSignInProcess();
                 }
 
@@ -128,13 +133,16 @@ public class SignInScreen extends Fragment implements IAsyncTaskRunner{
     public void PerformSignInProcess() {
         loadingDialog =  new LoadingDialog(getActivity());
         loadingDialog.show();
-        loadingDialog.SetTitleMessage("Sign In, Processing...");
-        HashMap<String, String> hashMap = new HashMap<>();
+        loadingDialog.SetTitleMessage(getString(R.string.sign_in_processing));
+        HashMap<String, String> hashMap = new HashMap<String, String>();
         hashMap.put(BaseNetwork.USER_EMAIL_PARAMETER, edit_email_address.getText().toString());
         hashMap.put(BaseNetwork.USER_PASSWORD_PARAMETER, edit_password.getText().toString());
         hashMap.put(BaseNetwork.USER_F_NAME_PARAMETER, "");
         hashMap.put(BaseNetwork.USER_M_NAME_PARAMETER, "");
         hashMap.put(BaseNetwork.USER_L_NAME_PARAMETER, "");
+        hashMap.put(BaseNetwork.AUTH_ID, "");
+        hashMap.put(BaseNetwork.DEVICE_TOKEN,  activityHandle.getSessionManager().getString(BaseNetwork.DEVICE_TOKEN));
+        hashMap.put(BaseNetwork.DEVICE_TYPE, StaticConstant.DEVICE_ANDROID);
         AuthCommonTask authCommonTask =  new AuthCommonTask(getActivity(),BaseNetwork.LOGIN_METHOD,this,loadingDialog);
         authCommonTask.execute(hashMap);
     }
@@ -160,6 +168,8 @@ public class SignInScreen extends Fragment implements IAsyncTaskRunner{
                 activityHandle.getSessionManager().putString(StaticConstant.USER_INFO,resultMessage.RESPONSE);
                 activityHandle.getSessionManager().putBoolean(StaticConstant.IS_LOGGED_IN , true);
                 activityHandle.setmUserInfo(userInfo);
+                //Save resume path
+                activityHandle.getSessionManager().putString(StaticConstant.USER_RESUME_PATH,userInfo.getUserResumePath());
                 //SAVE USER INFO END
                 if(((String)getArguments().getString("activity")).equalsIgnoreCase(StaticConstant.SIGN_IN)){
                     getActivity().getSupportFragmentManager().popBackStack();

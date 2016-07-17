@@ -1,73 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:fillViewport="true" >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" android:gravity="center_horizontal" android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:padding="5dp" android:textColor="@color/dark_grey" android:text="@string/upload_your_detail_resume" />
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp" android:background="@color/dark_grey"></View>
         <TextView
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:padding="5dp"
-            android:layout_height="wrap_content" android:textColor="@color/colorPrimary"
-            android:text="Upload your Resume Document :"/>
+            android:text="@string/upload_your_detail_resume"
+            android:textColor="@color/dark_grey" />
 
-        <ImageView
-            android:layout_marginTop="10dp"
-            android:id="@+id/image_document"
-            android:layout_marginBottom="10dp"
-            android:padding="10dp"
-            android:layout_width="80dp"
-            android:src="@drawable/ic_file_upload_white_24dp"
-            android:layout_height="80dp" android:background="@drawable/circle_greycolor"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:padding="5dp" android:textColor="@color/dark_grey" android:text="@string/mailer_and_privacy_settings" />
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp" android:background="@color/dark_grey"></View>
-        <LinearLayout
+            android:layout_height="1dp"
+            android:background="@color/dark_grey"></View>
+
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:orientation="vertical">
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:id="@+id/checkbox_job_alerts"
-                android:layout_height="wrap_content" android:textColor="@color/dark_grey" android:text="@string/job_alerts"/>
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:id="@+id/checkbox_imp_notification"
-                android:layout_height="wrap_content" android:textColor="@color/dark_grey" android:text="@string/important_notifications"/>
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:id="@+id/checkbox_fastforword_emails"
-                android:layout_height="wrap_content" android:textColor="@color/dark_grey" android:text="@string/fast_forward_e_mails"/>
-            <CheckBox
-                android:id="@+id/checkbox_communication_clients"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:textColor="@color/dark_grey" android:text="@string/communication_from_clients"/>
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:id="@+id/checkbox_fastforword_calls"
-                android:layout_height="wrap_content" android:textColor="@color/dark_grey" android:text="@string/fast_forward_call_sms"/>
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:id="@+id/checkbox_other_promotions"
-                android:layout_height="wrap_content" android:textColor="@color/dark_grey" android:text="@string/other_promotions_offers"/>
-        </LinearLayout>
-        <LinearLayout
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="Upload your Resume Document :"
+            android:textColor="@color/colorPrimary" />
+
+        <RelativeLayout
+            android:id="@+id/uploadResumeLayout"
+            android:layout_marginTop="@dimen/dp_30"
+            android:clickable="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:gravity="center">
-            <CheckBox
+            android:layout_height="wrap_content"
+            android:background="@drawable/circle_greycolor"
+            android:padding="@dimen/dp_15">
+
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:id="@+id/checkbox_I_have_read_and_understood_and_agree"
-                android:layout_height="wrap_content" android:textColor="@color/dark_grey" android:text="@string/i_have_read_and_understood_and_agree"/>
-        </LinearLayout>
+                android:focusable="false"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/resumeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="@dimen/dp_50"
+                    android:layout_marginRight="@dimen/dp_50"
+                    android:layout_marginTop="@dimen/dp_30"
+                    android:maxWidth="@dimen/dp_80"
+                    android:padding="@dimen/dp_2"
+                    android:gravity="center"
+                    android:text="Resume.doc"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_12" />
+
+                <ImageView
+                    android:id="@+id/image_document"
+                    android:layout_width="@dimen/dp_80"
+                    android:layout_height="@dimen/dp_80"
+                    android:layout_below="@+id/dateTextView"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="@dimen/dp_15"
+                    android:layout_marginRight="@dimen/dp_15"
+                    android:padding="@dimen/dp_5"
+                    android:src="@drawable/ic_file_upload_white_24dp" />
+
+                <TextView
+                    android:id="@+id/dateTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/resumeTextView"
+                    android:layout_centerHorizontal="true"
+                    android:padding="@dimen/dp_2"
+                    android:text="14 April, 2016"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_10" />
+
+                <TextView
+                    android:id="@+id/downloadTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/image_document"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/dp_30"
+                    android:padding="@dimen/dp_2"
+                    android:text="@string/download"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_12" />
+            </RelativeLayout>
+        </RelativeLayout>
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/updateResumeButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:padding="12dp"
+            android:textColor="@color/light"
+            android:text="@string/update_resume" android:background="@drawable/search_rectangle_btn"/>
     </LinearLayout>
 
 </ScrollView>

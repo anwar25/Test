@@ -1,402 +1,468 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" android:background="@color/background">
+    android:background="@color/background">
+
     <ScrollView
+        android:id="@+id/jobDetailScrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" android:fillViewport="true">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btnApply"
+        android:fillViewport="true">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" android:layout_margin="5dp">
+                android:layout_margin="5dp"
+                android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/text_job_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="Software Developer"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="16dp"
-                    android:text="Software Developer" />
+                    android:textSize="16dp" />
 
                 <TextView
                     android:id="@+id/text_company_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="Eweblabs Pvt limit."
                     android:textColor="@color/dark_grey"
-                    android:textSize="15dp"
-                    android:text="Eweblabs Pvt limit." />
+                    android:textSize="15dp" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
                     <ImageView
                         android:layout_width="25dp"
                         android:layout_height="25dp"
-                        android:background="@drawable/ic_view_column_black_24dp"/>
+                        android:background="@drawable/ic_view_column_black_24dp" />
+
                     <TextView
                         android:id="@+id/text_job_exp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/dark_grey"
                         android:layout_marginLeft="5dp"
-                        android:textSize="15sp"
-                        android:text="4-5 year" />
+                        android:text="4-5 year"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="15sp" />
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
                     <ImageView
+                        android:id="@+id/imageView3"
                         android:layout_width="25dp"
+                        android:layout_centerVertical="true"
                         android:layout_height="25dp"
-                        android:background="@drawable/ic_location_on_black_24dp"/>
+                        android:background="@drawable/ic_location_on_black_24dp" />
+
                     <TextView
                         android:id="@+id/text_job_location"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/dark_grey"
+                        android:layout_centerVertical="true"
                         android:layout_marginLeft="5dp"
-                        android:textSize="15sp"
-                        android:text="Delhi ,India " />
+                        android:layout_toEndOf="@+id/imageView3"
+                        android:layout_toRightOf="@+id/imageView3"
+                        android:text="Delhi ,India "
+                        android:textColor="@color/dark_grey"
+                        android:textSize="15sp" />
 
-                </LinearLayout>
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/shareJobImageView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:padding="@dimen/dp_5"
+                        android:layout_marginRight="@dimen/dp_15"
+                        app:srcCompat="@drawable/share_button_selector"/>
+
+                </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
                     <ImageView
                         android:layout_width="25dp"
                         android:layout_height="25dp"
-                        android:background="@drawable/ic_date_range_black_24dp"/>
+                        android:background="@drawable/ic_date_range_black_24dp" />
+
                     <TextView
                         android:id="@+id/text_job_post"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/dark_grey"
                         android:layout_marginLeft="5dp"
-                        android:textSize="15sp"
-                        android:text="31 Dec 2015 " />
+                        android:text="31 Dec 2015 "
+                        android:textColor="@color/dark_grey"
+                        android:textSize="15sp" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
                     <TextView
                         android:id="@+id/text_currency"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="#000"
                         android:layout_marginLeft="5dp"
-                        android:textSize="15sp"
-                        android:text="Ruppers" />
+                        android:text="Ruppers"
+                        android:textColor="#000"
+                        android:textSize="15sp" />
+
                     <TextView
                         android:id="@+id/text_ctc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/dark_grey"
                         android:layout_marginLeft="5dp"
-                        android:textSize="15sp"
-                        android:text="150000 - 200000" />
+                        android:text="150000 - 200000"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="15sp" />
 
                 </LinearLayout>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp" android:background="@color/dark_grey"></LinearLayout>
+                android:layout_height="1dp"
+                android:background="@color/dark_grey"></LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp" android:orientation="vertical">
+                android:layout_margin="5dp"
+                android:orientation="vertical">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="@string/job_Summary"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:text="@string/job_Summary"/>
+                    android:textSize="16sp" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
                     android:gravity="top"
-                    android:layout_marginBottom="2dp" android:orientation="horizontal">
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:text="@string/industry"
                         android:textColor="@color/dark_grey"
                         android:textSize="15sp"
-                        android:textStyle="bold"
-                        android:text="@string/industry"/>
+                        android:textStyle="bold" />
 
                     <TextView
-                        android:layout_width="0dp"
                         android:id="@+id/text_industry_area"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:text="Application Programing"
                         android:textColor="@color/dark_grey"
-                        android:textSize="15sp"
-                        android:text="Application Programing"/>
+                        android:textSize="15sp" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
                     android:gravity="top"
-                    android:layout_marginBottom="2dp" android:orientation="horizontal">
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:text="@string/functional_area"
                         android:textColor="@color/dark_grey"
                         android:textSize="15sp"
-                        android:textStyle="bold"
-                        android:text="@string/functional_area"/>
+                        android:textStyle="bold" />
 
                     <TextView
-                        android:layout_width="0dp"
                         android:id="@+id/text_functional_ares"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:text="Application Programing"
                         android:textColor="@color/dark_grey"
-                        android:textSize="15sp"
-                        android:text="Application Programing"/>
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
                     android:gravity="top"
-                    android:layout_marginBottom="2dp" android:orientation="horizontal">
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:text="@string/role"
                         android:textColor="@color/dark_grey"
                         android:textSize="15sp"
-                        android:textStyle="bold"
-                        android:text="@string/role"/>
+                        android:textStyle="bold" />
 
                     <TextView
-                        android:layout_width="0dp"
                         android:id="@+id/text_role"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:text="Software Developer"
                         android:textColor="@color/dark_grey"
-                        android:textSize="15sp"
-                        android:text="Software Developer"/>
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
                     android:gravity="top"
-                    android:layout_marginBottom="2dp" android:orientation="horizontal">
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:text="@string/job_type"
                         android:textColor="@color/dark_grey"
                         android:textSize="15sp"
-                        android:textStyle="bold"
-                        android:text="@string/job_type"/>
+                        android:textStyle="bold" />
 
                     <TextView
-                        android:layout_width="0dp"
                         android:id="@+id/text_job_type"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:text="Full Time"
                         android:textColor="@color/dark_grey"
-                        android:textSize="15sp"
-                        android:text="Full Time"/>
+                        android:textSize="15sp" />
                 </LinearLayout>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp" android:background="@color/dark_grey"></LinearLayout>
+                android:layout_height="1dp"
+                android:background="@color/dark_grey"></LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp" android:orientation="vertical">
+                android:layout_margin="5dp"
+                android:orientation="vertical">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="@string/job_details"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:text="@string/job_details"/>
+                    android:textSize="16sp" />
+
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="@color/dark_grey"
-                    android:textSize="15sp"
                     android:id="@+id/text_job_detail"
-                    android:text="Debeloper with an experience of 2 year."/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp" android:background="@color/dark_grey"></LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp" android:orientation="vertical">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:text="@string/educational_requirement"/>
-                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:text="Debeloper with an experience of 2 year."
                     android:textColor="@color/dark_grey"
-                    android:textSize="15sp"
-                    android:id="@+id/text_educational_requirement"
-                    android:text="Mca"/>
+                    android:textSize="15sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp" android:background="@color/dark_grey"></LinearLayout>
+                android:layout_height="1dp"
+                android:background="@color/dark_grey"></LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp" android:orientation="vertical">
+                android:layout_margin="5dp"
+                android:orientation="vertical">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="@string/educational_requirement"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:text="@string/employer_details"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/text_educational_requirement"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="top"
-                    android:layout_marginBottom="2dp" android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="@color/dark_grey"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
-                        android:text="@string/company_name"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:id="@+id/text_ed_company_name"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="@color/dark_grey"
-                        android:textSize="15sp"
-                        android:text="E Weblabs Pvt limit."/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="top"
-                    android:layout_marginBottom="2dp" android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="@color/dark_grey"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
-                        android:text="@string/contact_person"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:id="@+id/text_ed_contact_person"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="@color/dark_grey"
-                        android:textSize="15sp"
-                        android:text="Akash Singh"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="top"
-                    android:layout_marginBottom="2dp" android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="@color/dark_grey"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
-                        android:text="@string/contact_email"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:id="@+id/text_ed_contact_email"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="@color/dark_grey"
-                        android:textSize="15sp"
-                        android:text="android.eweblabs@gmail.com"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="top"
-                    android:layout_marginBottom="2dp" android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="@color/dark_grey"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
-                        android:text="@string/contact_number"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:id="@+id/text_ed_contact_number"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="@color/dark_grey"
-                        android:textSize="15sp"
-                        android:text="9812756756"/>
-                </LinearLayout>
+                    android:layout_weight="1"
+                    android:text="Mca"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="15sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp" android:background="@color/dark_grey"></LinearLayout>
+                android:layout_height="1dp"
+                android:background="@color/dark_grey"></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/employer_details"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:gravity="top"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/company_name"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/text_ed_company_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="E Weblabs Pvt limit."
+                        android:textColor="@color/dark_grey"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:gravity="top"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/contact_person"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/text_ed_contact_person"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Akash Singh"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:gravity="top"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/contact_email"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/text_ed_contact_email"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="android.eweblabs@gmail.com"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:gravity="top"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/contact_number"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/text_ed_contact_number"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="9812756756"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/dark_grey"></LinearLayout>
         </LinearLayout>
     </ScrollView>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/background">
+
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btnApply"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:padding="12dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/dp_15"
+        android:background="@drawable/search_rectangle_btn"
         android:minHeight="0dp"
-        android:textColor="@color/light"
-        android:text="Apply Now" android:background="@drawable/search_rectangle_btn"/>
-</LinearLayout>
+        android:padding="12dp"
+        android:text="Apply Now"
+        android:textColor="@color/light" />
 
-</LinearLayout>
+</RelativeLayout>

@@ -130,9 +130,15 @@
     <string name="title_applied_job">Applied Jobs</string>
     <string name="title_my_profile">My Profile</string>
     <string name="apply">Apply</string>
-    <string name="applying">Applying...</string>
+    <string name="applying">Applying , Please wait...</string>
     <string name="processing_wait">Processing , Please wait...</string>
     <string name="applied_jobs">Applied Jobs</string>
+    <string name="sign_in_processing">Sign In, Processing...</string>
+    <string name="failed_to_generate_token">Device token is not generated yet, Please retry.</string>
+    <string name="download">Download</string>
+    <string name="update_resume">Update resume</string>
+    <string name="update_download_resume">Update/Download Resume</string>
+    <string name="share_job_via">Share Job via</string>
 
     <string-array name="work_experience_year">
         <item>@string/select</item>

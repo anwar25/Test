@@ -104,8 +104,7 @@ public class ProfileScreen extends Fragment {
         imageLoader =  new ImageLoader(getActivity());
 
         UserInfo userInfo = activityHandle.getmUserInfo();
-        if(userInfo!=null && !TextUtils.isEmpty(userInfo.getUserEmail()))
-        {
+        if(userInfo!=null && !TextUtils.isEmpty(userInfo.getUserEmail())) {
 
             ((TextView)view.findViewById(R.id.txt_username)).setText(userInfo.getUserName());
             ((TextView)view.findViewById(R.id.text_email_address)).setText(userInfo.getUserEmail());

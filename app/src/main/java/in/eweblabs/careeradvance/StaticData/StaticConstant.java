@@ -8,6 +8,9 @@ public class StaticConstant {
     public static final String SIGN_IN = "SignIn";
     public static final String APPLIED_JOB = "applied_job";
     public static final String UPLOAD_RESUME = "upload_resume";
+    public static final String DEVICE_ANDROID = "android";
+    public static final String TITLE = "title";
+    public static final String BODY = "body";
 
     public static String GCM_APP_ID = "1059237334193";
     public static final int PAGING_ITEM_SIZE = 20;

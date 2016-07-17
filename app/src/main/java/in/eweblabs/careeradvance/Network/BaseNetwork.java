@@ -35,6 +35,11 @@ import in.eweblabs.careeradvance.Utils.Logger;
 public class BaseNetwork
 {
 
+    public static final String DEVICE_TYPE = "device_type";
+    public static final String DEVICE_TOKEN = "device_token";
+    public static final String AUTH_ID = "auth_id";
+
+
     private static BaseNetwork obj = null;
     public static final String LOGIN_METHOD = "/login";
     public static final String FORGET_PASSWORD_METHOD = "/forgetpass";
@@ -219,8 +224,7 @@ public class BaseNetwork
 
 
 
-    public boolean checkConnOnline(Context context)
-    {
+    public boolean checkConnOnline(Context context){
         ConnectivityManager cm =
                 (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
 

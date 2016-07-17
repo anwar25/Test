@@ -13,7 +13,7 @@
 
     <in.eweblabs.careeradvance.UI.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/profile_img"
+        android:id="@+id/header_profile_img"
         android:layout_width="78dp"
         android:layout_height="78dp"
         android:src="@drawable/ic_face_white_48dp"

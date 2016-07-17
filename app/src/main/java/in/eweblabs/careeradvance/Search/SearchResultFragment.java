@@ -2,7 +2,6 @@ package in.eweblabs.careeradvance.Search;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -85,19 +84,6 @@ public class SearchResultFragment extends Fragment implements IRefreshList , Job
 
         //shareTextUrl();
     }
-    private void shareTextUrl() {
-        Intent share = new Intent(android.content.Intent.ACTION_SEND);
-        share.setType("text/plain");
-      //  share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-
-        // Add data to the intent, the receiving app will decide
-        // what to do with it.
-        share.putExtra(Intent.EXTRA_SUBJECT, "Title Of The Post");
-        share.putExtra(Intent.EXTRA_TEXT, "http://www.codeofaninja.com");
-
-        startActivity(Intent.createChooser(share, "Share link!"));
-    }
-
     LoadingDialog loadingDialog;
     public void performApplyJob(Job job) {
         loadingDialog =  new LoadingDialog(getActivity());
