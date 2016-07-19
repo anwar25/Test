@@ -12,8 +12,8 @@
             android:title="@string/post_your_resume" />
         <item android:id="@+id/nav_change_country" android:icon="@drawable/ic_change_history_black_24dp"
             android:title="@string/change_county" />
-        <item android:id="@+id/nav_settings" android:icon="@drawable/ic_settings_black_24dp"
-            android:title="@string/settings" />
+     <!--   <item android:id="@+id/nav_settings" android:icon="@drawable/ic_settings_black_24dp"
+            android:title="@string/settings" />-->
     </group>
 
     <item android:title="Communicate">

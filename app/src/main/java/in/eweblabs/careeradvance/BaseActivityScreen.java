@@ -30,8 +30,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.firebase.iid.FirebaseInstanceId;
 
-import org.w3c.dom.Text;
-
 import in.eweblabs.careeradvance.Account.ChangePassword;
 import in.eweblabs.careeradvance.Account.ProfileScreen;
 import in.eweblabs.careeradvance.Account.SignInScreen;
@@ -272,9 +270,9 @@ public class BaseActivityScreen extends AppCompatActivity
             if(fragment instanceof ChangeCountry){}
             else
                 onReplaceFragment(new ChangeCountry(),true);
-        }  else if (id == R.id.nav_settings) {
+        }/*  else if (id == R.id.nav_settings) {
 
-        } else if (id == R.id.nav_term_and_condition) {
+        }*/ else if (id == R.id.nav_term_and_condition) {
             if(webviewMessageDialog==null)
                 webviewMessageDialog =new WebviewMessageDialog(this);
             if(webviewMessageDialog!=null && !webviewMessageDialog.isShowing())

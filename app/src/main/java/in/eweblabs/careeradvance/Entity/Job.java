@@ -3,7 +3,7 @@ package in.eweblabs.careeradvance.Entity;
 import java.io.Serializable;
 
 /**
- * Created by Akash.Singh on 1/8/2016.
+ * Created by Anwar Shaikh on 1/8/2016.
  */
 public class Job implements Serializable{
 
@@ -41,6 +41,15 @@ public class Job implements Serializable{
     String date_post;
     String address;
     String job_type;
+    String shared_url ;
+
+    public String getShared_url() {
+        return shared_url;
+    }
+
+    public void setShared_url(String shared_url) {
+        this.shared_url = shared_url;
+    }
 
     public String getJob_id() {
         return job_id;

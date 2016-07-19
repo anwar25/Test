@@ -328,7 +328,7 @@ public class HJSONParsing {
             }
             if(jsonObjectLogin.has(StaticConstant.JOBDETAIL)){
                 Object object = jsonObjectLogin.get(StaticConstant.JOBDETAIL);
-                ArrayList<Job> jobArrayList =  new ArrayList<>();
+                ArrayList<Job> jobArrayList =  new ArrayList<Job>();
                 if(object instanceof JSONArray){
                     JSONArray jsonArray =  jsonObjectLogin.getJSONArray(StaticConstant.JOBDETAIL);
                     for (int i = 0; i < jsonArray.length(); i++) {

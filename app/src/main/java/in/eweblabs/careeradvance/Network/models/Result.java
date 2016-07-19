@@ -110,6 +110,19 @@ public class Result {
     @Expose
     private String jobType;
 
+    @SerializedName("shared_url")
+    @Expose
+    private String sharedUrl;
+
+
+    public String getSharedUrl() {
+        return sharedUrl;
+    }
+
+    public void setSharedUrl(String sharedUrl) {
+        this.sharedUrl = sharedUrl;
+    }
+
     /**
      *
      * @return

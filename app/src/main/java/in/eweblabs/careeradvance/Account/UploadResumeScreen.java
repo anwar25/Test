@@ -5,9 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.OpenableColumns;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -22,28 +20,11 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.mime.HttpMultipartMode;
-import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.entity.mime.content.FileBody;
-import org.apache.http.entity.mime.content.StringBody;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 
 import in.eweblabs.careeradvance.BaseActivityScreen;
 import in.eweblabs.careeradvance.Entity.UserInfo;
-import in.eweblabs.careeradvance.Network.BaseNetwork;
+import in.eweblabs.careeradvance.Network.NetworkUtils;
 import in.eweblabs.careeradvance.Network.RetrofitInstance;
 import in.eweblabs.careeradvance.Network.models.GenericResponse;
 import in.eweblabs.careeradvance.R;
@@ -115,54 +96,10 @@ public class UploadResumeScreen extends Fragment implements View.OnClickListener
     }
 
     private void downloadResume() {
-       /* Call<ResponseBody> call = RetrofitInstance.getInstance().downloadResume(activityHandle.getmUserInfo().getUserResumePath());
-
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.isSuccessful()) {
-                    Log.d(TAG, "server contacted and has file");
-
-                //    boolean writtenToDisk = writeResponseBodyToDisk(response.body());
-
-                //    Log.d(TAG, "file download was a success? " + writtenToDisk);
-                } else {
-                    Log.d(TAG, "server contact failed");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.e(TAG, "error");
-            }
-        });*/
-       /* new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... params) {
-                Call<ResponseBody> call = RetrofitInstance.getInstance().downloadResume(activityHandle.getmUserInfo().getUserResumePath());
-
-                call.enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        if (response.isSuccessful()) {
-                            Log.d(TAG, "server contacted and has file");
-
-                            //    boolean writtenToDisk = writeResponseBodyToDisk(response.body());
-
-                            //    Log.d(TAG, "file download was a success? " + writtenToDisk);
-                        } else {
-                            Log.d(TAG, "server contact failed");
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Log.e(TAG, "error");
-                    }
-                });
-                return null ;
-            }
-        }.execute();*/
+        if(!NetworkUtils.isConnectedToInternet(activityHandle)){
+            Toast.makeText(activityHandle, getString(R.string.internal_storage_to_appear), Toast.LENGTH_SHORT).show();
+            return;
+        }
         Intent intent = new Intent(activityHandle,DownloadService.class);
         intent.putExtra(StaticConstant.USER_RESUME_PATH,activityHandle.getmUserInfo().getUserResumePath());
         intent.putExtra(StaticConstant.USER_RESUME_TEXT,String.valueOf(mResumeTextView.getText()));
@@ -179,7 +116,7 @@ public class UploadResumeScreen extends Fragment implements View.OnClickListener
                 , "application/rtf"};
         intent.putExtra(Intent.EXTRA_MIME_TYPES, mimetypes);
         startActivityForResult(intent, SELECT_FILE);
-        Toast.makeText(activityHandle, getString(R.string.internal_storage_to_appear), Toast.LENGTH_SHORT).show();
+        Toast.makeText(activityHandle, getString(R.string.error_message_network_to_connect), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -201,6 +138,10 @@ public class UploadResumeScreen extends Fragment implements View.OnClickListener
     }
 
     private void uploadResumeToServer(File resumeFile) {
+        if(!NetworkUtils.isConnectedToInternet(activityHandle)){
+            Toast.makeText(activityHandle, getString(R.string.internal_storage_to_appear), Toast.LENGTH_SHORT).show();
+            return;
+        }
         loadingDialog = new LoadingDialog(getActivity());
         loadingDialog.show();
         loadingDialog.SetTitleMessage(getString(R.string.uploading_wait));
@@ -269,89 +210,6 @@ public class UploadResumeScreen extends Fragment implements View.OnClickListener
 
     LoadingDialog loadingDialog;
 
-    private void FileUpload(final File file) {
-        (new AsyncTask() {
-            @Override
-            protected void onPreExecute() {
-                loadingDialog = new LoadingDialog(getActivity());
-                loadingDialog.show();
-                super.onPreExecute();
-
-            }
-
-            @Override
-            protected Object doInBackground(Object[] params) {
-                String st = "{\"Success\":0,\"message\":\"Post parameter is not matching from server parameter.\"}";
-                UserInfo userInfo = activityHandle.getmUserInfo();
-                try {
-                    HttpClient httpclient = new DefaultHttpClient();
-                    String URL = BaseNetwork.URL_HOST + "uploadResume";
-                    Logger.d(TAG, "::" + URL);
-                    HttpPost httppost = new HttpPost(URL);
-                    MultipartEntityBuilder mpEntity = MultipartEntityBuilder.create();
-                    mpEntity.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
-                    Logger.d(TAG, "file ::" + file.getAbsolutePath());
-                    Logger.d(TAG, "file_path::" + file.getPath());
-                    mpEntity.addPart("loginId", new StringBody(userInfo.getUserId()));
-                    mpEntity.addPart("resume", new FileBody(file));
-                    mpEntity.addPart(BaseNetwork.USER_RESUME_TEXT_PARAMETER, new StringBody(userInfo.getUserResumeText()));
-                    mpEntity.addPart(BaseNetwork.USER_JOB_ALERT_PARAMETER, new StringBody(userInfo.getUserJobAlert()));
-                    mpEntity.addPart(BaseNetwork.USER_FAST_FORWARD_EMAILS_PARAMETER, new StringBody(userInfo.getUserFastForwordEmails()));
-                    mpEntity.addPart(BaseNetwork.USER_FAST_FORWARD_CALLS_PARAMETER, new StringBody(userInfo.getUserFastForwordCalls()));
-                    mpEntity.addPart(BaseNetwork.USER_COMMUNICATION_PARAMETER, new StringBody(userInfo.getUserCommunicationClient()));
-                    mpEntity.addPart(BaseNetwork.USER_NOTIFICATION_PARAMETER, new StringBody(userInfo.getUserNotification()));
-                    mpEntity.addPart(BaseNetwork.USER_SPECIAL_OFFER_PARAMETER, new StringBody(userInfo.getUserSpecialOffer()));
-                    HttpEntity entity = mpEntity.build();
-                    httppost.setEntity(entity);
-                    HttpResponse response = httpclient.execute(httppost);
-                    st = EntityUtils.toString(response.getEntity());
-                    Logger.d("log_tag", "In the try Loop" + st);
-
-
-                } catch (Exception e) {
-                    Logger.d("log_tag", "Error in http connection " + e.toString());
-                }
-                return st;
-            }
-
-            protected void onPostExecute(Object obj) {
-                onPostExecute((String) obj);
-            }
-
-            protected void onPostExecute(String s) {
-                if (loadingDialog != null && loadingDialog.isShowing())
-                    loadingDialog.dismiss();
-                if (!TextUtils.isEmpty(s)) {
-
-                    try {
-                        Logger.d("Response", "::" + s);
-                        JSONObject jsonObjectLogin = new JSONObject(s);
-
-                        if (jsonObjectLogin.has(StaticConstant.MESSAGE)) {
-                            MessageDialog messageDialog = new MessageDialog(getActivity());
-                            messageDialog.show();
-                            messageDialog.setTitle(getString(R.string.app_name));
-                            messageDialog.setMessageContent(jsonObjectLogin.getString(StaticConstant.MESSAGE));
-                        }
-                        if (jsonObjectLogin.has("image_file")) {
-                            String image_file = jsonObjectLogin.getString("image_file");
-                            activityHandle.getmUserInfo().setUserResumePath(image_file);
-                            CheckResumeBackground();
-                        }
-
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                }
-            }
-
-        }).execute();
-
-
-    }
-
     private void CheckResumeBackground() {
         String userResumePath = activityHandle.getmUserInfo().getUserResumePath();
         if (TextUtils.isEmpty(userResumePath)) {
@@ -412,26 +270,4 @@ public class UploadResumeScreen extends Fragment implements View.OnClickListener
         }
         return true;
     }
-
-    private void MoveImagePath(InputStream input, String displayName) {
-        try {
-            File destination = new File(Environment.getExternalStorageDirectory().getAbsolutePath().toString(), displayName);
-            OutputStream os = new FileOutputStream(destination);
-            byte[] buffer = new byte[1024];
-            int bytesRead;
-            //read from is to buffer
-            while ((bytesRead = input.read(buffer)) != -1) {
-                os.write(buffer, 0, bytesRead);
-            }
-            input.close();
-            //flush OutputStream to write any buffered data to file
-            os.flush();
-            os.close();
-            FileUpload(destination);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
 }

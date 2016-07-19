@@ -10,7 +10,6 @@ import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -78,7 +77,7 @@ public class CaFmsService extends FirebaseMessagingService {
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notifyID = (int)((new Date().getTime() / 1000L) % Integer.MAX_VALUE) ;
-         Log.d(TAG, "notifyID: " + notifyID);
+       //  Log.d(TAG, "notifyID: " + notifyID);
         notificationManager.notify(notifyID/* ID of notification */, notificationBuilder.build());
     }
 }

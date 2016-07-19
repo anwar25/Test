@@ -3,6 +3,7 @@
     <string name="app_play_store_link">https://play.google.com/store/apps/details?id=%1$s</string>
 
 
+    <string name="not_connected">Not connected to Internet!</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 

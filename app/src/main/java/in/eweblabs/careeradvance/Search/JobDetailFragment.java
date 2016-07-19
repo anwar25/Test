@@ -125,6 +125,7 @@ public class JobDetailFragment extends Fragment implements IAsyncTaskRunner{
         // Add data to the intent, the receiving app will decide
         // what to do with it.
         share.putExtra(Intent.EXTRA_SUBJECT, job.getJob_title());
+     //   share.putExtra(Intent.EXTRA_TEXT,job.getJob_desc()+"\n"+job.getShared_url());
         share.putExtra(Intent.EXTRA_TEXT,job.getJob_desc());
 
         startActivity(Intent.createChooser(share, getString(R.string.share_job_via)));
