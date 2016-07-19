@@ -16,7 +16,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.HashMap;
 
@@ -29,9 +30,12 @@ import in.eweblabs.careeradvance.Interface.IAsyncTaskRunner;
 import in.eweblabs.careeradvance.Network.BaseNetwork;
 import in.eweblabs.careeradvance.R;
 import in.eweblabs.careeradvance.Search.AppliedJobFragment;
+import in.eweblabs.careeradvance.Search.SearchFragment;
 import in.eweblabs.careeradvance.StaticData.StaticConstant;
 import in.eweblabs.careeradvance.UI.LoadingDialog;
 import in.eweblabs.careeradvance.UI.MessageDialog;
+import in.eweblabs.careeradvance.Utils.Logger;
+import in.eweblabs.careeradvance.fcm.RegisterToken;
 
 /**
  * Created by Akash.Singh on 11/17/2015.
@@ -104,10 +108,6 @@ public class SignInScreen extends Fragment implements IAsyncTaskRunner{
                     input_password.setError(getString(R.string.hint_please_enter_your_password));
                     return;
                 } else {
-                    if(TextUtils.isEmpty(activityHandle.getSessionManager().getString(BaseNetwork.DEVICE_TOKEN))){
-                        Toast.makeText(activityHandle, getString(R.string.failed_to_generate_token), Toast.LENGTH_SHORT).show();
-                        return;
-                    }
                     PerformSignInProcess();
                 }
 
@@ -159,7 +159,11 @@ public class SignInScreen extends Fragment implements IAsyncTaskRunner{
     public void taskCompleted(Object obj) {
         if(loadingDialog!=null && loadingDialog.isShowing())
             loadingDialog.dismiss();
+        /*Gson gson = new Gson();
+        mSubscriptionModel = new SubscriptionModel();
+        mSubscriptionModel = gson.fromJson(subscriptionString, SubscriptionModel.class);*/
         if(obj!=null){
+
             ResultMessage resultMessage = (ResultMessage) obj;
             UserInfo userInfo = (UserInfo) resultMessage.RESULT_OBJECT;
             if(!TextUtils.isEmpty(userInfo.getUserEmail())){
@@ -168,16 +172,30 @@ public class SignInScreen extends Fragment implements IAsyncTaskRunner{
                 activityHandle.getSessionManager().putString(StaticConstant.USER_INFO,resultMessage.RESPONSE);
                 activityHandle.getSessionManager().putBoolean(StaticConstant.IS_LOGGED_IN , true);
                 activityHandle.setmUserInfo(userInfo);
+                //SEND REGISTRATIO TOKEN IF NOT SENT YET
+                String localStoredToken = activityHandle.getSessionManager().getString(BaseNetwork.DEVICE_TOKEN);
+                if(TextUtils.isEmpty(localStoredToken)){
+                    Logger.v("SignInScreen","token is empty");
+                    if(userInfo != null && !TextUtils.isEmpty(FirebaseInstanceId.getInstance().getToken())){
+                        RegisterToken.sendRegistrationTokenToServer(FirebaseInstanceId.getInstance().getToken(),activityHandle);
+                    }
+                }
+                //Log.d("BaseActivityScreen", "InstanceID token: " + FirebaseInstanceId.getInstance().getToken());
                 //Save resume path
-                activityHandle.getSessionManager().putString(StaticConstant.USER_RESUME_PATH,userInfo.getUserResumePath());
+                //activityHandle.getSessionManager().putString(StaticConstant.USER_RESUME_PATH,userInfo.getUserResumePath());
                 //SAVE USER INFO END
-                if(((String)getArguments().getString("activity")).equalsIgnoreCase(StaticConstant.SIGN_IN)){
-                    getActivity().getSupportFragmentManager().popBackStack();
-                    ((BaseActivityScreen) getActivity()).onReplaceFragment(new ProfileScreen(), true);
+                if(getArguments() == null){
+                    activityHandle.onReplaceFragment(new SearchFragment(),false);
+                }else if(((String)getArguments().getString("activity")).equalsIgnoreCase(StaticConstant.SIGN_IN)){
+                    activityHandle.getSupportFragmentManager().popBackStack();
+                    activityHandle.onReplaceFragment(new ProfileScreen(), true);
                 }else if(((String)getArguments().getString("activity")).equalsIgnoreCase("JobApply")){
-                    getActivity().getSupportFragmentManager().popBackStack();
+                    activityHandle.getSupportFragmentManager().popBackStack();
                 }else if(((String)getArguments().getString("activity")).equalsIgnoreCase(StaticConstant.APPLIED_JOB)){
-                    ((BaseActivityScreen) getActivity()).onReplaceFragment(new AppliedJobFragment(), true);
+                    activityHandle.onReplaceFragment(new AppliedJobFragment(), true);
+                }else if(((String)getArguments().getString("activity")).equalsIgnoreCase(StaticConstant.UPLOAD_RESUME)){
+                    activityHandle.getSupportFragmentManager().popBackStack();
+                    activityHandle.onReplaceFragment(new UploadResumeScreen(), true);
                 }
 
             }

@@ -103,7 +103,7 @@ public class SessionManager {
 
 
 
-	public  UserInfo getUserInfo(){
+	public  UserInfo getUserInfoFromShPref(){
 		String userInfoString = pref.getString(StaticConstant.USER_INFO,"");
 		Gson gson = new Gson();
 		return  gson.fromJson(userInfoString, UserInfo.class);

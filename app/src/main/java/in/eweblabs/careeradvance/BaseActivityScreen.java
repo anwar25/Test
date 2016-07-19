@@ -1,8 +1,12 @@
 package in.eweblabs.careeradvance;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,7 +18,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,6 +30,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import org.w3c.dom.Text;
+
 import in.eweblabs.careeradvance.Account.ChangePassword;
 import in.eweblabs.careeradvance.Account.ProfileScreen;
 import in.eweblabs.careeradvance.Account.SignInScreen;
@@ -34,6 +39,7 @@ import in.eweblabs.careeradvance.Account.SignUpScreen;
 import in.eweblabs.careeradvance.Account.UpdateProfile.UpdateProfileScreen;
 import in.eweblabs.careeradvance.Account.UploadResumeScreen;
 import in.eweblabs.careeradvance.Entity.UserInfo;
+import in.eweblabs.careeradvance.Network.BaseNetwork;
 import in.eweblabs.careeradvance.Search.AppliedJobFragment;
 import in.eweblabs.careeradvance.Search.ChangeCountry;
 import in.eweblabs.careeradvance.Search.JobDetailFragment;
@@ -45,10 +51,12 @@ import in.eweblabs.careeradvance.UI.AppRater;
 import in.eweblabs.careeradvance.UI.CircleImageView;
 import in.eweblabs.careeradvance.UI.WebviewMessageDialog;
 import in.eweblabs.careeradvance.Utils.Logger;
+import in.eweblabs.careeradvance.fcm.RegisterToken;
 
 public class BaseActivityScreen extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static final String TAG = BaseActivityScreen.class.getSimpleName();
     ActionBarDrawerToggle toggle;
     public EditText edit_search_country;
     private  static SessionManager sSessionManager;
@@ -84,7 +92,7 @@ public class BaseActivityScreen extends AppCompatActivity
                 super.onDrawerOpened(drawerView);
             }
         };
-        drawer.setDrawerListener(toggle);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         ((LinearLayout)headerView.findViewById(R.id.navigation_header)).setOnClickListener(new View.OnClickListener() {
@@ -118,11 +126,20 @@ public class BaseActivityScreen extends AppCompatActivity
         });
         edit_search_country = (EditText) findViewById(R.id.edit_search_country);
 
-        FirebaseInstanceId.getInstance().getToken();
-        Log.d("BaseActivityScreen", "InstanceID token: " + FirebaseInstanceId.getInstance().getToken());
-        mUserInfo =  getSessionManager().getUserInfo();
+        mUserInfo =  getSessionManager().getUserInfoFromShPref();
         ApplicationController.getInstance().setUserInfo(mUserInfo);
         headerSettings(headerView);
+
+        //SEND REGISTRATIO TOKEN IF NOT SENT YET
+        String localStoredToken = getSessionManager().getString(BaseNetwork.DEVICE_TOKEN);
+        if(TextUtils.isEmpty(localStoredToken)){
+            Logger.v(TAG,"token is empty");
+            if(mUserInfo != null && !TextUtils.isEmpty(FirebaseInstanceId.getInstance().getToken())){
+                RegisterToken.sendRegistrationTokenToServer(FirebaseInstanceId.getInstance().getToken(),this);
+            }
+        }
+        //MARSHMALLOW SUPPORT
+        mayRequestPermission();
     }
 
     public synchronized  SessionManager getSessionManager(){
@@ -156,7 +173,7 @@ public class BaseActivityScreen extends AppCompatActivity
               //  imageLoader.DisplayImage(mUserInfo.getUserAvatar(),profile_img);
                 Glide.with(this)
                         .load(mUserInfo.getUserAvatar())
-                       // .placeholder(R.drawable.ic_face_white_48dp) // can also be a drawable
+                        .placeholder(R.drawable.ic_face_white_48dp) // can also be a drawable
                         .error(R.drawable.ic_face_white_48dp) // will be displayed if the image cannot be loaded
                         .crossFade(2000)
                         .into(profile_img);
@@ -482,6 +499,41 @@ public class BaseActivityScreen extends AppCompatActivity
             toggle.onDrawerStateChanged(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
             toggle.setDrawerIndicatorEnabled(false);
             toggle.syncState();
+        }
+    }
+
+    private final int REQUEST_WRITE_EXT_STORAGE = 3;
+
+    private boolean mayRequestPermission() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return true;
+        }
+        if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        }
+        if (shouldShowRequestPermissionRationale(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            Toast.makeText(this, getString(R.string.permission_storage_ratinale)
+                    , Toast.LENGTH_LONG).show();
+            requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_WRITE_EXT_STORAGE);
+        } else {
+            requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_WRITE_EXT_STORAGE);
+        }
+        return false;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        if (requestCode == REQUEST_WRITE_EXT_STORAGE) {
+            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                //startLocationUpdates();
+            } else {
+                if (requestCode == REQUEST_WRITE_EXT_STORAGE) {
+                    Toast.makeText(this, getString(R.string.permission_storage_denied)
+                            , Toast.LENGTH_LONG).show();
+                }
+
+            }
         }
     }
 

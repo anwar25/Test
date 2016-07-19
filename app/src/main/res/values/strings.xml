@@ -132,6 +132,8 @@
     <string name="apply">Apply</string>
     <string name="applying">Applying , Please wait...</string>
     <string name="processing_wait">Processing , Please wait...</string>
+    <string name="uploading_wait">Uploading , Please wait...</string>
+    <string name="downloading_wait">Downloading , Please wait...</string>
     <string name="applied_jobs">Applied Jobs</string>
     <string name="sign_in_processing">Sign In, Processing...</string>
     <string name="failed_to_generate_token">Device token is not generated yet, Please retry.</string>
@@ -139,6 +141,12 @@
     <string name="update_resume">Update resume</string>
     <string name="update_download_resume">Update/Download Resume</string>
     <string name="share_job_via">Share Job via</string>
+    <string name="file_less_than_300KB">File should be less than 300 KB</string>
+    <string name="resume_rtf">Resume.rtf</string>
+    <string name="resume_pdf">Resume.pdf</string>
+    <string name="resume_doc">Resume.doc</string>
+    <string name="resume_docx">Resume.docx</string>
+    <string name="no_resume_uploaded">No Resume uploaded yet.</string>
 
     <string-array name="work_experience_year">
         <item>@string/select</item>
@@ -576,5 +584,12 @@
         <item>2</item>
         <item>9999</item>
     </string-array>
+
+    <string name="permission_storage_denied">Access to the external storage is required to allow user to upload Resume.\n By denying permission, Application will not respond properly</string>
+    <string name="permission_storage_ratinale">This Application requires storage permission to allow user to upload Resume. Please try again and grant access .\nIf the permission has been permanently denied, it can be enabled from the System Settings.</string>
+    <string name="something_went_wrong">Something went wrong!</string>
+    <string name="downloading_file">Downloading...</string>
+    <string name="download_complete">Download Complete.</string>
+    <string name="internal_storage_to_appear">If you do not see Internal Storage,Please change you file chooser setting.</string>
 
 </resources>
