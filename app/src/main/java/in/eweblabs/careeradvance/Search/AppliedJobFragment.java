@@ -13,29 +13,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.gson.Gson;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import in.eweblabs.careeradvance.Adapter.AppliedJobItemAdapter;
+import in.eweblabs.careeradvance.Adapter.JobItemAdapter;
 import in.eweblabs.careeradvance.AsyncTask.AuthCommonTask;
 import in.eweblabs.careeradvance.BaseActivityScreen;
+import in.eweblabs.careeradvance.Entity.Job;
+import in.eweblabs.careeradvance.Entity.Response;
 import in.eweblabs.careeradvance.Entity.ResultMessage;
 import in.eweblabs.careeradvance.Interface.IAsyncTaskRunner;
+import in.eweblabs.careeradvance.Interface.IRefreshList;
 import in.eweblabs.careeradvance.Network.BaseNetwork;
-import in.eweblabs.careeradvance.Network.models.AppliedJobModel;
-import in.eweblabs.careeradvance.Network.models.Result;
 import in.eweblabs.careeradvance.R;
+import in.eweblabs.careeradvance.StaticData.StaticConstant;
 import in.eweblabs.careeradvance.UI.LoadingDialog;
 import in.eweblabs.careeradvance.UI.MessageDialog;
 
 /**
  * Created by Anwar Shaikh on 1/9/2016.
  */
-public class AppliedJobFragment extends Fragment implements IAsyncTaskRunner, DialogInterface.OnDismissListener {
-    ArrayList<Result> jobArrayList;
-    AppliedJobItemAdapter jobItemAdapter;
+public class AppliedJobFragment extends Fragment implements IAsyncTaskRunner, DialogInterface.OnDismissListener
+        ,IRefreshList, JobItemAdapter.ApplyJobListener{
+    ArrayList<Job> jobArrayList;
+    JobItemAdapter jobItemAdapter;
     RecyclerView recycler_view;
     private BaseActivityScreen activityHandle;
 
@@ -45,19 +46,21 @@ public class AppliedJobFragment extends Fragment implements IAsyncTaskRunner, Di
         View view = inflater.inflate(R.layout.content_search_result_screen, container, false);
         ((BaseActivityScreen) getActivity()).setToolbarInitialization(this);
         //jobArrayList = (ArrayList<Job>) getArguments().getSerializable("Job");
-        getAppliedJob();
-        jobArrayList = new ArrayList<Result>();
-        recycler_view = (RecyclerView) view.findViewById(R.id.recycler_view);
-        mapControls();
+        mapControls(view);
         return view;
     }
 
-    private void mapControls() {
+    private void mapControls( View view) {
+        if(jobArrayList == null ){
+            getAppliedJob();
+            jobArrayList = new ArrayList<Job>();
+        }
+        recycler_view = (RecyclerView) view.findViewById(R.id.recycler_view);
         recycler_view.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recycler_view.setLayoutManager(llm);
-        jobItemAdapter = new AppliedJobItemAdapter(activityHandle, jobArrayList);
+        jobItemAdapter = new JobItemAdapter(getActivity(),jobArrayList,this,this,false);
         recycler_view.setAdapter(jobItemAdapter);
         jobItemAdapter.notifyDataSetChanged();
 
@@ -91,8 +94,9 @@ public class AppliedJobFragment extends Fragment implements IAsyncTaskRunner, Di
             loadingDialog.dismiss();
         if (obj != null) {
             ResultMessage resultMessage = (ResultMessage) obj;
-            String response = resultMessage.RESPONSE;
-            AppliedJobModel appliedJobModel = (new Gson()).fromJson(response, AppliedJobModel.class);
+            Response response = (Response) resultMessage.RESULT_OBJECT;
+            //String response = resultMessage.RESPONSE;
+           /* AppliedJobModel appliedJobModel = (new Gson()).fromJson(response, AppliedJobModel.class);
 
             //Log.v("AppliedJobFragment",""+appliedJobModel);
             if (appliedJobModel != null && appliedJobModel.getResults() != null && appliedJobModel.getResults().size() != 0) {
@@ -105,6 +109,17 @@ public class AppliedJobFragment extends Fragment implements IAsyncTaskRunner, Di
                 messageDialog.show();
                 messageDialog.setTitle(getString(R.string.app_name));
                 messageDialog.setMessageContent("You havent applied to any jobs yet ");
+                messageDialog.setOnDismissListener(this);
+            }*/
+            if(response.getJobArrayList().size()>0){
+                jobArrayList.addAll(response.getJobArrayList());
+                jobItemAdapter.notifyDataSetChanged();
+            }
+            else if(!TextUtils.isEmpty(response.getMessage())){
+                MessageDialog messageDialog = new MessageDialog(getActivity());
+                messageDialog.show();
+                messageDialog.setTitle(getString(R.string.app_name));
+                messageDialog.setMessageContent(getString(R.string.not_applied_to_any_job));
                 messageDialog.setOnDismissListener(this);
             }
         }
@@ -146,4 +161,19 @@ public class AppliedJobFragment extends Fragment implements IAsyncTaskRunner, Di
 
     }
 
+    @Override
+    public void jobApplied(Job job) {
+
+    }
+
+    @Override
+    public void onRefresh(Object object) {
+        Job job = (Job) object;
+        JobDetailFragment jobDetailFragment =  new JobDetailFragment();
+        Bundle bundle =  new Bundle();
+        bundle.putBoolean(StaticConstant.APPLIED_JOB,true);
+        bundle.putSerializable("JobDetail",job);
+        jobDetailFragment.setArguments(bundle);
+        ((BaseActivityScreen) getActivity()).onReplaceFragment(jobDetailFragment,true);
+    }
 }

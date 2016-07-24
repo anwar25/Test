@@ -56,7 +56,7 @@ public class SearchResultFragment extends Fragment implements IRefreshList , Job
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recycler_view.setLayoutManager(llm);
-        jobItemAdapter = new JobItemAdapter(getActivity(),jobArrayList,this,this);
+        jobItemAdapter = new JobItemAdapter(getActivity(),jobArrayList,this,this,true);
         recycler_view.setAdapter(jobItemAdapter);
         jobItemAdapter.notifyDataSetChanged();
 

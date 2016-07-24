@@ -349,6 +349,41 @@ public class HJSONParsing {
         return response;
     }
 
+
+    public Object ParseAppliedJobSearch(Context context, String Result) {
+        Response response =  new Response();
+        try {
+            JSONObject jsonObjectLogin =  new JSONObject(Result);
+
+            if(jsonObjectLogin.has(StaticConstant.MESSAGE)){
+                response.setMessage(jsonObjectLogin.getString(StaticConstant.MESSAGE));
+            }
+            if(jsonObjectLogin.has(StaticConstant.SUCCESS)){
+                response.setSuccess(jsonObjectLogin.getString(StaticConstant.SUCCESS));
+            }
+            if(jsonObjectLogin.has(StaticConstant.RESULTS)){
+                Object object = jsonObjectLogin.get(StaticConstant.RESULTS);
+                ArrayList<Job> jobArrayList =  new ArrayList<Job>();
+                if(object instanceof JSONArray){
+                    JSONArray jsonArray =  jsonObjectLogin.getJSONArray(StaticConstant.RESULTS);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        jobArrayList.add(ParseSingleJob(jsonObject));
+                    }
+                }
+                else if(object instanceof  JSONObject){
+                    JSONObject jsonObject = jsonObjectLogin.getJSONObject(StaticConstant.RESULTS);
+                    jobArrayList.add(ParseSingleJob(jsonObject));
+                }
+                response.setJobArrayList(jobArrayList);
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
+
     public Object ParseJobLocation(Context context, String Result) {
         Response response =  new Response();
         try{
@@ -418,6 +453,7 @@ public class HJSONParsing {
         job.setDate_post(jsonObject.getString(StaticConstant.JOB_DATE_POST));
         job.setAddress(jsonObject.getString(StaticConstant.JOB_ADDRESS));
         job.setJob_type(jsonObject.getString(StaticConstant.JOB_TYPE));
+        job.setShared_url(jsonObject.getString(StaticConstant.SHARED_URL));
         return  job;
     }
 }

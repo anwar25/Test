@@ -26,6 +26,7 @@ import in.eweblabs.careeradvance.Entity.UserInfo;
 import in.eweblabs.careeradvance.Interface.IAsyncTaskRunner;
 import in.eweblabs.careeradvance.Network.BaseNetwork;
 import in.eweblabs.careeradvance.R;
+import in.eweblabs.careeradvance.StaticData.StaticConstant;
 import in.eweblabs.careeradvance.UI.LoadingDialog;
 import in.eweblabs.careeradvance.UI.MessageDialog;
 import in.eweblabs.careeradvance.Utils.TextUtility;
@@ -40,12 +41,15 @@ public class JobDetailFragment extends Fragment implements IAsyncTaskRunner{
 
     private AppCompatImageView mShareJobImageView ;
 
+    private boolean isAppliedJob = false ;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.content_job_detail_screen,container,false);
         ((BaseActivityScreen)getActivity()).setToolbarInitialization(this);
         job = (Job) getArguments().getSerializable("JobDetail");
+        isAppliedJob = getArguments().getBoolean(StaticConstant.APPLIED_JOB);
         WidgetMapping(view);
         return view;
     }
@@ -87,26 +91,30 @@ public class JobDetailFragment extends Fragment implements IAsyncTaskRunner{
         ((TextView)view.findViewById(R.id.text_ed_contact_email)).setText(job.getEmail_id());
         ((TextView)view.findViewById(R.id.text_ed_contact_number)).setText(job.getContact_number());
 
-        ((AppCompatButton)view.findViewById(R.id.btnApply)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(job.getWebsite().equalsIgnoreCase("www.careeradvance.com")){
-                    UserInfo userInfo = activityHandle.getmUserInfo();
-                    if(userInfo!=null && !TextUtils.isEmpty(userInfo.getUserEmail())) {
-                        performJobApplyProcess();
+        if(!isAppliedJob){
+            ((AppCompatButton)view.findViewById(R.id.btnApply)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(job.getWebsite().equalsIgnoreCase("www.careeradvance.com")){
+                        UserInfo userInfo = activityHandle.getmUserInfo();
+                        if(userInfo!=null && !TextUtils.isEmpty(userInfo.getUserEmail())) {
+                            performJobApplyProcess();
+                        }else{
+                            Bundle bundle =  new Bundle();
+                            bundle.putString("activity", "JobApply");
+                            SignInScreen signInScreen = new SignInScreen();
+                            signInScreen.setArguments(bundle);
+                            ((BaseActivityScreen) getActivity()).onReplaceFragment(signInScreen, true);
+                        }
+
                     }else{
-                        Bundle bundle =  new Bundle();
-                        bundle.putString("activity", "JobApply");
-                        SignInScreen signInScreen = new SignInScreen();
-                        signInScreen.setArguments(bundle);
-                        ((BaseActivityScreen) getActivity()).onReplaceFragment(signInScreen, true);
+
                     }
-
-                }else{
-
                 }
-            }
-        });
+            });
+        }else{
+            ((AppCompatButton)view.findViewById(R.id.btnApply)).setText(getString(R.string.already_applied));
+        }
         mShareJobImageView = (AppCompatImageView)view.findViewById(R.id.shareJobImageView);
         mShareJobImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,8 +133,8 @@ public class JobDetailFragment extends Fragment implements IAsyncTaskRunner{
         // Add data to the intent, the receiving app will decide
         // what to do with it.
         share.putExtra(Intent.EXTRA_SUBJECT, job.getJob_title());
-     //   share.putExtra(Intent.EXTRA_TEXT,job.getJob_desc()+"\n"+job.getShared_url());
-        share.putExtra(Intent.EXTRA_TEXT,job.getJob_desc());
+        share.putExtra(Intent.EXTRA_TEXT,job.getJob_desc()+"\n"+job.getShared_url());
+     //   share.putExtra(Intent.EXTRA_TEXT,job.getJob_desc());
 
         startActivity(Intent.createChooser(share, getString(R.string.share_job_via)));
     }

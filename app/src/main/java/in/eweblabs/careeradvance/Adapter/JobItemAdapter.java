@@ -24,6 +24,7 @@ public class JobItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     ArrayList<Job> listItems;
     FragmentActivity context;
     IRefreshList iRefreshList;
+    private  boolean showApplyButton ;
 
     private final  ApplyJobListener applyJob ;
     public interface ApplyJobListener{
@@ -31,11 +32,12 @@ public class JobItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     public JobItemAdapter(FragmentActivity context, ArrayList<Job> listItems, IRefreshList iRefreshList,
-                          ApplyJobListener applyJobListener) {
+                          ApplyJobListener applyJobListener,boolean showApplyButon) {
         this.context = context;
         this.listItems = listItems;
         this.iRefreshList = iRefreshList;
         this.applyJob  = applyJobListener ;
+        this.showApplyButton = showApplyButon ;
     }
 
 
@@ -110,6 +112,9 @@ public class JobItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             text_job_location = (TextView) itemView.findViewById(R.id.text_job_location);
             applyJobButton = (AppCompatButton) itemView.findViewById(R.id.btnApply);
             applyJobButton.setOnClickListener(this);
+            if(!showApplyButton){
+                applyJobButton.setVisibility(View.GONE);
+            }
             card_view = (CardView) itemView.findViewById(R.id.card_view);
         }
 

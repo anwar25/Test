@@ -116,7 +116,7 @@ public class UploadResumeScreen extends Fragment implements View.OnClickListener
                 , "application/rtf"};
         intent.putExtra(Intent.EXTRA_MIME_TYPES, mimetypes);
         startActivityForResult(intent, SELECT_FILE);
-        Toast.makeText(activityHandle, getString(R.string.error_message_network_to_connect), Toast.LENGTH_SHORT).show();
+        Toast.makeText(activityHandle, getString(R.string.internal_storage_to_appear), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -139,7 +139,7 @@ public class UploadResumeScreen extends Fragment implements View.OnClickListener
 
     private void uploadResumeToServer(File resumeFile) {
         if(!NetworkUtils.isConnectedToInternet(activityHandle)){
-            Toast.makeText(activityHandle, getString(R.string.internal_storage_to_appear), Toast.LENGTH_SHORT).show();
+            Toast.makeText(activityHandle, getString(R.string.error_message_network_to_connect), Toast.LENGTH_SHORT).show();
             return;
         }
         loadingDialog = new LoadingDialog(getActivity());

@@ -7,16 +7,13 @@ package in.eweblabs.careeradvance.AsyncTask;
 import android.content.Context;
 import android.text.TextUtils;
 import android.widget.ProgressBar;
+
 import java.util.HashMap;
 
-import in.eweblabs.careeradvance.ApplicationController;
 import in.eweblabs.careeradvance.Data.HJSONParsing;
 import in.eweblabs.careeradvance.Entity.ResultMessage;
-import in.eweblabs.careeradvance.Entity.UserInfo;
 import in.eweblabs.careeradvance.Interface.IAsyncTaskRunner;
 import in.eweblabs.careeradvance.Network.BaseNetwork;
-import in.eweblabs.careeradvance.SharedPreferences.PreHelper;
-import in.eweblabs.careeradvance.StaticData.StaticConstant;
 import in.eweblabs.careeradvance.UI.LoadingDialog;
 import in.eweblabs.careeradvance.Utils.Logger;
 
@@ -80,6 +77,9 @@ public class AuthCommonTask extends AsyncTaskRunner
                             }
                             else if(s.equalsIgnoreCase(BaseNetwork.APPLYJOB)){
                                 resultmessage.RESULT_OBJECT = jsonParser.ParseApplyJob(context, resultmessage.RESPONSE);
+                            }
+                            else if(s.equalsIgnoreCase(BaseNetwork.MY_APPLIED_JOBS)){
+                                resultmessage.RESULT_OBJECT = jsonParser.ParseAppliedJobSearch(context, resultmessage.RESPONSE);
                             }
                             else  if(s.equalsIgnoreCase(BaseNetwork.ADD_USERS)){
                                 resultmessage.RESULT_OBJECT = jsonParser.ParseLoginDetail(context, resultmessage.RESPONSE);

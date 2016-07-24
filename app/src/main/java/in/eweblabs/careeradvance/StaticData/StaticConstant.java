@@ -12,6 +12,7 @@ public class StaticConstant {
     public static final String TITLE = "title";
     public static final String BODY = "body";
 
+
     public static String GCM_APP_ID = "1059237334193";
     public static final int PAGING_ITEM_SIZE = 20;
     public static final int NULL_POINTER_EXCEPTION = 0;
@@ -70,6 +71,7 @@ public class StaticConstant {
     public static final String JOB_DATE_POST = "date_post";
     public static final String JOB_ADDRESS = "address";
     public static final String JOB_TYPE = "job_type";
+    public static final String SHARED_URL = "shared_url";
 
 
 
@@ -129,4 +131,6 @@ public class StaticConstant {
     public static final String USER_INFO = "user_info";
 
     public static final String IS_LOGGED_IN = "is_logged_in";
+
+    public static String RESULTS ="results";
 }

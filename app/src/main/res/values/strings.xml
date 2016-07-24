@@ -592,5 +592,7 @@
     <string name="downloading_file">Downloading...</string>
     <string name="download_complete">Download Complete.</string>
     <string name="internal_storage_to_appear">If you do not see Internal Storage,Please change you file chooser setting.</string>
+    <string name="not_applied_to_any_job">You havent applied to any jobs yet</string>
+    <string name="already_applied">Already Applied</string>
 
 </resources>
