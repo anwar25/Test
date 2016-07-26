@@ -7,4 +7,5 @@ public interface Urls {
 
     String UPLOAD_RESUME = "uploadResume";
     String REGISTER_TOKEN_API = "deviceToken";
+    String JOB_SUGGESTION_API = "jobKeywordsOther";
 }

@@ -133,4 +133,7 @@ public class StaticConstant {
     public static final String IS_LOGGED_IN = "is_logged_in";
 
     public static String RESULTS ="results";
+
+    public static String KEYWORDS = "keywords";
+    public static String LOCATION = "location";
 }

@@ -1,6 +1,8 @@
 package in.eweblabs.careeradvance.Network;
 
 import in.eweblabs.careeradvance.Network.models.GenericResponse;
+import in.eweblabs.careeradvance.Network.models.JobSugestionReqModel;
+import in.eweblabs.careeradvance.Network.models.JobSugestionResModel;
 import in.eweblabs.careeradvance.Network.models.RegisterDeviceModel;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -36,4 +38,8 @@ public interface RetrofitInterface {
 
     @POST(Urls.REGISTER_TOKEN_API)
     Call<GenericResponse> registerDevice(@Body RegisterDeviceModel registerDeviceModel);
+
+    @POST(Urls.JOB_SUGGESTION_API)
+    Call<JobSugestionResModel> jobSuggestions(@Body JobSugestionReqModel registerDeviceModel);
+
 }

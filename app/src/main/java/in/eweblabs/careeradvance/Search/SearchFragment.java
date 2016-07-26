@@ -9,12 +9,14 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import in.eweblabs.careeradvance.Account.ProfileScreen;
 import in.eweblabs.careeradvance.Account.SignInScreen;
+import in.eweblabs.careeradvance.Adapter.JobSugestionAdapter;
 import in.eweblabs.careeradvance.ApplicationController;
 import in.eweblabs.careeradvance.AsyncTask.AuthCommonTask;
 import in.eweblabs.careeradvance.BaseActivityScreen;
@@ -34,6 +36,10 @@ import in.eweblabs.careeradvance.UI.MessageDialog;
  */
 public class SearchFragment extends Fragment implements IAsyncTaskRunner{
     AutoCompleteTextView edit_job_title,edit_your_location;
+
+    private JobSugestionAdapter mLocationSuggestionAdapter ;
+    private JobSugestionAdapter mJobKeywordAdapter ;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -76,27 +82,23 @@ public class SearchFragment extends Fragment implements IAsyncTaskRunner{
     }
 
     private void SetJobKeywordAutoCompleteTextView() {
-        ArrayList<Object> objectArrayList = ApplicationController.getInstance().getCareerAdvanceDBData().getKeywordRecord();
+        /*ArrayList<Object> objectArrayList = ApplicationController.getInstance().getCareerAdvanceDBData().getKeywordRecord();
         String[] arr = new String[objectArrayList.size()];
         for (int i = 0; i < objectArrayList.size() ; i++) {
             arr[i] = (String) objectArrayList.get(i);
-        }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_dropdown_item, arr);
+        }*/
+        ArrayList<String> jobKeywordList = new ArrayList<String>();
+        mJobKeywordAdapter = new JobSugestionAdapter(getActivity(),android.R.layout.simple_spinner_dropdown_item,StaticConstant.KEYWORDS,jobKeywordList);
         edit_job_title.setThreshold(2);
-        edit_job_title.setAdapter(adapter);
+        edit_job_title.setAdapter(mJobKeywordAdapter);
 
     }
 
     private void SetJobLocationAutoCompleteTextView() {
-        ArrayList<Object> objectArrayList = ApplicationController.getInstance().getCareerAdvanceDBData().getJobLocation();
-        String[] arr = new String[objectArrayList.size()];
-        for (int i = 0; i < objectArrayList.size() ; i++) {
-            arr[i] = (String) objectArrayList.get(i);
-        }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_dropdown_item, arr);
+        ArrayList<String> jobKeywordList = new ArrayList<String>();
+        mLocationSuggestionAdapter = new JobSugestionAdapter(getActivity(),android.R.layout.simple_spinner_dropdown_item,StaticConstant.LOCATION,jobKeywordList);
         edit_your_location.setThreshold(2);
-        edit_your_location.setAdapter(adapter);
-
+        edit_your_location.setAdapter(mLocationSuggestionAdapter);
     }
 
     LoadingDialog loadingDialog;
