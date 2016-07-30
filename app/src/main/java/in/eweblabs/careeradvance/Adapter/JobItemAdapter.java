@@ -8,6 +8,9 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -17,102 +20,135 @@ import in.eweblabs.careeradvance.Interface.IRefreshList;
 import in.eweblabs.careeradvance.R;
 
 /**
- * Created by Akash.Singh on 12/11/2015.
+ * Created by Anwar shaikh on 12/11/2015.
  */
 public class JobItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    ArrayList<Job> listItems;
+    private static ArrayList<Job> jobArrayList;
     FragmentActivity context;
     IRefreshList iRefreshList;
-    private  boolean showApplyButton ;
+    private static boolean showApplyButton;
 
-    private final  ApplyJobListener applyJob ;
-    public interface ApplyJobListener{
+    private final int VIEW_TYPE_ITEM = 0;
+    private final int VIEW_TYPE_LOADING = 1;
+
+    private static ApplyJobListener applyJob;
+
+    public interface ApplyJobListener {
         void jobApplied(Job job);
     }
 
-    public JobItemAdapter(FragmentActivity context, ArrayList<Job> listItems, IRefreshList iRefreshList,
-                          ApplyJobListener applyJobListener,boolean showApplyButon) {
+    public JobItemAdapter(FragmentActivity context, ArrayList<Job> jobArrayList, IRefreshList iRefreshList,
+                          ApplyJobListener applyJobListener, boolean showApplyButon ,RecyclerView mRecyclerView ) {
         this.context = context;
-        this.listItems = listItems;
+        this.jobArrayList = jobArrayList;
         this.iRefreshList = iRefreshList;
-        this.applyJob  = applyJobListener ;
-        this.showApplyButton = showApplyButon ;
+        this.applyJob = applyJobListener;
+        showApplyButton = showApplyButon;
     }
 
+    private OnLoadMoreListener mOnLoadMoreListener;
+    private static  LoadingViewHolder loadingViewHolder ;
+    public void setLoaded() {
+        //isLoading = false;
+        loadingViewHolder.mLoadingImage.setVisibility(View.VISIBLE);
+        loadingViewHolder.progressBar.setVisibility(View.GONE);
+    }
+
+    public void setOnLoadMoreListener(OnLoadMoreListener mOnLoadMoreListener) {
+        this.mOnLoadMoreListener = mOnLoadMoreListener;
+    }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_job_view, parent, false);
-        return new ViewItem(v);
+        if (viewType == VIEW_TYPE_ITEM) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_job_view, parent, false);
+            return new JobViewHolder(view);
+        } else if (viewType == VIEW_TYPE_LOADING) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.load_more_layout, parent, false);
+            return new LoadingViewHolder(view);
+        }
+        return null;
     }
 
-    private Job getItem(int position)
-    {
-        return listItems.get(position);
+    private Job getItem(int position) {
+        return jobArrayList.get(position);
     }
-
-
-    @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-        ViewItem Viewitem = (ViewItem)holder;
-            final Job job = getItem(position);
-
-            if(!TextUtils.isEmpty(job.getJob_title()))
-                Viewitem.text_job_title.setText(job.getJob_title());
-            else
-                Viewitem.text_job_title.setText("");
-
-        if(!TextUtils.isEmpty(job.getExperience_min()))
-            Viewitem.text_job_exp.setText(job.getExperience_min()+" - "+job.getExperience_max()+" Year");
-        else
-            Viewitem.text_job_exp.setText("");
-
-
-        if(!TextUtils.isEmpty(job.getCompany()))
-            Viewitem.text_company_name.setText(job.getCompany());
-        else
-            Viewitem.text_company_name.setText("");
-
-
-        if(!TextUtils.isEmpty(job.getJob_loacation_city()))
-            Viewitem.text_company_name.setText(job.getJob_loacation_city()+", "+job.getJob_loc_country());
-        else
-            Viewitem.text_company_name.setText("");
-
-        Viewitem.card_view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                iRefreshList.onRefresh(getItem(position));
-            }
-        });
-    }
-
 
     @Override
     public int getItemViewType(int position) {
-          return position;
+        return jobArrayList.get(position) == null ? VIEW_TYPE_LOADING : VIEW_TYPE_ITEM;
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+        if (holder instanceof JobViewHolder) {
+            JobViewHolder viewitem = (JobViewHolder) holder;
+            final Job job = getItem(position);
+
+            if (!TextUtils.isEmpty(job.getJob_title()))
+                viewitem.text_job_title.setText(job.getJob_title());
+            else
+                viewitem.text_job_title.setText("");
+
+            if (!TextUtils.isEmpty(job.getExperience_min()))
+                viewitem.text_job_exp.setText(job.getExperience_min() + " - " + job.getExperience_max() + " Year");
+            else
+                viewitem.text_job_exp.setText("");
+
+            if (!TextUtils.isEmpty(job.getCompany()))
+                viewitem.text_company_name.setText(job.getCompany());
+            else
+                viewitem.text_company_name.setText("");
+
+            if (!TextUtils.isEmpty(job.getJob_loacation_city()))
+                viewitem.text_company_name.setText(job.getJob_loacation_city() + ", " + job.getJob_loc_country());
+            else
+                viewitem.text_company_name.setText("");
+
+            viewitem.card_view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    iRefreshList.onRefresh(getItem(position));
+                }
+            });
+        } else {
+            loadingViewHolder = (LoadingViewHolder) holder;
+            loadingViewHolder.loadingViewLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    loadingViewHolder.mLoadingImage.setVisibility(View.GONE);
+                    loadingViewHolder.progressBar.setVisibility(View.VISIBLE);
+                    loadingViewHolder.progressBar.setIndeterminate(true);
+                    if (mOnLoadMoreListener != null) {
+                        mOnLoadMoreListener.onLoadMore();
+                    }
+                }
+            });
+          //  loadingViewHolder.progressBar.setIndeterminate(true);
+        }
     }
 
 
     @Override
     public int getItemCount() {
-        return listItems.size();
+        return jobArrayList == null ? 0 : jobArrayList.size();
     }
 
-    class ViewItem extends RecyclerView.ViewHolder implements View.OnClickListener{
-        public TextView text_job_location,text_job_title,text_company_name,text_job_exp;
+    static class JobViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        public TextView text_job_location, text_job_title, text_company_name, text_job_exp;
         CardView card_view;
-        public AppCompatButton applyJobButton ;
-        public ViewItem(View itemView) {
+        public AppCompatButton applyJobButton;
+
+        public JobViewHolder(View itemView) {
             super(itemView);
-            text_job_title = (TextView)itemView.findViewById(R.id.text_job_title);
-            text_company_name = (TextView)itemView.findViewById(R.id.text_company_name);
-            text_job_exp = (TextView)itemView.findViewById(R.id.text_job_exp);
+            text_job_title = (TextView) itemView.findViewById(R.id.text_job_title);
+            text_company_name = (TextView) itemView.findViewById(R.id.text_company_name);
+            text_job_exp = (TextView) itemView.findViewById(R.id.text_job_exp);
             text_job_location = (TextView) itemView.findViewById(R.id.text_job_location);
             applyJobButton = (AppCompatButton) itemView.findViewById(R.id.btnApply);
             applyJobButton.setOnClickListener(this);
-            if(!showApplyButton){
+            if (!showApplyButton) {
                 applyJobButton.setVisibility(View.GONE);
             }
             card_view = (CardView) itemView.findViewById(R.id.card_view);
@@ -120,15 +156,28 @@ public class JobItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         @Override
         public void onClick(View v) {
-            applyJob.jobApplied(listItems.get(getAdapterPosition()));
+            applyJob.jobApplied(jobArrayList.get(getAdapterPosition()));
+        }
+    }
+
+    static class LoadingViewHolder extends RecyclerView.ViewHolder {
+        public ProgressBar progressBar;
+        public ImageView mLoadingImage ;
+        public LinearLayout loadingViewLayout ;
+
+        public LoadingViewHolder(View itemView) {
+            super(itemView);
+            loadingViewLayout = (LinearLayout)itemView.findViewById(R.id.loadingViewLayout);
+            mLoadingImage = (ImageView) itemView.findViewById(R.id.loadImage);
+            progressBar = (ProgressBar) itemView.findViewById(R.id.progressBar1);
         }
     }
 
     public void clearData() {
-        int size = this.listItems.size();
+        int size = this.jobArrayList.size();
         if (size > 0) {
             for (int i = 0; i < size; i++) {
-                this.listItems.remove(0);
+                this.jobArrayList.remove(0);
             }
 
             this.notifyItemRangeRemoved(0, size);

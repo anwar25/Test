@@ -38,6 +38,7 @@ public class BaseNetwork
     public static final String DEVICE_TYPE = "device_type";
     public static final String DEVICE_TOKEN = "device_token";
     public static final String AUTH_ID = "auth_id";
+    public static final String PAGE = "page";
 
 
     private static BaseNetwork obj = null;

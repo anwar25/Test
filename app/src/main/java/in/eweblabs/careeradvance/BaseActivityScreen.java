@@ -59,6 +59,7 @@ public class BaseActivityScreen extends AppCompatActivity
     public EditText edit_search_country;
     private  static SessionManager sSessionManager;
     private UserInfo mUserInfo ;
+    private CircleImageView mProfileImage;
 
     static {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
@@ -75,7 +76,7 @@ public class BaseActivityScreen extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         final View headerView = (View) LayoutInflater.from(this).inflate(R.layout.nav_header_splash_screen, null);
         navigationView.addHeaderView(headerView);
-        profile_img = (CircleImageView)headerView.findViewById(R.id.header_profile_img);
+        mProfileImage = (CircleImageView)headerView.findViewById(R.id.header_profile_img);
 
         toggle = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.navigation_drawer_open, R.string.navigation_drawer_close){
 
@@ -154,7 +155,7 @@ public class BaseActivityScreen extends AppCompatActivity
     public void setmUserInfo(UserInfo mUserInfo) {
         this.mUserInfo = mUserInfo;
     }
-    CircleImageView profile_img ;
+
     //ImageLoader imageLoader;
     private void headerSettings(View headerView) {
 
@@ -168,16 +169,17 @@ public class BaseActivityScreen extends AppCompatActivity
             text_email_address.setText(mUserInfo.getUserEmail());
             //imageLoader =  new ImageLoader(this);
             if(!TextUtils.isEmpty(mUserInfo.getUserAvatar())){
-              //  imageLoader.DisplayImage(mUserInfo.getUserAvatar(),profile_img);
+              //  imageLoader.DisplayImage(mUserInfo.getUserAvatar(),mProfileImage);
                 Glide.with(this)
                         .load(mUserInfo.getUserAvatar())
-                        .placeholder(R.drawable.ic_face_white_48dp) // can also be a drawable
+                      //  .placeholder(R.drawable.ic_face_white_48dp) // can also be a drawable
                         .error(R.drawable.ic_face_white_48dp) // will be displayed if the image cannot be loaded
-                        .crossFade(2000)
-                        .into(profile_img);
+                       // .crossFade(2000)
+                        .into(mProfileImage);
             }
 
         } else{
+            mProfileImage.setImageResource(R.drawable.ic_face_white_48dp);
             text_email_address.setVisibility(View.INVISIBLE);
             txt_username.setText(getString(R.string.title_sign_in_sign_up));
         }

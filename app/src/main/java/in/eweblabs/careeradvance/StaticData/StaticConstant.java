@@ -72,6 +72,9 @@ public class StaticConstant {
     public static final String JOB_ADDRESS = "address";
     public static final String JOB_TYPE = "job_type";
     public static final String SHARED_URL = "shared_url";
+    public static final String TYPE = "type";
+    public static final String JOB_URL = "jobUrl";
+
 
 
 
@@ -136,4 +139,8 @@ public class StaticConstant {
 
     public static String KEYWORDS = "keywords";
     public static String LOCATION = "location";
+
+    public static String JOB_CAREER_ADVANCE = "careeradvance";
+    public static String JOB_OTHER = "Other";
+
 }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Progress Layout contains Progress Bar and a TextView -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/loadingViewLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:background="@drawable/load_more_selector"
+    android:clickable="true"
+    android:orientation="horizontal"
+    android:padding="5dp">
+
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        android:layout_width="30dp"
+        android:visibility="gone"
+        android:layout_height="30dp" />
+    <ImageView
+        android:id="@+id/loadImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:clickable="false"
+        android:src="@android:drawable/stat_notify_sync_noanim" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/progressBar1"
+        android:padding="3dp"
+        android:textColor="@color/light"
+        android:text="@string/loadmore_job"
+        android:focusable="false"
+        android:textSize="15sp" />
+
+</LinearLayout>

@@ -3,6 +3,7 @@ package in.eweblabs.careeradvance.Search;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -61,10 +62,14 @@ public class JobDetailFragment extends Fragment implements IAsyncTaskRunner{
         ((TextView)view.findViewById(R.id.text_job_exp)).setText(job.getExperience_min()+" - "+job.getExperience_max()+" "+getString(R.string.years));
         ((TextView)view.findViewById(R.id.text_job_location)).setText(job.getJob_loacation_city()+" "+job.getJob_loc_country());
         ((TextView)view.findViewById(R.id.text_job_post)).setText(TextUtility.checkIsStringEmpty(job.getDate_post()));
-        if(job.getCtc_currency().equalsIgnoreCase("Rupees"))
-            ((TextView)view.findViewById(R.id.text_currency)).setText(" ₹ ");
-        else
-            ((TextView)view.findViewById(R.id.text_currency)).setText(" $ ");
+
+        if(job.getCtc_currency() != null){
+            if(job.getCtc_currency().equalsIgnoreCase("Rupees"))
+                ((TextView)view.findViewById(R.id.text_currency)).setText(" ₹ ");
+            else
+                ((TextView)view.findViewById(R.id.text_currency)).setText(" $ ");
+
+        }
 
         ((TextView)view.findViewById(R.id.text_ctc)).setText(job.getCtc_min()+" - "+job.getCtc_max());
         ((TextView)view.findViewById(R.id.text_industry_area)).setText(TextUtility.checkIsStringEmpty(job.getIndustry()));
@@ -95,7 +100,7 @@ public class JobDetailFragment extends Fragment implements IAsyncTaskRunner{
             ((AppCompatButton)view.findViewById(R.id.btnApply)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(job.getWebsite().equalsIgnoreCase("www.careeradvance.com")){
+                    if(job.getType().equalsIgnoreCase(StaticConstant.JOB_CAREER_ADVANCE)){
                         UserInfo userInfo = activityHandle.getmUserInfo();
                         if(userInfo!=null && !TextUtils.isEmpty(userInfo.getUserEmail())) {
                             performJobApplyProcess();
@@ -108,7 +113,9 @@ public class JobDetailFragment extends Fragment implements IAsyncTaskRunner{
                         }
 
                     }else{
-
+                        Intent i = new Intent(Intent.ACTION_VIEW);
+                        i.setData(Uri.parse(job.getJobUrl()));
+                        startActivity(i);
                     }
                 }
             });

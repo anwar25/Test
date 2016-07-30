@@ -109,6 +109,7 @@ public class SearchFragment extends Fragment implements IAsyncTaskRunner{
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put(BaseNetwork.KEYWORD, edit_job_title.getText().toString());
         hashMap.put(BaseNetwork.LOCATION, edit_your_location.getText().toString());
+        hashMap.put(BaseNetwork.PAGE, "1");
         AuthCommonTask authCommonTask =  new AuthCommonTask(getActivity(),BaseNetwork.SEARCHJOBBYKEYWORD,this,loadingDialog);
         authCommonTask.execute(hashMap);
     }
@@ -128,6 +129,8 @@ public class SearchFragment extends Fragment implements IAsyncTaskRunner{
             if(response.getJobArrayList().size()>0){
                 SearchResultFragment searchResultFragment =  new SearchResultFragment();
                 Bundle bundle = new Bundle();
+                bundle.putString(BaseNetwork.KEYWORD, String.valueOf(edit_job_title.getText()));
+                bundle.putString(BaseNetwork.LOCATION, String.valueOf(edit_your_location.getText()));
                 bundle.putSerializable("Job",response.getJobArrayList());
                 searchResultFragment.setArguments(bundle);
                 ((BaseActivityScreen) getActivity()).onReplaceFragment(searchResultFragment, true);

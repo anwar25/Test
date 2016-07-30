@@ -60,7 +60,7 @@ public class AppliedJobFragment extends Fragment implements IAsyncTaskRunner, Di
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recycler_view.setLayoutManager(llm);
-        jobItemAdapter = new JobItemAdapter(getActivity(),jobArrayList,this,this,false);
+        jobItemAdapter = new JobItemAdapter(getActivity(),jobArrayList,this,this,false,recycler_view);
         recycler_view.setAdapter(jobItemAdapter);
         jobItemAdapter.notifyDataSetChanged();
 

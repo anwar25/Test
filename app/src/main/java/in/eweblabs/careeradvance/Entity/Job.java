@@ -42,6 +42,26 @@ public class Job implements Serializable{
     String address;
     String job_type;
     String shared_url ;
+    // whether job is third party or career advance
+    String type ;
+    // Job url for third party job
+    String jobUrl ;
+
+    public String getJobUrl() {
+        return jobUrl;
+    }
+
+    public void setJobUrl(String jobUrl) {
+        this.jobUrl = jobUrl;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public String getShared_url() {
         return shared_url;

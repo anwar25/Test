@@ -64,14 +64,15 @@ import in.eweblabs.careeradvance.Utils.TextUtility;
 import in.eweblabs.careeradvance.loader.ImageLoader;
 
 /**
- * Created by Akash.singh on 11/20/2015.
+ * Created by Anwar Shaikh on 11/20/2015.
  */
-public class ProfileScreen extends Fragment {
-    CircleImageView profile_img;
+public class ProfileScreen extends Fragment implements  View.OnClickListener{
+    private CircleImageView mProfileImageView;
     int REQUEST_CAMERA = 9999;
     int SELECT_FILE = 8888;
     ImageLoader imageLoader;
     private BaseActivityScreen activityHandle;
+    private AppCompatButton mLogoutButton ;
 
 
     @Nullable
@@ -91,6 +92,37 @@ public class ProfileScreen extends Fragment {
         }
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        activityHandle = null ;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mLogoutButton = null ;
+        imageLoader = null ;
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()){
+            case R.id.logout_btn :
+                ApplicationController.getInstance().getCareerAdvanceDBData().resetUserRecordTable();
+                ApplicationController.getInstance().setUserInfo(new UserInfo());
+                activityHandle.onBackPressed();
+                activityHandle.getSessionManager().logoutUser();
+                activityHandle.setmUserInfo(null);
+
+                break;
+            case R.id.profile_img :
+                selectImage();
+                break;
+        }
+    }
+
     private void WidgetMapping(View view) {
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +132,7 @@ public class ProfileScreen extends Fragment {
             }
         });
 
-        profile_img = (CircleImageView)view.findViewById(R.id.profile_img);
+        mProfileImageView = (CircleImageView)view.findViewById(R.id.profile_img);
         imageLoader =  new ImageLoader(getActivity());
 
         UserInfo userInfo = activityHandle.getmUserInfo();
@@ -110,23 +142,12 @@ public class ProfileScreen extends Fragment {
             ((TextView)view.findViewById(R.id.text_email_address)).setText(userInfo.getUserEmail());
             Logger.d("profileScreen","::"+userInfo.getUserAvatar());
             if(!TextUtils.isEmpty(userInfo.getUserAvatar()));
-            imageLoader.DisplayImage(userInfo.getUserAvatar(),profile_img);
+            imageLoader.DisplayImage(userInfo.getUserAvatar(), mProfileImageView);
         }
-        ((AppCompatButton)view.findViewById(R.id.logout_btn)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ApplicationController.getInstance().getCareerAdvanceDBData().resetUserRecordTable();
-                ApplicationController.getInstance().setUserInfo(new UserInfo());
-                ((BaseActivityScreen) getActivity()).onBackPressed();
-            }
-        });
+        mLogoutButton = (AppCompatButton) view.findViewById(R.id.logout_btn) ;
+        mLogoutButton.setOnClickListener(this);
 
-        profile_img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectImage();
-            }
-        });
+        mProfileImageView.setOnClickListener(this);
 
         ((TextView)view.findViewById(R.id.profile_resume_headline)).setText(TextUtility.checkIsStringEmpty(userInfo.getUserResumeHeadline()));
         ((TextView)view.findViewById(R.id.profile_objective)).setText(TextUtility.checkIsStringEmpty(userInfo.getUserObjective()));
@@ -241,7 +262,7 @@ public class ProfileScreen extends Fragment {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                profile_img.setImageBitmap(thumbnail);
+                mProfileImageView.setImageBitmap(thumbnail);
                 ImageUpload();
             } else if (requestCode == SELECT_FILE) {
                 Uri selectedImageUri = data.getData();
@@ -279,7 +300,7 @@ public class ProfileScreen extends Fragment {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                profile_img.setImageBitmap(bm);
+                mProfileImageView.setImageBitmap(bm);
                 ImageUpload();
             }
         }
@@ -348,7 +369,7 @@ public class ProfileScreen extends Fragment {
                             String ImageFile = jsonObjectLogin.getString("image_file");
                             activityHandle.getmUserInfo().setUserAvatar(jsonObjectLogin.getString("image_file"));
                             if(!TextUtils.isEmpty(ImageFile));
-                            imageLoader.DisplayImage(ImageFile, profile_img);
+                            imageLoader.DisplayImage(ImageFile, mProfileImageView);
                         }
 
 
@@ -364,5 +385,6 @@ public class ProfileScreen extends Fragment {
 
 
     }
+
 
 }
