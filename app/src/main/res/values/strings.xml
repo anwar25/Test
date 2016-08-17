@@ -595,5 +595,14 @@
     <string name="not_applied_to_any_job">You havent applied to any jobs yet</string>
     <string name="already_applied">Already Applied</string>
     <string name="loadmore_job">Load More Jobs</string>
+    <string name="job_age">%d days ago</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="today">Today</string>
+    <string name="recent_searches">Recent Searches</string>
+    <string name="job_search_processing">Job Search, Processing...</string>
+    <string name="loading">Loading...</string>
+    <string name="year_ago">%d years ago.</string>
+    <string name="month_ago">%d months ago.</string>
+    <string name="filter">Filter</string>
 
 </resources>

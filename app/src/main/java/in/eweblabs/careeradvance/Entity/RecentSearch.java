@@ -14,6 +14,11 @@ public class RecentSearch extends DbConstraints{
     String location;
     public RecentSearch(){
     }
+
+    public RecentSearch (String keyword ,String location){
+        this.keyword = keyword ;
+        this.location = location ;
+    }
     public RecentSearch(Cursor cursor){
         setId(cursor.getInt(cursor.getColumnIndex(CA_ID)));
         setKeyword(cursor.getString(cursor.getColumnIndex(CA_KEYWORD)));

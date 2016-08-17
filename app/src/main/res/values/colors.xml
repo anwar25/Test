@@ -5,10 +5,12 @@
     <color name="colorPrimaryDark">#B01E28</color>
     <color name="colorAccent">#FF4081</color>
     <color name="light">#FFEEEEEE</color>
+    <color name="filter_color">#90EAA5AA</color>
     <color name="light_grey">#6621425d</color>
     <color name="dark_grey">#888888</color>
     <color name="background">#fff</color>
     <color name="white">#FFFFFF</color>
+    <color name="white_transparent">#80FFFFFF</color>
     <color name="black">#000</color>
     <bool name="default_circle_indicator_centered">true</bool>
     <color name="default_circle_indicator_fill_color">#AD1D29</color>

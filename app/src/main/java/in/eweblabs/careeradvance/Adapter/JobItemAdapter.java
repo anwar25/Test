@@ -13,11 +13,16 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import in.eweblabs.careeradvance.Entity.Job;
 import in.eweblabs.careeradvance.Interface.IRefreshList;
 import in.eweblabs.careeradvance.R;
+import in.eweblabs.careeradvance.Utils.Logger;
 
 /**
  * Created by Anwar shaikh on 12/11/2015.
@@ -33,6 +38,7 @@ public class JobItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private final int VIEW_TYPE_LOADING = 1;
 
     private static ApplyJobListener applyJob;
+
 
     public interface ApplyJobListener {
         void jobApplied(Job job);
@@ -51,6 +57,7 @@ public class JobItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private static  LoadingViewHolder loadingViewHolder ;
     public void setLoaded() {
         //isLoading = false;
+        loadingViewHolder.mLoadingText.setText(context.getString(R.string.loadmore_job));
         loadingViewHolder.mLoadingImage.setVisibility(View.VISIBLE);
         loadingViewHolder.progressBar.setVisibility(View.GONE);
     }
@@ -102,9 +109,9 @@ public class JobItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 viewitem.text_company_name.setText("");
 
             if (!TextUtils.isEmpty(job.getJob_loacation_city()))
-                viewitem.text_company_name.setText(job.getJob_loacation_city() + ", " + job.getJob_loc_country());
+                viewitem.text_job_location.setText(job.getJob_loacation_city() + ", " + job.getJob_loc_country());
             else
-                viewitem.text_company_name.setText("");
+                viewitem.text_job_location.setText("");
 
             viewitem.card_view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -112,6 +119,30 @@ public class JobItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     iRefreshList.onRefresh(getItem(position));
                 }
             });
+
+            Date jobPostingDate = null;
+            try {
+                SimpleDateFormat jobDateFormat = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss");
+                jobPostingDate = jobDateFormat.parse(job.getDate_post());
+                Date currentDate = new Date();
+                long diff = currentDate.getTime() - jobPostingDate.getTime() ;
+                //System.out.println ("anwar: " + );
+                long days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+                if(days >= 365){
+                    viewitem.jobAgeTextView.setText(context.getString(R.string.year_ago,days/365));
+                }else if( days >= 30){
+                    viewitem.jobAgeTextView.setText(context.getString(R.string.month_ago,days/30));
+                }else if (days == 1){
+                    viewitem.jobAgeTextView.setText(context.getString(R.string.yesterday));
+                }else if(days == 0){
+                    viewitem.jobAgeTextView.setText(context.getString(R.string.today));
+                } else {
+                    viewitem.jobAgeTextView.setText(context.getString(R.string.job_age,days));
+                }
+            } catch (ParseException e) {
+                viewitem.jobAgeTextView.setText(job.getDate_post());
+                Logger.e("JobItemAdapter",e.getMessage()+"");
+            }
         } else {
             loadingViewHolder = (LoadingViewHolder) holder;
             loadingViewHolder.loadingViewLayout.setOnClickListener(new View.OnClickListener() {
@@ -119,6 +150,7 @@ public class JobItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 public void onClick(View v) {
                     loadingViewHolder.mLoadingImage.setVisibility(View.GONE);
                     loadingViewHolder.progressBar.setVisibility(View.VISIBLE);
+                    loadingViewHolder.mLoadingText.setText(context.getString(R.string.loading));
                     loadingViewHolder.progressBar.setIndeterminate(true);
                     if (mOnLoadMoreListener != null) {
                         mOnLoadMoreListener.onLoadMore();
@@ -137,6 +169,7 @@ public class JobItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     static class JobViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView text_job_location, text_job_title, text_company_name, text_job_exp;
+        public TextView jobAgeTextView ;
         CardView card_view;
         public AppCompatButton applyJobButton;
 
@@ -146,6 +179,7 @@ public class JobItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             text_company_name = (TextView) itemView.findViewById(R.id.text_company_name);
             text_job_exp = (TextView) itemView.findViewById(R.id.text_job_exp);
             text_job_location = (TextView) itemView.findViewById(R.id.text_job_location);
+            jobAgeTextView = (TextView) itemView.findViewById(R.id.jobAgeTextView);
             applyJobButton = (AppCompatButton) itemView.findViewById(R.id.btnApply);
             applyJobButton.setOnClickListener(this);
             if (!showApplyButton) {
@@ -163,6 +197,7 @@ public class JobItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     static class LoadingViewHolder extends RecyclerView.ViewHolder {
         public ProgressBar progressBar;
         public ImageView mLoadingImage ;
+        public TextView mLoadingText ;
         public LinearLayout loadingViewLayout ;
 
         public LoadingViewHolder(View itemView) {
@@ -170,6 +205,8 @@ public class JobItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             loadingViewLayout = (LinearLayout)itemView.findViewById(R.id.loadingViewLayout);
             mLoadingImage = (ImageView) itemView.findViewById(R.id.loadImage);
             progressBar = (ProgressBar) itemView.findViewById(R.id.progressBar1);
+            mLoadingText = (TextView) itemView.findViewById(R.id.loadingTextView);
+
         }
     }
 

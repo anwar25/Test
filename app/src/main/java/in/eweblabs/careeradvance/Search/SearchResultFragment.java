@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -38,13 +39,14 @@ import in.eweblabs.careeradvance.Utils.Utils;
  * Created by Akash.Singh on 1/9/2016.
  */
 public class SearchResultFragment extends Fragment implements IRefreshList, JobItemAdapter.ApplyJobListener
-        , IAsyncTaskRunner {
+        , IAsyncTaskRunner , View.OnClickListener {
     private ArrayList<Job> jobArrayList ;
     private JobItemAdapter jobItemAdapter;
     private RecyclerView mJobsRecyclerView;
     private BaseActivityScreen activityHandle;
     private LoadingDialog loadingDialog;
     private String mLocation , mKeyword ;
+    private AppCompatButton mFilterButton ;
 
     @Nullable
     @Override
@@ -58,6 +60,8 @@ public class SearchResultFragment extends Fragment implements IRefreshList, JobI
             mKeyword = getArguments().getString(BaseNetwork.KEYWORD);
         }
         mJobsRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        mFilterButton = (AppCompatButton) view.findViewById(R.id.btn_filter);
+        mFilterButton.setOnClickListener(this);
         CreateJob();
         return view;
     }
@@ -98,6 +102,15 @@ public class SearchResultFragment extends Fragment implements IRefreshList, JobI
         authCommonTask.execute(hashMap);
     }
 
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btn_filter :
+                activityHandle.onReplaceFragment(new FilterFragment(), true);
+                break;
+        }
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -159,7 +172,7 @@ public class SearchResultFragment extends Fragment implements IRefreshList, JobI
             }else{
                 jobArrayList.remove(jobArrayList.size() - 1);
                 jobItemAdapter.notifyItemRemoved(jobArrayList.size());
-
+                jobItemAdapter.notifyItemRangeChanged(jobArrayList.size(),jobItemAdapter.getItemCount());
 
               //  jobItemAdapter.notifyItemInserted(jobArrayList.size() - 1);
                 if(response.getJobArrayList().size() < 10){
@@ -227,4 +240,6 @@ public class SearchResultFragment extends Fragment implements IRefreshList, JobI
         }
 
     }
+
+
 }

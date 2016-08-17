@@ -4,13 +4,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.text.TextUtils;
 
 import java.util.ArrayList;
 
 import in.eweblabs.careeradvance.Entity.RecentSearch;
 import in.eweblabs.careeradvance.Entity.UserInfo;
 import in.eweblabs.careeradvance.StaticData.DbConstraints;
-import in.eweblabs.careeradvance.StaticData.StaticConstant;
 
 
 /**
@@ -148,6 +148,8 @@ public class CareerAdvanceDBData extends DbConstraints {
     }
 
     public void InsertRecentSearchLocation(RecentSearch recentSearch){
+        if(TextUtils.isEmpty(recentSearch.getKeyword().trim()) && TextUtils.isEmpty(recentSearch.getLocation().trim()))
+            return;
         openDB();
         database.beginTransaction();
         try {
@@ -241,16 +243,18 @@ public class CareerAdvanceDBData extends DbConstraints {
         return arrayList;
     }
 
-    public ArrayList<Object> getRecentSearchRecord(){
-        ArrayList<Object>  arrayList =  new ArrayList<>();
+    public ArrayList<RecentSearch> getRecentSearchRecord(){
+        ArrayList<RecentSearch>  arrayList =  new ArrayList<RecentSearch>();
         openDB();
         database.beginTransaction();
         try {
             String Query = "Select * From " + USER_RECENT_SEARCH_TABLE_NAME ;
             Cursor cursor = database.rawQuery(Query, null);
             if (cursor != null && cursor.moveToFirst()){
+
                 while (!cursor.isAfterLast()) {
-                    arrayList.add(cursor.getString(cursor.getColumnIndex(CA_KEYWORD)));
+                    arrayList.add(new RecentSearch(cursor.getString(cursor.getColumnIndex(CA_KEYWORD))
+                            ,cursor.getString(cursor.getColumnIndex(CA_LOCATION))));
                     cursor.moveToNext();
                 }
             }

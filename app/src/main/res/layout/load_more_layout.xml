@@ -25,6 +25,7 @@
         android:src="@android:drawable/stat_notify_sync_noanim" />
 
     <TextView
+        android:id="@+id/loadingTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -33,6 +34,6 @@
         android:textColor="@color/light"
         android:text="@string/loadmore_job"
         android:focusable="false"
-        android:textSize="15sp" />
+        android:textSize="@dimen/sp_18" />
 
 </LinearLayout>

@@ -172,7 +172,8 @@ public class BaseActivityScreen extends AppCompatActivity
               //  imageLoader.DisplayImage(mUserInfo.getUserAvatar(),mProfileImage);
                 Glide.with(this)
                         .load(mUserInfo.getUserAvatar())
-                      //  .placeholder(R.drawable.ic_face_white_48dp) // can also be a drawable
+                      //  .load("https://chinmayala.org/sites/default/files/styles/slideshow/public/gurudev-kids.jpg?itok=BdnmB7j3")
+                        .placeholder(R.drawable.ic_face_white_48dp) // can also be a drawable
                         .error(R.drawable.ic_face_white_48dp) // will be displayed if the image cannot be loaded
                        // .crossFade(2000)
                         .into(mProfileImage);

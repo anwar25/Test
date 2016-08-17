@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/recentJobTextView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/dp_10"
+    android:paddingBottom="@dimen/dp_10"
+    android:layout_marginLeft="@dimen/dp_10"
+    android:textSize="@dimen/sp_18">
+
+</TextView>

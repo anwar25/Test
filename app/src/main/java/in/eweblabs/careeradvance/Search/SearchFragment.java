@@ -5,11 +5,14 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,11 +37,14 @@ import in.eweblabs.careeradvance.UI.MessageDialog;
 /**
  * Created by Akash.Singh on 11/17/2015.
  */
-public class SearchFragment extends Fragment implements IAsyncTaskRunner{
+public class SearchFragment extends Fragment implements IAsyncTaskRunner , RecentJobsAdapter.RecentJobListener{
+
     AutoCompleteTextView edit_job_title,edit_your_location;
 
     private JobSugestionAdapter mLocationSuggestionAdapter ;
     private JobSugestionAdapter mJobKeywordAdapter ;
+    private RecyclerView mRecentJobSearchView;
+    private TextView recentSearchHeader;
 
     @Nullable
     @Override
@@ -53,6 +59,7 @@ public class SearchFragment extends Fragment implements IAsyncTaskRunner{
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         edit_job_title = (AutoCompleteTextView) view.findViewById(R.id.edit_job_title);
         edit_your_location = (AutoCompleteTextView) view.findViewById(R.id.edit_your_location);
+        recentSearchHeader = (TextView) view.findViewById(R.id.recentJobSearchHeader);
         SetJobKeywordAutoCompleteTextView();
         SetJobLocationAutoCompleteTextView();
         ((AppCompatButton)view.findViewById(R.id.btn_search)).setOnClickListener(new View.OnClickListener() {
@@ -79,6 +86,21 @@ public class SearchFragment extends Fragment implements IAsyncTaskRunner{
                 }
             }
         });
+        mRecentJobSearchView = (RecyclerView) view.findViewById(R.id.recentSearchRecyclerView);
+        ArrayList<RecentSearch> recentSearchArrayList = ApplicationController.getInstance().getCareerAdvanceDBData().getRecentSearchRecord();
+        if(recentSearchArrayList.size() == 0){
+            recentSearchHeader.setVisibility(View.GONE);
+        }else{
+            RecentJobsAdapter recentJobsAdapter = new RecentJobsAdapter(recentSearchArrayList,this);
+            final LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+            mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+            mRecentJobSearchView.setLayoutManager(mLayoutManager);
+            mRecentJobSearchView.addItemDecoration(new DividerItemDecoration(getActivity()));
+            mRecentJobSearchView.setAdapter(recentJobsAdapter);
+        }
+
+        //recentJobsAdapter.notifyDataSetChanged();
+
     }
 
     private void SetJobKeywordAutoCompleteTextView() {
@@ -101,11 +123,24 @@ public class SearchFragment extends Fragment implements IAsyncTaskRunner{
         edit_your_location.setAdapter(mLocationSuggestionAdapter);
     }
 
+    @Override
+    public void jobSearchClicked(RecentSearch recentSearch) {
+        loadingDialog =  new LoadingDialog(getActivity());
+        loadingDialog.show();
+        loadingDialog.SetTitleMessage(getString(R.string.job_search_processing));
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put(BaseNetwork.KEYWORD, recentSearch.getKeyword());
+        hashMap.put(BaseNetwork.LOCATION, recentSearch.getLocation());
+        hashMap.put(BaseNetwork.PAGE, "1");
+        AuthCommonTask authCommonTask =  new AuthCommonTask(getActivity(),BaseNetwork.SEARCHJOBBYKEYWORD,this,loadingDialog);
+        authCommonTask.execute(hashMap);
+    }
+
     LoadingDialog loadingDialog;
     public void PerformSearchProcess() {
         loadingDialog =  new LoadingDialog(getActivity());
         loadingDialog.show();
-        loadingDialog.SetTitleMessage("Job Search, Processing...");
+        loadingDialog.SetTitleMessage(getString(R.string.job_search_processing));
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put(BaseNetwork.KEYWORD, edit_job_title.getText().toString());
         hashMap.put(BaseNetwork.LOCATION, edit_your_location.getText().toString());
@@ -176,4 +211,6 @@ public class SearchFragment extends Fragment implements IAsyncTaskRunner{
     public void onCanceled() {
 
     }
+
+
 }
