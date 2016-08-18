@@ -19,6 +19,7 @@
     <dimen name="default_circle_indicator_radius">3dp</dimen>
     <bool name="default_circle_indicator_snap">false</bool>
     <color name="default_circle_indicator_stroke_color">#AD1D29</color>
+    <color name="light_white">#FFF0F0F0</color>
     <dimen name="default_circle_indicator_stroke_width">1dp</dimen>
 
 </resources>

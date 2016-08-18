@@ -604,5 +604,19 @@
     <string name="year_ago">%d years ago.</string>
     <string name="month_ago">%d months ago.</string>
     <string name="filter">Filter</string>
-
+  <!--  <string name="filter_text">%s jobs in %s</string>-->
+    <string name="filter_text"> %1$s  jobs in %2$s </string>
+    <string name="sort_by_relevance">Sort by relevance</string>
+    <string name="sort_by_date">Sort by date</string>
+    <string name="all_job_types">All job types</string>
+    <string name="full_time">Full-time</string>
+    <string name="contract">Contract</string>
+    <string name="temporary">Temporary</string>
+    <string name="part_time">Part-time</string>
+    <string name="update">Update</string>
+    <string name="within_radius">Within %d Km</string>
+    <string name="updating">Updating...</string>
+    <string name="fresher">Fresher</string>
+    <string name="internship">Internship</string>
+    <string name="walkin">Walk-In</string>
 </resources>

@@ -39,6 +39,9 @@ public class BaseNetwork
     public static final String DEVICE_TOKEN = "device_token";
     public static final String AUTH_ID = "auth_id";
     public static final String PAGE = "page";
+    public static final String RADIUS = "radius";
+    public static final String SORT_BY = "sort_by";
+    public static final String JOB_TYPE = "job_type";
 
 
     private static BaseNetwork obj = null;

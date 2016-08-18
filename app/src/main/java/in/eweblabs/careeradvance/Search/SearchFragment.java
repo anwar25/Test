@@ -45,6 +45,8 @@ public class SearchFragment extends Fragment implements IAsyncTaskRunner , Recen
     private JobSugestionAdapter mJobKeywordAdapter ;
     private RecyclerView mRecentJobSearchView;
     private TextView recentSearchHeader;
+    private boolean isRecentSearch = false ;
+    private String mKeyword , mLocation ;
 
     @Nullable
     @Override
@@ -125,12 +127,15 @@ public class SearchFragment extends Fragment implements IAsyncTaskRunner , Recen
 
     @Override
     public void jobSearchClicked(RecentSearch recentSearch) {
+        isRecentSearch = true ;
+        mKeyword = recentSearch.getKeyword() ;
+        mLocation = recentSearch.getLocation() ;
         loadingDialog =  new LoadingDialog(getActivity());
         loadingDialog.show();
         loadingDialog.SetTitleMessage(getString(R.string.job_search_processing));
         HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put(BaseNetwork.KEYWORD, recentSearch.getKeyword());
-        hashMap.put(BaseNetwork.LOCATION, recentSearch.getLocation());
+        hashMap.put(BaseNetwork.KEYWORD, mKeyword);
+        hashMap.put(BaseNetwork.LOCATION, mLocation);
         hashMap.put(BaseNetwork.PAGE, "1");
         AuthCommonTask authCommonTask =  new AuthCommonTask(getActivity(),BaseNetwork.SEARCHJOBBYKEYWORD,this,loadingDialog);
         authCommonTask.execute(hashMap);
@@ -161,11 +166,17 @@ public class SearchFragment extends Fragment implements IAsyncTaskRunner , Recen
             recentSearch.setLocation(edit_your_location.getText().toString());
             recentSearch.setKeyword(edit_job_title.getText().toString());
             ApplicationController.getInstance().getCareerAdvanceDBData().InsertRecentSearchLocation(recentSearch);
-            if(response.getJobArrayList().size()>0){
+            if(response.getJobArrayList().size() > 0){
                 SearchResultFragment searchResultFragment =  new SearchResultFragment();
                 Bundle bundle = new Bundle();
-                bundle.putString(BaseNetwork.KEYWORD, String.valueOf(edit_job_title.getText()));
-                bundle.putString(BaseNetwork.LOCATION, String.valueOf(edit_your_location.getText()));
+                if(isRecentSearch){
+                    bundle.putString(BaseNetwork.KEYWORD, mKeyword);
+                    bundle.putString(BaseNetwork.LOCATION, mLocation);
+                    isRecentSearch = false ;
+                }else  {
+                    bundle.putString(BaseNetwork.KEYWORD, String.valueOf(edit_job_title.getText()));
+                    bundle.putString(BaseNetwork.LOCATION, String.valueOf(edit_your_location.getText()));
+                }
                 bundle.putSerializable("Job",response.getJobArrayList());
                 searchResultFragment.setArguments(bundle);
                 ((BaseActivityScreen) getActivity()).onReplaceFragment(searchResultFragment, true);

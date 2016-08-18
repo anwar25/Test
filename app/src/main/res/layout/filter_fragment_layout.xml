@@ -1,6 +1,194 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:id="@+id/filterLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/filter_color"
+            android:padding="@dimen/dp_10">
+
+            <EditText
+                android:id="@+id/filterEditText"
+                style="@style/EditRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_toLeftOf="@+id/btn_filter"
+                android:layout_toStartOf="@+id/btn_filter"
+                android:hint="@string/filter"
+                android:padding="12dp"
+                android:singleLine="true" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_filter"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:layout_alignBottom="@+id/filterEditText"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/search_rectangle_btn"
+                android:padding="@dimen/dp_5"
+                android:text="@string/filter"
+                android:textColor="@color/light" />
+
+        </RelativeLayout>
+
+        <RadioGroup
+            android:id="@+id/firstRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_15">
+
+            <RadioButton
+                android:id="@+id/sortByRelevanceRadio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:button="@drawable/filter_item_selector"
+                android:checked="true"
+                android:padding="@dimen/dp_5"
+                android:text="@string/sort_by_relevance"
+                android:textColor="@color/filter_text_selector" />
+
+            <RadioButton
+                android:id="@+id/sortByDateRadio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_10"
+                android:button="@drawable/filter_item_selector"
+                android:padding="@dimen/dp_5"
+                android:text="@string/sort_by_date"
+                android:textColor="@color/filter_text_selector" />
+
+
+        </RadioGroup>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/dark_grey" />
+
+
+        <TextView
+            android:id="@+id/seekBarProgressText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="Medium Text"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <in.eweblabs.careeradvance.UI.TextThumbSeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
+            android:thumb="@drawable/shape_seek_bar_text_thumb"
+            android:thumbOffset="4dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/dark_grey" />
+
+        <RadioGroup
+            android:id="@+id/secondRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_10">
+
+            <RadioButton
+                android:id="@+id/allJobTypesRadio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:button="@drawable/filter_item_selector"
+                android:checked="true"
+                android:padding="@dimen/dp_5"
+                android:text="@string/all_job_types"
+                android:textColor="@color/filter_text_selector" />
+
+            <RadioButton
+                android:id="@+id/fullTimeRadio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:button="@drawable/filter_item_selector"
+                android:padding="@dimen/dp_5"
+                android:text="@string/full_time"
+                android:textColor="@color/filter_text_selector" />
+
+            <RadioButton
+                android:id="@+id/fresherRadio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:button="@drawable/filter_item_selector"
+                android:padding="@dimen/dp_5"
+                android:text="@string/fresher"
+                android:textColor="@color/filter_text_selector" />
+
+            <RadioButton
+                android:id="@+id/internshipRadio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:button="@drawable/filter_item_selector"
+                android:padding="@dimen/dp_5"
+                android:text="@string/internship"
+                android:textColor="@color/filter_text_selector" />
+
+            <RadioButton
+                android:id="@+id/walkinRadio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:button="@drawable/filter_item_selector"
+                android:padding="@dimen/dp_5"
+                android:text="@string/walkin"
+                android:textColor="@color/filter_text_selector" />
+
+            <RadioButton
+                android:id="@+id/partTimeRadio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:button="@drawable/filter_item_selector"
+                android:padding="@dimen/dp_5"
+                android:text="@string/part_time"
+                android:textColor="@color/filter_text_selector" />
+
+
+        </RadioGroup>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_10"
+            android:background="@drawable/search_rectangle_btn"
+            android:padding="@dimen/dp_5"
+            android:text="@string/update"
+            android:textColor="@color/light" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/dark_grey" />
+        <!--android:button="@null"-->
+
+    </LinearLayout>
+</ScrollView>

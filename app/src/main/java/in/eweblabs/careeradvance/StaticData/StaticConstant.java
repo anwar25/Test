@@ -11,6 +11,9 @@ public class StaticConstant {
     public static final String DEVICE_ANDROID = "android";
     public static final String TITLE = "title";
     public static final String BODY = "body";
+    public static final String FILTER_TEXT = "filter_text";
+    public static final String DATE = "date";
+    public static final String RELEVANCE= "relevance";
 
 
     public static String GCM_APP_ID = "1059237334193";
@@ -143,4 +146,10 @@ public class StaticConstant {
     public static String JOB_CAREER_ADVANCE = "careeradvance";
     public static String JOB_OTHER = "Other";
 
+    public static String JOB_TYPE_ALL = "all";
+    public static String JOB_TYPE_FULLTIME = "fulltime" ;
+    public static String JOB_TYPE_PARTTIME ="parttime";
+    public static String JOB_TYPE_FRESHER = "new_grad";
+    public static String JOB_TYPE_INTERNSHIP = "internship";
+    public static String JOB_TYPE_WALKIN = "custom_1";
 }

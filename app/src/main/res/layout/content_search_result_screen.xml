@@ -3,36 +3,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
-    android:orientation="vertical">
+    android:background="@color/background">
 
     <RelativeLayout
         android:id="@+id/filterLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/filter_color"
-        android:padding="@dimen/dp_5">
+        android:padding="@dimen/dp_10">
 
         <EditText
-            android:id="@+id/edit_job_title"
+            android:id="@+id/filterEditText"
+            style="@style/EditRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_centerHorizontal="true"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_toLeftOf="@+id/btn_filter"
             android:layout_toStartOf="@+id/btn_filter"
             android:hint="@string/filter"
-            android:singleLine="true"
-            android:layout_toLeftOf="@+id/btn_filter" />
+            android:padding="12dp"
+            android:singleLine="true" />
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_filter"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="38dp"
+            android:layout_alignBottom="@+id/filterEditText"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:background="@drawable/search_rectangle_btn"
-            android:padding="12dp"
-            android:layout_marginRight="@dimen/dp_10"
+            android:padding="@dimen/dp_5"
             android:text="@string/filter"
             android:textColor="@color/light" />
 

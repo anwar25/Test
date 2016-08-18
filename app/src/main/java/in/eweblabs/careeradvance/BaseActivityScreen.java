@@ -60,6 +60,7 @@ public class BaseActivityScreen extends AppCompatActivity
     private  static SessionManager sSessionManager;
     private UserInfo mUserInfo ;
     private CircleImageView mProfileImage;
+    private Bundle mFilterBundle ;
 
     static {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
@@ -146,6 +147,14 @@ public class BaseActivityScreen extends AppCompatActivity
             sSessionManager = new SessionManager(getApplicationContext());
         }
         return sSessionManager ;
+    }
+
+    public Bundle getmFilterBundle() {
+        return mFilterBundle;
+    }
+
+    public void setmFilterBundle(Bundle mFilterBundle) {
+        this.mFilterBundle = mFilterBundle;
     }
 
     public UserInfo getmUserInfo() {

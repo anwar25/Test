@@ -46,6 +46,7 @@ public class AppliedJobFragment extends Fragment implements IAsyncTaskRunner, Di
         View view = inflater.inflate(R.layout.content_search_result_screen, container, false);
         ((BaseActivityScreen) getActivity()).setToolbarInitialization(this);
         //jobArrayList = (ArrayList<Job>) getArguments().getSerializable("Job");
+        view.findViewById(R.id.filterLayout).setVisibility(View.GONE);
         mapControls(view);
         return view;
     }

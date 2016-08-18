@@ -14,6 +14,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,21 +48,52 @@ public class SearchResultFragment extends Fragment implements IRefreshList, JobI
     private LoadingDialog loadingDialog;
     private String mLocation , mKeyword ;
     private AppCompatButton mFilterButton ;
-
+    private EditText mFilterEditText ;
+    private String mRadius = null ;
+    private String mSortBy = null ;
+    private String mJobType = null ;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.content_search_result_screen, container, false);
         ((BaseActivityScreen) getActivity()).setToolbarInitialization(this);
-        if(jobArrayList == null){
-            jobArrayList = (ArrayList<Job>) getArguments().getSerializable("Job");
+
+        if( ((BaseActivityScreen) getActivity()).getmFilterBundle() != null){
+
+            Bundle bundle = ((BaseActivityScreen) getActivity()).getmFilterBundle() ;
+            jobArrayList = (ArrayList<Job>)bundle.getSerializable("Job");
             jobArrayList.add(null);
-            mLocation = getArguments().getString(BaseNetwork.LOCATION);
-            mKeyword = getArguments().getString(BaseNetwork.KEYWORD);
+            mLocation = bundle.getString(BaseNetwork.LOCATION).trim();
+            mKeyword = bundle.getString(BaseNetwork.KEYWORD).trim();
+            mRadius = bundle.getString(BaseNetwork.RADIUS,"");
+            mSortBy = bundle.getString(BaseNetwork.SORT_BY,"");
+            mJobType =  bundle.getString(BaseNetwork.JOB_TYPE,"");
+           // Toast.makeText(getContext(), "Bundle not null", Toast.LENGTH_SHORT).show();
+        }else{
+            if(jobArrayList == null){
+                jobArrayList = (ArrayList<Job>) getArguments().getSerializable("Job");
+                jobArrayList.add(null);
+                mLocation = getArguments().getString(BaseNetwork.LOCATION).trim();
+                mKeyword = getArguments().getString(BaseNetwork.KEYWORD).trim();
+            }
         }
         mJobsRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         mFilterButton = (AppCompatButton) view.findViewById(R.id.btn_filter);
         mFilterButton.setOnClickListener(this);
+        mFilterEditText = (EditText) view.findViewById(R.id.filterEditText);
+
+        if(!TextUtils.isEmpty(mLocation) && !TextUtils.isEmpty(mKeyword)){
+            mFilterEditText.setText(String.format(getString(R.string.filter_text), mKeyword, mLocation));
+        }else if(TextUtils.isEmpty(mKeyword) && !TextUtils.isEmpty(mLocation)){
+            mFilterEditText.setText( "All jobs in "+mLocation);
+            //mFilterEditText.setText(getString(R.string.filter_text,"All jobs in",mLocation));
+        }else if(TextUtils.isEmpty(mLocation) && !TextUtils.isEmpty(mKeyword)){
+            mFilterEditText.setText(mKeyword+" jobs");
+           // mFilterEditText.setText(getString(R.string.filter_text,mKeyword,"jobs"));
+        }else{
+            mFilterEditText.setText( "All jobs");
+        }
+
         CreateJob();
         return view;
     }
@@ -98,16 +130,39 @@ public class SearchResultFragment extends Fragment implements IRefreshList, JobI
         hashMap.put(BaseNetwork.KEYWORD, mKeyword);
         hashMap.put(BaseNetwork.LOCATION, mLocation);
         hashMap.put(BaseNetwork.PAGE, String.valueOf(pageCount));
+        if(!TextUtils.isEmpty(mRadius)){
+            hashMap.put(BaseNetwork.RADIUS, mRadius);
+        }
+        if(!TextUtils.isEmpty(mSortBy)){
+            hashMap.put(BaseNetwork.SORT_BY, mSortBy);
+        }
+        if(!TextUtils.isEmpty(mJobType)){
+            hashMap.put(BaseNetwork.JOB_TYPE, mJobType);
+        }
         AuthCommonTask authCommonTask =  new AuthCommonTask(getActivity(),BaseNetwork.SEARCHJOBBYKEYWORD,this,loadingDialog);
         authCommonTask.execute(hashMap);
     }
 
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mRadius = null ;
+        mSortBy = null ;
+        mJobType = null ;
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_filter :
-                activityHandle.onReplaceFragment(new FilterFragment(), true);
+                FilterFragment filterFragment = new FilterFragment() ;
+                Bundle bundle = new Bundle();
+                bundle.putString(StaticConstant.FILTER_TEXT,String.valueOf(mFilterEditText.getText()));
+                bundle.putString(StaticConstant.LOCATION,mLocation);
+                bundle.putString(StaticConstant.KEYOWRDS,mKeyword);
+                filterFragment.setArguments(bundle);
+                activityHandle.onReplaceFragment(filterFragment, true);
                 break;
         }
     }
