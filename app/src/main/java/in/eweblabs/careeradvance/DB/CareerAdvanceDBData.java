@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import in.eweblabs.careeradvance.Entity.RecentSearch;
 import in.eweblabs.careeradvance.Entity.UserInfo;
 import in.eweblabs.careeradvance.StaticData.DbConstraints;
+import in.eweblabs.careeradvance.Utils.Logger;
 
 
 /**
@@ -116,7 +117,8 @@ public class CareerAdvanceDBData extends DbConstraints {
                 database.insert(USER_JOB_KEYWORDS_TABLE_NAME, null, contentvalues);
             database.setTransactionSuccessful();
         }catch (Exception e){
-            e.printStackTrace();
+            Logger.e("CareerDb",""+e.getMessage());
+            //e.printStackTrace();
         } finally {
             database.endTransaction();
             // closeDB();
@@ -260,7 +262,8 @@ public class CareerAdvanceDBData extends DbConstraints {
             }
             database.setTransactionSuccessful();
         }catch (Exception e){
-            e.printStackTrace();
+            Logger.e("CareeerAdvanceDb",""+e.getMessage());
+           // e.printStackTrace();
         } finally {
             database.endTransaction();
             // closeDB();
@@ -277,7 +280,8 @@ public class CareerAdvanceDBData extends DbConstraints {
             database.delete(USER_RECORD_TABLE_NAME,null,null);
             database.setTransactionSuccessful();
         }catch (Exception e){
-            e.printStackTrace();
+            //e.printStackTrace();
+            Logger.e("CareeerAdvanceDb",""+e.getMessage());
         } finally {
             database.endTransaction();
         }
@@ -291,7 +295,8 @@ public class CareerAdvanceDBData extends DbConstraints {
             database.delete(USER_RECENT_SEARCH_TABLE_NAME,null,null);
             database.setTransactionSuccessful();
         }catch (Exception e){
-            e.printStackTrace();
+            //e.printStackTrace();
+            Logger.e("CareeerAdvanceDb",""+e.getMessage());
         } finally {
             database.endTransaction();
         }
@@ -305,7 +310,8 @@ public class CareerAdvanceDBData extends DbConstraints {
             database.delete(USER_JOB_LOCATION_TABLE_NAME,null,null);
             database.setTransactionSuccessful();
         }catch (Exception e){
-            e.printStackTrace();
+           // e.printStackTrace();
+            Logger.e("CareeerAdvanceDb",""+e.getMessage());
         } finally {
             database.endTransaction();
         }
@@ -319,7 +325,8 @@ public class CareerAdvanceDBData extends DbConstraints {
             database.delete(USER_JOB_KEYWORDS_TABLE_NAME,null,null);
             database.setTransactionSuccessful();
         }catch (Exception e){
-            e.printStackTrace();
+            //e.printStackTrace();
+            Logger.e("CareeerAdvanceDb",""+e.getMessage());
         } finally {
             database.endTransaction();
         }

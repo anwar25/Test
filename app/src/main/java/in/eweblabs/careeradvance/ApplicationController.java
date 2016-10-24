@@ -1,13 +1,11 @@
+
 package in.eweblabs.careeradvance;
 
 import android.app.Application;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import java.io.IOException;
-
 import in.eweblabs.careeradvance.DB.CareerAdvanceDBData;
-import in.eweblabs.careeradvance.DB.DatabaseManager;
 import in.eweblabs.careeradvance.Data.DataModel;
 import in.eweblabs.careeradvance.Entity.UserInfo;
 import in.eweblabs.careeradvance.SharedPreferences.PreHelper;
@@ -36,15 +34,15 @@ public class ApplicationController extends Application{
         super.onCreate();
         appController = this;
         dataModel =  new DataModel(this);
-        DatabaseManager databaseManager = new DatabaseManager(this);
-        try {
+       // DatabaseManager databaseManager = new DatabaseManager(this);
+       /* try {
             databaseManager.createDataBase();
         }
         catch (IOException ioexception) {
             throw new RuntimeException(ioexception);
-        }
+        }*/
         careerAdvanceDBData =  new CareerAdvanceDBData(this);
-        registerGCMService();
+       // registerGCMService();
         LocalDataLoad();
     }
 

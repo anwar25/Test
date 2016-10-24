@@ -2,15 +2,13 @@ package in.eweblabs.careeradvance.DB;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.SQLException;
-
-import in.eweblabs.careeradvance.StaticData.StaticConstant;
 
 /**
  * Created by Akash.Singh on 7/30/2015.
@@ -18,7 +16,7 @@ import in.eweblabs.careeradvance.StaticData.StaticConstant;
 public class DatabaseManager extends SQLiteOpenHelper {
 
     private static String DB_NAME = "db_careeradvance.el";
-    private static String DB_PATH = "/data/data/"+ StaticConstant.PACKAGE_NAME+"/databases/";
+ //   private static String DB_PATH = "/data/data/"+ StaticConstant.PACKAGE_NAME+"/databases/";
     public static int WAITING_TIME = 3000;
     private final Context myContext;
     private SQLiteDatabase myDataBase;
@@ -32,19 +30,19 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
         super(context, DB_NAME, null, 1);
         this.myContext = context;
-        if(android.os.Build.VERSION.SDK_INT >= 4.2){
+       /* if(android.os.Build.VERSION.SDK_INT >= 4.2){
             DB_PATH = context.getApplicationInfo().dataDir + "/databases/";
         } else {
             DB_PATH = "/data/data/" + context.getPackageName() + "/databases/";
-        }
+        }*/
     }
 
     /**
      * Creates a empty database on the system and rewrites it with your own database.
      * */
-    public void createDataBase() throws IOException{
+   /* public void createDataBase() throws IOException{
 
-        boolean dbExist = checkDataBase();
+       // boolean dbExist = checkDataBase();
 
         if(dbExist){
             //do nothing - database already exist
@@ -54,32 +52,33 @@ public class DatabaseManager extends SQLiteOpenHelper {
             //of your application so we are gonna be able to overwrite that database with our database.
             this.getReadableDatabase();
 
-            try {
+            *//*try {
 
                 copyDataBase();
 
             } catch (IOException e) {
                 throw new RuntimeException(e);
 
-            }
+            }*//*
         }
 
-    }
+    }*/
 
     /**
      * Check if the database already exist to avoid re-copying the file each time you open the application.
      * @return true if it exists, false if it doesn't
      */
-    private boolean checkDataBase(){
+   /* private boolean checkDataBase(){
 
         SQLiteDatabase checkDB = null;
 
         try{
-            String myPath = DB_PATH + DB_NAME;
+            String myPath = DB_NAME;
             checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
 
         }catch(SQLiteException e){
-            e.printStackTrace();
+            Logger.e("DatabaseManager",""+e.getMessage());
+            //e.printStackTrace();
             //database does't exist yet.
 
         }
@@ -91,7 +90,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         }
 
         return checkDB != null ? true : false;
-    }
+    }*/
 
     /**
      * Copies your database from your local assets-folder to the just created empty database in the
@@ -104,7 +103,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         InputStream myInput = myContext.getAssets().open(DB_NAME);
 
         // Path to the just created empty db
-        String outFileName = DB_PATH + DB_NAME;
+        String outFileName =  DB_NAME;
 
         //Open the empty db as the output stream
         OutputStream myOutput = new FileOutputStream(outFileName);
@@ -126,7 +125,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     public void openDataBase() throws SQLException{
 
         //Open the database
-        String myPath = DB_PATH + DB_NAME;
+        String myPath =  DB_NAME;
         myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
 
     }
@@ -143,6 +142,10 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE ca_recent_search (id INTEGER PRIMARY KEY  NOT NULL" +
+                " ,keyword TEXT NOT NULL ,location TEXT NOT NULL  DEFAULT (null) )");
+        db.execSQL("CREATE TABLE ca_job_keywords (id INTEGER PRIMARY KEY  NOT NULL  UNIQUE , keyword TEXT)");
+        db.execSQL("CREATE TABLE ca_job_location (id INTEGER PRIMARY KEY  NOT NULL  UNIQUE , location TEXT NOT NULL )");
 
     }
 
